@@ -123,6 +123,7 @@ class TagebuchModel extends ListModel
 		$query->select('(length( trim( a.text_ss ) ) >0) AS text_ss_bool');
 		$query->select('(length( trim( a.text_z1 ) ) >0) AS text_z1_bool');
 		$query->select('(length( trim( a.text_z2 ) ) >0) AS text_z2_bool');
+		$query->select('(length( trim( a.text_an ) ) >0) AS text_an_bool');
 		$query->select('(length( trim( a.text_bl ) ) >0) AS text_bl_bool');
 		$query->from($db->quoteName('#__tagebuch') . ' AS a');
 
