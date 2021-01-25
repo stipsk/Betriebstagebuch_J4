@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="component"
+		label="COM_TAGEBUCH_COMPONENT_LABEL"
+		description="COM_TAGEBUCH_COMPONENT_DESC"
+        addfieldpath="/administrator/components/com_tagebuch/src/Field"
+	>
+        <field
+            name="debug"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="0"
+            label="COM_TAGEBUCH_DEBUG_LABEL"
+            description="COM_TAGEBUCH_DEBUG_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+            name="show_print_icon"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_TAGEBUCH_SHOWPRINT_LABEL"
+            description="COM_TAGEBUCH_SHOWPRINT_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+            name="show_print_tab_lu"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_TAGEBUCH_SHOWPRINT_LU_LABEL"
+            description="COM_TAGEBUCH_SHOWPRINT_LU_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+            
+        <field
+            name="show_print_tab_ws"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_TAGEBUCH_SHOWPRINT_WS_LABEL"
+            description="COM_TAGEBUCH_SHOWPRINT_WS_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+            
+        <field
+            name="show_icons"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_TAGEBUCH_SHOWICONS_LABEL"
+            description="COM_TAGEBUCH_SHOWICONS_DESC"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+            
+        <field
+            name="show_field_erst_am"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_TAGEBUCH_SHOWFIELD_ERST_AM"
+            description="COM_TAGEBUCH_SHOWFIELD_ERST_AM"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+            
+        <field
+            name="verantwortlicher"
+            type="skauthor"
+            label="COM_TAGEBUCH_VERANTW_LABEL"
+            description="COM_TAGEBUCH_VERANTW_DESC"
+        />
+            
+        <field
+            name="verantwortlicher_abluft"
+            type="skauthor"
+            label="COM_TAGEBUCH_VERANTWABL_LABEL"
+            description="COM_TAGEBUCH_VERANTWABL_DESC"
+        />
+            
+        <field
+			name="save_history"
+			type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="JGLOBAL_SAVE_HISTORY_OPTIONS_LABEL"
+			description="JGLOBAL_SAVE_HISTORY_OPTIONS_DESC"
+        >
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		
+		<field
+			name="history_limit"
+			type="text"
+			filter="integer"
+			label="JGLOBAL_HISTORY_LIMIT_OPTIONS_LABEL"
+			description="JGLOBAL_HISTORY_LIMIT_OPTIONS_DESC"
+			default="5"
+		/>
+
+
+	</fieldset>
+    <fieldset name="vorlagen"
+        label="COM_TAGEBUCH_VORLAGEN_LABEL"
+		description="COM_TAGEBUCH_VORLAGEN_DESC"
+    >
+
+        <field name="vorlage_frueh" type="filelist"
+            class="inputbox"
+            description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FS_DESC"
+            label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FS_LABEL"
+            stripext="1"
+            directory="media/com_tagebuch/Vorlagen/"
+            hide_none="1"
+            default="de"
+            hide_default="1"
+            filter="$"
+            size="10"
+		/>
+
+        <field name="vorlage_spaet" type="filelist"
+            class="inputbox"
+			description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_SS_DESC"
+			label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_SS_LABEL"
+            stripext="1"
+            directory="media/com_tagebuch/Vorlagen/"
+            hide_none="1"
+            default="de"
+            hide_default="1"
+            filter="$"
+            size="10"
+		/>
+
+        <field name="vorlage_luft" type="filelist"
+            class="inputbox"
+			description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_LUFT_DESC"
+			label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_LUFT_LABEL"
+            stripext="1"
+            directory="media/com_tagebuch/Vorlagen/"
+            hide_none="1"
+            default="de"
+            hide_default="1"
+            filter="$"
+            size="10"
+		/>
+                
+        <field name="vorlage_an" type="filelist"
+            class="inputbox"
+			description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_RCH_DESC"
+			label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_RCH_LABEL"
+            stripext="1"
+            directory="media/com_tagebuch/Vorlagen/"
+            hide_none="1"
+            default="de"
+            hide_default="1"
+            filter="$"
+            size="10"
+        />
+                
+        <field  name="vorlage_fahrzeug1"
+            type="skfahrzeuge"
+            extension="com_tagebuch"
+            label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG1_LABEL"
+            description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG1_DESC"
+            class="inputbox chzn-sk"
+        />
+                
+        <field  name="vorlage_fahrzeug2"
+            type="skfahrzeuge"
+            extension="com_tagebuch"
+            label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG2_LABEL"
+            description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG2_DESC"
+            class="inputbox chzn-sk"
+        />
+                
+        <field  name="vorlage_fahrzeug3"
+            type="skfahrzeuge"
+            extension="com_tagebuch"
+            label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG3_LABEL"
+            description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG3_DESC"
+            class="inputbox chzn-sk"
+        />
+
+        <field  name="vorlage_fahrzeug4"
+            type="skfahrzeuge"
+            extension="com_tagebuch"
+            label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG4_LABEL"
+            description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG4_DESC"
+            class="inputbox chzn-sk"
+        />
+                
+    </fieldset>
+
+    <fieldset
+        name="permissions"
+		description="JCONFIG_PERMISSIONS_DESC"
+		label="JCONFIG_PERMISSIONS_LABEL"
+	>
+
+		<field name="rules" type="rules"
+			component="com_tagebuch"
+			filter="rules"
+			validate="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			section="component"
+        />
+	</fieldset>
+</config>
