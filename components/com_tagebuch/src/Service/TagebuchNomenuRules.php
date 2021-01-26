@@ -68,9 +68,6 @@ class TagebuchNomenuRules implements RulesInterface
 	 */
 	public function parse(&$segments, &$vars)
 	{
-		//with this url: http://localhost/j4x/my-walks/mywalk-n/walk-title.html
-		// segments: [[0] => mywalk-n, [1] => walk-title]
-		// vars: [[option] => com_mywalks, [view] => mywalks, [id] => 0]
 
 		$vars['view'] = 'edit';
 		$vars['id'] = substr($segments[0], strpos($segments[0], '-') + 1);

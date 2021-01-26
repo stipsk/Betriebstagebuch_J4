@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
-use J4xdemos\Component\Mywalks\Site\Helper\RouteHelper as MywalksHelperRoute;
+use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelperRoute;
 
 ?>
 <div class="table-responsive">

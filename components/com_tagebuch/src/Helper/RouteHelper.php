@@ -15,14 +15,14 @@ use Joomla\CMS\Categories\CategoryNode;
 use Joomla\CMS\Language\Multilanguage;
 
 /**
- * Mywalks Component Route Helper.
+ * Tagebuch Component Route Helper.
  *
  * @since  1.5
  */
 abstract class RouteHelper
 {
 	/**
-	 * Get the article route.
+	 * Get the edit route.
 	 *
 	 * @param   integer  $id        The route of the content item.
 	 * @param   integer  $language  The language code.
@@ -35,7 +35,7 @@ abstract class RouteHelper
 	public static function getEditRoute($id, $slug, $language = 0, $layout = null)
 	{
 		// Create the link
-		$link = 'index.php?option=com_tagebuch&view=tagebuch&id=' . $id . '&slug=' . $slug;
+		$link = 'index.php?option=com_tagebuch&view=edit&id=' . $id . '&slug=' . $slug;
 
 		if ($language && $language !== '*' && Multilanguage::isEnabled())
 		{

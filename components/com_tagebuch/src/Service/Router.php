@@ -18,13 +18,13 @@ use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 //use Joomla\CMS\Component\Router\Rules\NomenuRules;
-use J4xdemos\Component\Mywalks\Site\Service\MywalksNomenuRules as NomenuRules;
+use SK\Component\Tagebuch\Site\Service\TagebuchNomenuRules as NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseInterface;
 
 /**
- * Routing class of com_mywalks
+ * Routing class of com_tagebuch
  *
  * @since  3.3
  */
