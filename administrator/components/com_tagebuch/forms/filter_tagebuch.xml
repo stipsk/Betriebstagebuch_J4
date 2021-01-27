@@ -28,14 +28,12 @@
 			name="fullordering"
 			type="list"
 			label="JGLOBAL_SORT_BY"
-			default="a.name ASC"
+			default="a.datum ASC"
 			onchange="this.form.submit();"
 			>
 			<option value="">JGLOBAL_SORT_BY</option>
-			<option value="a.published ASC">JSTATUS_ASC</option>
-			<option value="a.published DESC">JSTATUS_DESC</option>
-			<option value="a.datum ASC">JGLOBAL_TITLE_ASC</option>
-			<option value="a.datum DESC">JGLOBAL_TITLE_DESC</option>
+			<option value="a.datum ASC">JDATE_ASC</option>
+			<option value="a.datum DESC">JDATE_DESC</option>
 			<option value="a.id ASC">JGRID_HEADING_ID_ASC</option>
 			<option value="a.id DESC">JGRID_HEADING_ID_DESC</option>
 		</field>
@@ -44,7 +42,7 @@
 			name="limit"
 			type="limitbox"
 			label="JGLOBAL_LIST_LIMIT"
-			default="25"
+			default="20"
 			onchange="this.form.submit();"
 		/>
 	</fields>

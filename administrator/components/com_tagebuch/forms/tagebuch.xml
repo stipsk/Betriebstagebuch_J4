@@ -13,15 +13,15 @@
 		/>
 
 		<field
-				name="datum"
-				type="calendar"
-				label="COM_TAGEBUCH_TAGEBUCH_DATE_LABEL_DATE"
-				default="0"
+			name="datum"
+			type="calendar"
+			label="COM_TAGEBUCH_TAGEBUCH_DATE_LABEL_DATE"
+			default="0"
 		/>
 
 		<field
 			name="text_fs"
-			type="textarea"
+			type="checkbox"
 			label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_FS"
 			rows="5"
 			cols="40"

@@ -48,28 +48,20 @@ $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
 									<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:20%">
-									<?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_DATUM', 'a.datum', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:20%">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_DESCRIPTION', 'a.description', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_FS_BOOL', 'a.text_fs_bool', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:10%">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_DISTANCE', 'a.distance', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_SS_BOOL', 'text_ss_bool', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:10%">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_NVISITS', 'a.distance', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_AN_BOOL', 'a.text_an_bool', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_TOILETS', 'a.toilets', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_BL_BOOL', 'a.text_bl_bool', $listDirn, $listOrder); ?>
 								</th>
-								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_CAFE', 'a.cafe', $listDirn, $listOrder); ?>
-								</th>
-								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_HILLS', 'a.hills', $listDirn, $listOrder); ?>
-								</th>
-								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_BOGS', 'a.bogs', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -90,31 +82,21 @@ $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
 								</td>
 								<th scope="row" class="has-context">
 									<a class="hasTooltip" href="<?php echo Route::_('index.php?option=com_tagebuch&task=edit.edit&id=' . $item->id); ?>">
-										<?php echo $editIcon; ?><?php echo $this->escape($item->title); ?>
+										<?php echo $editIcon; ?><?php echo $this->escape($item->datum); ?>
 									</a>
 								</th>
 								<td class="">
-									<?php echo $item->description; ?>
+									<?php echo $item->text_fs_bool; ?>
 								</td>
 								<td class="">
-									<?php echo $item->distance; ?>
-								</td>
-								<td class="">
-									<a href="index.php?option=com_mywalks&view=mywalk_dates&walk_id=<?php echo $item->id; ?>">
-									<?php echo $editIcon; ?><?php echo $item->nvisits; ?></a>
-								</td>
-								<td class="d-none d-md-table-cell">
-									<?php echo $item->toilets; ?>
-								</td>
-								<td class="d-none d-md-table-cell">
-									<?php echo $item->cafe; ?>
-								</td>
-								<td class="d-none d-md-table-cell">
-									<?php echo $item->hills; ?>
-								</td>
-								<td class="d-none d-md-table-cell">
-									<?php echo $item->bogs; ?>
-								</td>
+									<?php echo $item->text_ss_bool; ?>
+                                </td>
+                                <td class="">
+									<?php echo $item->text_an_bool; ?>
+                                </td>
+                                <td class="">
+									<?php echo $item->text_bl_bool; ?>
+                                </td>
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->id; ?>
 								</td>
