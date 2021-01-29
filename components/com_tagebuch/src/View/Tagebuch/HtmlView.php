@@ -16,6 +16,8 @@ use Joomla\CMS\Factory;
 //use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+//use Joomla\CMS\Toolbar\Toolbar;
+//use Joomla\CMS\Toolbar\ToolbarHelper;
 //use Joomla\CMS\Router\Route;
 
 /**
@@ -40,6 +42,20 @@ class HtmlView extends BaseHtmlView
 	 * @since  1.6.0
 	 */
 	protected $items;
+
+	/**
+	 * Form object for search filters
+	 *
+	 * @var  \JForm
+	 */
+	public $filterForm;
+
+	/**
+	 * The active search filters
+	 *
+	 * @var  array
+	 */
+	public $activeFilters;
 
 	/**
 	 * The pagination object
@@ -75,6 +91,8 @@ class HtmlView extends BaseHtmlView
 		$state      = $this->get('State');
 		$items      = $this->get('Items');
 		$pagination = $this->get('Pagination');
+		$filterForm    = $this->get('FilterForm');
+		$activeFilters = $this->get('ActiveFilters');
 
 		// Flag indicates to not add limitstart=0 to URL
 		$pagination->hideEmptyLimitstart = true;
@@ -89,6 +107,8 @@ class HtmlView extends BaseHtmlView
 		$this->items      = &$items;
 		$this->params     = &$params;
 		$this->pagination = &$pagination;
+		$this->filterForm = &$filterForm;
+		$this->activeFilters = &$activeFilters;
 
 		return parent::display($tpl);
 	}

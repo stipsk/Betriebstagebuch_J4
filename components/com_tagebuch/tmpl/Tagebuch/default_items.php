@@ -14,33 +14,62 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelperRoute;
 
+$listOrder = $this->escape($this->state->get('list.ordering'));
+$listDirn  = $this->escape($this->state->get('list.direction'));
+$states = array (
+	'0' => Text::_('JUNPUBLISHED'),
+	'1' => Text::_('JPUBLISHED'),
+	'2' => Text::_('JARCHIVED'),
+	'-2' => Text::_('JTRASHED')
+);
+$editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
+$yesIcon = '<span class="fa fa-thumbs-up mr-2" aria-hidden="true" style="color:limegreen;"></span>';
+$noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:coral;"></span>';
+
 ?>
-<div class="table-responsive">
-  <table class="table table-striped">
-  <caption><?php echo Text::_('COM_TAGEBUCH_LIST_TABLE_CAPTION'); ?></caption>
-  <thead>
-    <tr>
- 		<th scope="col"><?php echo Text::_('COM_TAGEBUCH_LIST_DATUM'); ?></th>
-		<th scope="col"><?php echo Text::_('COM_TAGEBUCH_LIST_TEXT_FS'); ?></th>
-		<th scope="col"><?php echo Text::_('COM_TAGEBUCH_LIST_TEXT_SS'); ?></th>
-		<th scope="col"><?php echo Text::_('COM_TAGEBUCH_LIST_TEXT_AN'); ?></th>
-		<th scope="col"><?php echo Text::_('COM_TAGEBUCH_LIST_TEXT_BL'); ?></th>
-	</tr>
-	</thead>
+
 	<tbody>
 	<?php foreach ($this->items as $id => $item) :
 		$slug = preg_replace('/[^a-z\d]/i', '-', $item->datum);
 		$slug = strtolower(str_replace(' ', '-', $slug));
 	?>
 	<tr>
-		<td><a href="<?php echo Route::_(TagebuchHelperRoute::getEditRoute($item->id, $slug)); ?>">
-		<?php echo $item->datum; ?></a></td>
-		<td><?php echo $item->text_fs; ?></td>
-		<td><?php echo $item->text_ss; ?></td>
-		<td><?php echo $item->text_an; ?></td>
-		<td><?php echo $item->text_bl; ?></td>
+        <td class="text-center">
+			<?php echo HTMLHelper::_('grid.id', $id, $item->id); ?>
+        </td>
+        <td class="class="article-status"">
+		<?php echo $states[$item->state]; ?>
+        </td>
+        <th scope="row" class="has-context">
+            <a class="hasTooltip" href="<?php echo Route::_('index.php?option=com_tagebuch&task=edit.edit&id=' . $item->id); ?>">
+				<?php echo $editIcon; ?><?php echo $this->escape($item->datum); ?>
+            </a>
+        </th>
+        <td class="">
+			<?php echo $item->text_fs_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->text_ss_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->text_an_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->text_bl_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->text_z1_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->text_z2_bool>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->gesehen>0 ? $yesIcon : $noIcon; ?>
+        </td>
+        <td class="">
+			<?php echo $item->abluft_ok>0 ? $yesIcon : $noIcon; ?>
+        </td>
 	</tr>
 	<?php endforeach; ?><?php //endif; ?>
 	</tbody>
-  </table>
-</div>
+

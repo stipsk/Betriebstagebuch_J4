@@ -18,6 +18,8 @@ use Joomla\CMS\MVC\Model\ListModel;
  * This models supports retrieving lists of articles.
  *
  * @since  1.6
+ *
+ * @todo    Listenanzeige "limit" funktioniert nicht
  */
 class TagebuchModel extends ListModel
 {
@@ -69,20 +71,20 @@ class TagebuchModel extends ListModel
 		$value = $app->input->get('limitstart', 0, 'uint');
 		$this->setState('list.start', $value);
 
-		$orderCol = $app->input->get('filter_order', 'a.id');
+		$orderCol = $app->input->get('filter_order', 'a.datum');
 
 		if (!in_array($orderCol, $this->filter_fields))
 		{
-			$orderCol = 'a.id';
+			$orderCol = 'a.datum';
 		}
 
 		$this->setState('list.ordering', $orderCol);
 
-		$listOrder = $app->input->get('filter_order_Dir', 'ASC');
+		$listOrder = $app->input->get('filter_order_Dir', 'DESC');
 
 		if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
 		{
-			$listOrder = 'ASC';
+			$listOrder = 'DESC';
 		}
 
 		$this->setState('list.direction', $listOrder);
@@ -136,18 +138,24 @@ class TagebuchModel extends ListModel
 				'a.*
 				')
 		);
+		$query->select('(length( trim( a.text_fs ) ) >0) AS text_fs_bool');
+		$query->select('(length( trim( a.text_ss ) ) >0) AS text_ss_bool');
+		$query->select('(length( trim( a.text_z1 ) ) >0) AS text_z1_bool');
+		$query->select('(length( trim( a.text_z2 ) ) >0) AS text_z2_bool');
+		$query->select('(length( trim( a.text_an ) ) >0) AS text_an_bool');
+		$query->select('(length( trim( a.text_bl ) ) >0) AS text_bl_bool');
 		$query->from('#__tagebuch AS a');
 
 		$params      = $this->getState('params');
 
 		// Add the list ordering clause.
-		$query->order($this->getState('list.ordering', 'a.id') . ' ' . $this->getState('list.direction', 'ASC'));
+		$query->order($this->getState('list.ordering', 'a.datum') . ' ' . $this->getState('list.direction', 'DESC'));
 
 		return $query;
 	}
 
 	/**
-	 * Method to get a list of walks.
+	 * Method to get a list of Tagebuch-Entrys.
 	 *
 	 * Overridden to inject convert the attribs field into a \JParameter object.
 	 *

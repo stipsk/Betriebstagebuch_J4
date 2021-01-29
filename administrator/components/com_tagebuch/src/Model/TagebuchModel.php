@@ -161,8 +161,8 @@ class TagebuchModel extends ListModel
 		}
 
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering', 'a.id');
-		$orderDirn = $this->state->get('list.direction', 'ASC');
+		$orderCol  = $this->state->get('list.ordering', 'a.datum');
+		$orderDirn = $this->state->get('list.direction', 'DESC');
 
 		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

@@ -67,7 +67,7 @@ class Router extends RouterView
 		$params = ComponentHelper::getParams('com_tagebuch');
 		$this->noIDs = (bool) $params->get('sef_ids');
 
-		$tagebuch = new RouterViewConfiguration('tagebuch');
+		$tagebuch = new RouterViewConfiguration('Tagebuch');
 		$tagebuch->setKey('id');
 		$this->registerView($tagebuch);
 
