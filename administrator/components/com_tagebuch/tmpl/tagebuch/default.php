@@ -23,6 +23,8 @@ $states = array (
 		'-2' => Text::_('JTRASHED')
 );
 $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
+$yesIcon = '<span class="fa fa-thumbs-up mr-2" aria-hidden="true" style="color:limegreen;"></span>';
+$noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:coral;"></span>';
 ?>
 <form action="<?php echo Route::_('index.php?option=com_tagebuch'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
@@ -59,9 +61,15 @@ $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
 								<th scope="col" style="width:10%">
 									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_AN_BOOL', 'a.text_an_bool', $listDirn, $listOrder); ?>
 								</th>
-								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
+                                <th scope="col" style="width:10%">
 									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_BL_BOOL', 'a.text_bl_bool', $listDirn, $listOrder); ?>
-								</th>
+                                </th>
+								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_GESEHEN', 'a.gesehen', $listDirn, $listOrder); ?>
+                                </th>
+                                <th scope="col" style="width:5%" class="d-none d-md-table-cell">
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_ABLUFT_OK', 'a.abluft_ok', $listDirn, $listOrder); ?>
+                                </th>
 								</th>
 								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -86,16 +94,22 @@ $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
 									</a>
 								</th>
 								<td class="">
-									<?php echo $item->text_fs_bool; ?>
+									<?php echo $item->text_fs_bool>0 ? $yesIcon : $noIcon; ?>
 								</td>
 								<td class="">
-									<?php echo $item->text_ss_bool; ?>
+									<?php echo $item->text_ss_bool>0 ? $yesIcon : $noIcon; ?>
                                 </td>
                                 <td class="">
-									<?php echo $item->text_an_bool; ?>
+									<?php echo $item->text_an_bool>0 ? $yesIcon : $noIcon; ?>
                                 </td>
                                 <td class="">
-									<?php echo $item->text_bl_bool; ?>
+									<?php echo $item->text_bl_bool>0 ? $yesIcon : $noIcon; ?>
+                                </td>
+                                <td class="">
+									<?php echo $item->gesehen>0 ? $yesIcon : $noIcon; ?>
+                                </td>
+                                <td class="">
+									<?php echo $item->abluft_ok>0 ? $yesIcon : $noIcon; ?>
                                 </td>
 								<td class="d-none d-md-table-cell">
 									<?php echo $item->id; ?>

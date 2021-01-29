@@ -56,6 +56,18 @@
 		/>
 
 		<field
+			name="gesehen"
+			type="bool"
+			label="COM_TAGEBUCH_TAGEBUCH_LABEL_GESEHEN"
+		/>
+
+		<field
+				name="abluft_ok"
+				type="bool"
+				label="COM_TAGEBUCH_TAGEBUCH_LABEL_ABLUFT_OK"
+		/>
+
+		<field
 			name="published"
 			type="list"
 			label="JSTATUS"
