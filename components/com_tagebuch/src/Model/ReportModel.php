@@ -64,12 +64,6 @@ class ReportModel extends ItemModel
 		// If $pk is set then authorise on complete asset, else on component only
 		$asset = empty($pk) ? 'com_tagebuch' : 'com_tagebuch.report.' . $pk;
 
-		if ((!$user->authorise('core.edit.state', $asset)) && (!$user->authorise('core.edit', $asset)))
-		{
-			$this->setState('filter.published', TagebuchComponent::CONDITION_PUBLISHED);
-			$this->setState('filter.archived', TagebuchComponent::CONDITION_ARCHIVED);
-		}
-
 		$this->setState('filter.language', Multilanguage::isEnabled());
 	}
 
@@ -103,115 +97,108 @@ class ReportModel extends ItemModel
 						'item.select',
 						[
 							$db->quoteName('a.id'),
-							$db->quoteName('a.asset_id'),
-							$db->quoteName('a.title'),
 							$db->quoteName('a.alias'),
-							$db->quoteName('a.introtext'),
-							$db->quoteName('a.fulltext'),
+							$db->quoteName('a.sff'),
+							$db->quoteName('a.sfs'),
+							$db->quoteName('a.sfan'),
+							$db->quoteName('a.text_fs'),
+							$db->quoteName('a.text_ss'),
+							$db->quoteName('a.text_z1'),
+							$db->quoteName('a.text_z2'),
+							$db->quoteName('a.text_an'),
+							$db->quoteName('a.text_bl'),
+							$db->quoteName('a.datum'),
+							$db->quoteName('a.fs_erstellt'),
+							$db->quoteName('a.fs_erstellt_von'),
+							$db->quoteName('a.fs_laenderung'),
+							$db->quoteName('a.fs_laenderung_von'),
+							$db->quoteName('a.ss_erstellt'),
+							$db->quoteName('a.ss_erstellt_von'),
+							$db->quoteName('a.ss_laenderung'),
+							$db->quoteName('a.ss_laenderung_von'),
+							$db->quoteName('a.z1_erstellt'),
+							$db->quoteName('a.z1_erstellt_von'),
+							$db->quoteName('a.z1_laenderung'),
+							$db->quoteName('a.z1_laenderung_von'),
+							$db->quoteName('a.z2_erstellt'),
+							$db->quoteName('a.z2_erstellt_von'),
+							$db->quoteName('a.z2_laenderung'),
+							$db->quoteName('a.z2_laenderung_von'),
+							$db->quoteName('a.an_erstellt'),
+							$db->quoteName('a.an_erstellt_von'),
+							$db->quoteName('a.an_laenderung'),
+							$db->quoteName('a.an_laenderung_von'),
+							$db->quoteName('a.bl_erstellt'),
+							$db->quoteName('a.bl_erstellt_von'),
+							$db->quoteName('a.bl_laenderung'),
+							$db->quoteName('a.bl_laenderung_von'),
+							$db->quoteName('a.fs_erstellt'),
+							$db->quoteName('a.fs_erstellt_von'),
+							$db->quoteName('a.fs_laenderung'),
+							$db->quoteName('a.bereich_fahrzeug1'),
+							$db->quoteName('a.bereich_fahrzeug2'),
+							$db->quoteName('a.bereich_fahrzeug3'),
+							$db->quoteName('a.bereich_fahrzeug4'),
 							$db->quoteName('a.state'),
-							$db->quoteName('a.catid'),
-							$db->quoteName('a.created'),
-							$db->quoteName('a.created_by'),
-							$db->quoteName('a.created_by_alias'),
-							$db->quoteName('a.modified'),
-							$db->quoteName('a.modified_by'),
 							$db->quoteName('a.checked_out'),
 							$db->quoteName('a.checked_out_time'),
-							$db->quoteName('a.publish_up'),
-							$db->quoteName('a.publish_down'),
-							$db->quoteName('a.images'),
-							$db->quoteName('a.urls'),
-							$db->quoteName('a.attribs'),
-							$db->quoteName('a.version'),
-							$db->quoteName('a.ordering'),
+							$db->quoteName('a.access'),
+							$db->quoteName('a.gesehen'),
+							$db->quoteName('a.abluft_ok'),
 							$db->quoteName('a.metakey'),
 							$db->quoteName('a.metadesc'),
-							$db->quoteName('a.access'),
-							$db->quoteName('a.hits'),
 							$db->quoteName('a.metadata'),
-							$db->quoteName('a.featured'),
-							$db->quoteName('a.language'),
+							$db->quoteName('a.publish_up'),
+							$db->quoteName('a.publish_down'),
+							$db->quoteName('a.attribs'),
+							$db->quoteName('a.version'),
+							$db->quoteName('a.note'),
 						]
 					)
 				)
 					->select(
 						[
-							$db->quoteName('fp.featured_up'),
-							$db->quoteName('fp.featured_down'),
-							$db->quoteName('c.title', 'category_title'),
-							$db->quoteName('c.alias', 'category_alias'),
-							$db->quoteName('c.access', 'category_access'),
-							$db->quoteName('c.language', 'category_language'),
-							$db->quoteName('fp.ordering'),
-							$db->quoteName('u.name', 'author'),
-							$db->quoteName('parent.title', 'parent_title'),
-							$db->quoteName('parent.id', 'parent_id'),
-							$db->quoteName('parent.path', 'parent_route'),
-							$db->quoteName('parent.alias', 'parent_alias'),
-							$db->quoteName('parent.language', 'parent_language'),
-							'ROUND(' . $db->quoteName('v.rating_sum') . ' / ' . $db->quoteName('v.rating_count') . ', 0) AS '
-								. $db->quoteName('rating'),
-							$db->quoteName('v.rating_count', 'rating_count'),
+							$db->quoteName('sff.name', 'sff_name'),
+							$db->quoteName('sfs.name', 'sfs_name'),
+							$db->quoteName('sfan.name', 'sfan_name'),
+							$db->quoteName('fs.name', 'fs_erstellt_von_name'),
+							$db->quoteName('fs2.name', 'fs_laenderung_von_name'),
+							$db->quoteName('ss.name', 'ss_erstellt_von_name'),
+							$db->quoteName('ss2.name', 'ss_laenderung_von_name'),
+							$db->quoteName('z1.name', 'z1_erstellt_von_name'),
+							$db->quoteName('z12.name', 'z1_laenderung_von_name'),
+							$db->quoteName('z2.name', 'z2_erstellt_von_name'),
+							$db->quoteName('z22.name', 'z2_laenderung_von_name'),
+							$db->quoteName('an.name', 'an_erstellt_von_name'),
+							$db->quoteName('an.name', 'an_laenderung_von_name'),
+							$db->quoteName('bl.name', 'bl_erstellt_von_name'),
+							$db->quoteName('bl2.name', 'bl_laenderung_von_name'),
 						]
 					)
-					->from($db->quoteName('#__content', 'a'))
-					->join(
-						'INNER',
-						$db->quoteName('#__categories', 'c'),
-						$db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid')
-					)
-					->join('LEFT', $db->quoteName('#__content_frontpage', 'fp'), $db->quoteName('fp.content_id') . ' = ' . $db->quoteName('a.id'))
-					->join('LEFT', $db->quoteName('#__users', 'u'), $db->quoteName('u.id') . ' = ' . $db->quoteName('a.created_by'))
-					->join('LEFT', $db->quoteName('#__categories', 'parent'), $db->quoteName('parent.id') . ' = ' . $db->quoteName('c.parent_id'))
-					->join('LEFT', $db->quoteName('#__content_rating', 'v'), $db->quoteName('a.id') . ' = ' . $db->quoteName('v.content_id'))
+					->from($db->quoteName('#__tagebuch', 'a'))
+					->join('LEFT', $db->quoteName('#__users', 'sff'), $db->quoteName('sff.id') . ' = ' . $db->quoteName('a.sff'))
+					->join('LEFT', $db->quoteName('#__users', 'sfs'), $db->quoteName('sfs.id') . ' = ' . $db->quoteName('a.sfs'))
+					->join('LEFT', $db->quoteName('#__users', 'sfan'), $db->quoteName('sfan.id') . ' = ' . $db->quoteName('a.sfan'))
+					->join('LEFT', $db->quoteName('#__users', 'fs'), $db->quoteName('fs.id') . ' = ' . $db->quoteName('a.fs_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'fs2'), $db->quoteName('fs2.id') . ' = ' . $db->quoteName('a.fs_laenderung_von'))
+					->join('LEFT', $db->quoteName('#__users', 'ss'), $db->quoteName('ss.id') . ' = ' . $db->quoteName('a.ss_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'ss2'), $db->quoteName('ss2.id') . ' = ' . $db->quoteName('a.ss_laenderung_von'))
+					->join('LEFT', $db->quoteName('#__users', 'z1'), $db->quoteName('z1.id') . ' = ' . $db->quoteName('a.z1_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'z12'), $db->quoteName('z12.id') . ' = ' . $db->quoteName('a.z1_laenderung_von'))
+					->join('LEFT', $db->quoteName('#__users', 'z2'), $db->quoteName('z2.id') . ' = ' . $db->quoteName('a.z2_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'z22'), $db->quoteName('z22.id') . ' = ' . $db->quoteName('a.z2_laenderung_von'))
+					->join('LEFT', $db->quoteName('#__users', 'an'), $db->quoteName('an.id') . ' = ' . $db->quoteName('a.an_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'an2'), $db->quoteName('an2.id') . ' = ' . $db->quoteName('a.an_laenderung_von'))
+					->join('LEFT', $db->quoteName('#__users', 'bl'), $db->quoteName('bl.id') . ' = ' . $db->quoteName('a.bl_erstellt_von'))
+					->join('LEFT', $db->quoteName('#__users', 'bl2'), $db->quoteName('bl2.id') . ' = ' . $db->quoteName('a.bl_laenderung_von'))
+
 					->where(
 						[
 							$db->quoteName('a.id') . ' = :pk',
-							$db->quoteName('c.published') . ' > 0',
 						]
 					)
 					->bind(':pk', $pk, ParameterType::INTEGER);
 
-				// Filter by language
-				if ($this->getState('filter.language'))
-				{
-					$query->whereIn($db->quoteName('a.language'), [Factory::getLanguage()->getTag(), '*'], ParameterType::STRING);
-				}
-
-				if (!$user->authorise('core.edit.state', 'com_content.article.' . $pk)
-					&& !$user->authorise('core.edit', 'com_content.article.' . $pk)
-				)
-				{
-					// Filter by start and end dates.
-					$nowDate = Factory::getDate()->toSql();
-
-					$query->extendWhere(
-						'AND',
-						[
-							$db->quoteName('a.publish_up') . ' IS NULL',
-							$db->quoteName('a.publish_up') . ' <= :publishUp',
-						],
-						'OR'
-					)
-						->extendWhere(
-							'AND',
-							[
-								$db->quoteName('a.publish_down') . ' IS NULL',
-								$db->quoteName('a.publish_down') . ' >= :publishDown',
-							],
-							'OR'
-						)
-						->bind([':publishUp', ':publishDown'], $nowDate);
-				}
-
-				// Filter by published state.
-				$published = $this->getState('filter.published');
-				$archived = $this->getState('filter.archived');
-
-				if (is_numeric($published))
-				{
-					$query->whereIn($db->quoteName('a.state'), [(int) $published, (int) $archived]);
-				}
 
 				$db->setQuery($query);
 
@@ -220,12 +207,6 @@ class ReportModel extends ItemModel
 				if (empty($data))
 				{
 					throw new \Exception(Text::_('COM_TAGEBUCH_ERROR_REPORT_NOT_FOUND'), 404);
-				}
-
-				// Check for published state if filter set.
-				if ((is_numeric($published) || is_numeric($archived)) && ($data->state != $published && $data->state != $archived))
-				{
-					throw new \Exception(Text::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'), 404);
 				}
 
 				// Convert parameter fields to objects.
@@ -240,7 +221,7 @@ class ReportModel extends ItemModel
 				if (!$user->get('guest'))
 				{
 					$userId = $user->get('id');
-					$asset = 'com_content.article.' . $data->id;
+					$asset = 'com_tagebuch.report.' . $data->id;
 
 					// Check general edit permission first.
 					if ($user->authorise('core.edit', $asset))
@@ -252,9 +233,25 @@ class ReportModel extends ItemModel
 					elseif (!empty($userId) && $user->authorise('core.edit.own', $asset))
 					{
 						// Check for a valid user and that they are the owner.
-						if ($userId == $data->created_by)
+						if (($userId == $data->sff) || ($userId == $data->fs_erstellt_von) || ($userId == $data->fs_laenderung_von) )
 						{
-							$data->params->set('access-edit', true);
+							$data->params->set('access-edit-fs', true);
+						}
+						if (($userId == $data->sfs) || ($userId == $data->ss_erstellt_von) || ($userId == $data->ss_laenderung_von) )
+						{
+							$data->params->set('access-edit-ss', true);
+						}
+						if (($userId == $data->sfan) || ($userId == $data->an_erstellt_von) || ($userId == $data->an_laenderung_von) )
+						{
+							$data->params->set('access-edit-an', true);
+						}
+						if ( ($userId == $data->z1_erstellt_von) || ($userId == $data->z1_laenderung_von) )
+						{
+							$data->params->set('access-edit-z1', true);
+						}
+						if ( ($userId == $data->z2_erstellt_von) || ($userId == $data->z2_laenderung_von) )
+						{
+							$data->params->set('access-edit-z2', true);
 						}
 					}
 				}
