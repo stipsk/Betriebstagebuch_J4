@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
-use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelperRoute;
+use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
@@ -23,8 +23,9 @@ $states = array (
 	'-2' => Text::_('JTRASHED')
 );
 $editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
-$yesIcon = '<span class="fa fa-thumbs-up mr-2" aria-hidden="true" style="color:limegreen;"></span>';
-$noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:coral;"></span>';
+$detailIcon = '<span class="fa fa-eye mr-2" aria-hidden="true" style="color:limegreen; font-size: larger;"></span>';
+$yesIcon = '<span class="fa fa-thumbs-up mr-2" aria-hidden="true" style="color:limegreen; font-size: larger;"></span>';
+$noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:coral; font-size: larger;"></span>';
 
 ?>
 
@@ -41,8 +42,8 @@ $noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:
 		<?php echo $states[$item->state]; ?>
         </td>
         <th scope="row" class="has-context">
-            <a class="hasTooltip" href="<?php echo Route::_('index.php?option=com_tagebuch&task=edit.edit&id=' . $item->id); ?>">
-				<?php echo $editIcon; ?><?php echo $this->escape($item->datum); ?>
+            <a class="hasTooltip" href="<?php echo Route::_(TagebuchHelper::getReportRoute($item->id, $slug)); ?>">
+				<?php echo $detailIcon; ?><?php echo $this->escape($item->datum); ?>
             </a>
         </th>
         <td class="">

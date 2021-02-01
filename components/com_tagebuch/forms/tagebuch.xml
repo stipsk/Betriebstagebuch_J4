@@ -29,30 +29,30 @@
 		 />
 
 		<field
-				name="text_ss"
-				type="textarea"
-				label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_SS"
-				rows="5"
-				cols="40"
-				required="true"
+			name="text_ss"
+			type="textarea"
+			label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_SS"
+			rows="5"
+			cols="40"
+			required="true"
 		/>
 
 		<field
-				name="text_z1"
-				type="textarea"
-				label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_Z1"
-				rows="5"
-				cols="40"
-				required="true"
+			name="text_z1"
+			type="textarea"
+			label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_Z1"
+			rows="5"
+			cols="40"
+			required="true"
 		/>
 
 		<field
-				name="text_z2"
-				type="textarea"
-				label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_Z2"
-				rows="5"
-				cols="40"
-				required="true"
+			name="text_z2"
+			type="textarea"
+			label="COM_TAGEBUCH_TAGEBUCH_LABEL_TEXT_Z2"
+			rows="5"
+			cols="40"
+			required="true"
 		/>
 
 		<field
@@ -62,9 +62,9 @@
 		/>
 
 		<field
-				name="abluft_ok"
-				type="bool"
-				label="COM_TAGEBUCH_TAGEBUCH_LABEL_ABLUFT_OK"
+			name="abluft_ok"
+			type="bool"
+			label="COM_TAGEBUCH_TAGEBUCH_LABEL_ABLUFT_OK"
 		/>
 
 		<field

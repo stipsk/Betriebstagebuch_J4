@@ -13,6 +13,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
+use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
 
 HTMLHelper::_('behavior.core');
 

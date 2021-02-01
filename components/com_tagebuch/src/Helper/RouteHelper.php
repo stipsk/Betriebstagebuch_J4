@@ -27,8 +27,33 @@ abstract class RouteHelper
 	 * @param   integer  $id        The route of the content item.
 	 * @param   integer  $language  The language code.
 	 * @param   string   $layout    The layout value.
+	 **
+	 * @return  string  The report route.
 	 *
-	 * @return  string  The article route.
+	 * @since   1.5
+	 */
+	public static function getReportRoute($id, $slug, $language = 0, $layout = null)
+	{
+		// Create the link
+		$link = 'index.php?option=com_tagebuch&view=report&id=' . $id . '&slug=' . $slug;;
+
+
+		if ($language && $language !== '*' && Multilanguage::isEnabled())
+		{
+			$link .= '&lang=' . $language;
+		}
+
+		if ($layout)
+		{
+			$link .= '&layout=' . $layout;
+		}
+
+		return $link;
+	}
+
+
+	 /**
+	 * @return  string  The report route.
 	 *
 	 * @since   1.5
 	 */
