@@ -5,15 +5,18 @@
 	--
 
 	1. Rename #__sk_tagebuch 		-> 	#__tagebuch
+			RENAME TABLE `#__sk_tagebuch` TO `#__tagebuch`;
 	2. Rename #__sk_tagebuch_avv 	-> 	#__tagebuch_avv
-
+			RENAME TABLE `#__sk_tagebuch_avv` TO `#__tagebuch_avv`;
 
 	--
 	--	Tabelle #__tagbuch Strukturänderung:
 	--
 
-	1. #__tagebuch.parameters		->	#__tagebuch.attribs		varchar(5120)	notNull
+	1. #__tagebuch.params			->	#__tagebuch.attribs		varchar(5120)	notNull
+			ALTER TABLE `#__tagebuch` CHANGE `params` `attribs` VARCHAR(5120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 	2. Hinzufügen:					->	#__tagebuch.note		varchar(255)	notNull
+			ALTER TABLE `#__tagebuch` ADD `note` VARCHAR(255) NOT NULL AFTER `version`;
 
 #### 2020-02-01 End	#########################
 
