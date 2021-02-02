@@ -18,3 +18,13 @@
 
 !./administrator/components/com_tagebuch
 !./components/com_tagebuch
+!./administrator/components/com_cbks
+!./components/com_cbks
+!./administrator/components/com_energies
+!./components/com_energies
+!./administrator/components/com_repairs
+!./components/com_repairs
+!./administrator/components/com_wartungen
+!./components/com_wartungen
+!./administrator/components/com_wind
+!./components/com_wind

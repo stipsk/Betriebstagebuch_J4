@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS `#__wartung`;
+DROP TABLE IF EXISTS `#__wartung_done`;
+DROP TABLE IF EXISTS `#__wartung_grundlage`;
+DROP TABLE IF EXISTS `#__wartung_mangel`;
+DROP TABLE IF EXISTS `#__wartung_maschbs`;
+DROP TABLE IF EXISTS `#__wartung_maschine`;
+DROP TABLE IF EXISTS `#__wartung_qualifikation`;
+DROP TABLE IF EXISTS `#__wartung_termin`;
