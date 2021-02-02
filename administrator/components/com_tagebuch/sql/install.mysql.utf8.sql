@@ -53,11 +53,12 @@ CREATE TABLE IF NOT EXISTS `#__tagebuch` (
     `metadesc` text NOT NULL,
     `metadata` text NOT NULL,
     `publish_up` datetime NOT NULL,
-    `params` text DEFAULT NULL,
+    `attribs` varchar(5120) DEFAULT NULL,
     `publish_down` datetime NOT NULL,
     `modified` datetime NOT NULL,
     `modified_by` int(10) NOT NULL,
     `version` int(10) NOT NULL DEFAULT 1,
+    `note` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `datum` (`datum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;

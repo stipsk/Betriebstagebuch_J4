@@ -1,0 +1,19 @@
+
+#### 2020-02-01  ############################
+	--
+	--	Rename Tabellen
+	--
+
+	1. Rename #__sk_tagebuch 		-> 	#__tagebuch
+	2. Rename #__sk_tagebuch_avv 	-> 	#__tagebuch_avv
+
+
+	--
+	--	Tabelle #__tagbuch Strukturänderung:
+	--
+
+	1. #__tagebuch.parameters		->	#__tagebuch.attribs		varchar(5120)	notNull
+	2. Hinzufügen:					->	#__tagebuch.note		varchar(255)	notNull
+
+#### 2020-02-01 End	#########################
+
