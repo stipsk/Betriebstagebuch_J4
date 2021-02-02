@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS `#__repairs_parts` (
     `ordering` int(11) UNSIGNED NOT NULL DEFAULT 0,
     `access` int(10) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
-    KEY `ResId` (`rid`,`dt_start`) COMMENT='Sortierung nach ResId und Startzeit'
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Resourcenverbindung zu Reperaturen';
+    KEY `ResId` (`rid`,`dt_start`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tabellenstruktur für Tabelle `uw3ro_repairs_resources`
@@ -97,4 +97,4 @@ CREATE TABLE IF NOT EXISTS `#__repairs_resources` (
     `ordering` int(11) UNSIGNED NOT NULL DEFAULT 0,
     `access` int(10) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Resourcenverbindung zu Reperaturen';
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
