@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_repairs</name>
+	<author>Stephan Knauer</author>
+	<creationDate>January 2021</creationDate>
+	<copyright>(C) 2021 Stephan Knauer. All rights reserved.</copyright>
+	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
+	<authorEmail>stephan.knauer@web.de</authorEmail>
+	<authorUrl>www.sv-portal.info/joomla-addons</authorUrl>
+	<version>4.0.0</version>
+	<description>COM_REPAIRS_XML_DESCRIPTION</description>
+	<namespace path="src">SK\Component\Repairs</namespace>
+
+	<install> <!-- Runs on install -->
+    	<sql>
+        	<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+  		</sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall com_Tagebuch -->
+    	<sql>
+        	<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+  		</sql>
+   </uninstall>
+
+	<files folder="site">
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/com_repairs.ini</language>
+		<language tag="de-DE">language/de-DE/com_repairs.ini</language>
+	</languages>
+
+	<media destination="com_repairs" folder="media">
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>vorlagen</folder>
+	</media>
+
+	<administration>
+		<menu img="class:repairs">com_repairs</menu>
+		<menu img="class:repairs">COM_REPAIRS</menu>
+		<submenu>
+			<!--
+				Note that all & must be escaped to &amp; for the file to be valid
+				XML and be parsed by the installer
+			-->
+			<menu link="option=com_repairs" view="repairs" img="class:repairs"
+				alt="Chargenbegleitkarte">com_repairs</menu>
+
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<folder>forms</folder>
+			<folder>services</folder>
+			<folder>sql</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/com_repairs.ini</language>
+			<language tag="en-GB">language/en-GB/com_repairs.sys.ini</language>
+			<language tag="de-DE">language/de-DE/com_repairs.ini</language>
+			<language tag="de-DE">language/de-DE/com_repairs.sys.ini</language>
+		</languages>
+	</administration>
+</extension>
+
