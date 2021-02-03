@@ -43,7 +43,26 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 	}
 	?>
 
-    <?php HTMLHelper::()
+	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
+
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', Text::_('Erster Tab')); ?>
+    <div>so</div>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general2', Text::_('Zweiter Tab')); ?>
+    <div>sound</div>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general3', Text::_('Dritter Tab')); ?>
+    <div>soundso</div>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general4', Text::_('Vierter Tab')); ?>
+    <div>soundsodele</div>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
+
 
 	<?php // Todo Not that elegant would be nice to group the params ?>
 	<?php $useDefList = ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
