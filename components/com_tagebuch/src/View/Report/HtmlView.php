@@ -25,6 +25,7 @@ use Joomla\CMS\Uri\Uri;
 //use SK\Component\Tagebuch\Site\Helper\AssociationHelper;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper;
 
+
 /**
  * HTML Report View class for the Tagebuch component
  *
