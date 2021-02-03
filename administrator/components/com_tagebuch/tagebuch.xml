@@ -25,6 +25,7 @@
 	<files folder="site">
 		<folder>src</folder>
 		<folder>tmpl</folder>
+		<folder>language</folder>
 	</files>
 
 	<languages folder="site">
@@ -54,6 +55,7 @@
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<folder>forms</folder>
+			<folder>language</folder>
 			<folder>services</folder>
 			<folder>sql</folder>
 			<folder>src</folder>

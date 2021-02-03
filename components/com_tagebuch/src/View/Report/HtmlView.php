@@ -167,12 +167,12 @@ class HtmlView extends BaseHtmlView
 		}
 
 		/**
-		 * Check for no 'access-view' and empty fulltext,
+		 * Check for no 'access-view',
 		 * - Redirect guest users to login
 		 * - Deny access to logged users with 403 code
 		 * NOTE: we do not recheck for no access-view + show_noauth disabled ... since it was checked above
 		 */
-		if ($item->params->get('access-view') == false && !strlen($item->fulltext))
+		if ($item->params->get('access-view') == false)
 		{
 			if ($this->user->get('guest'))
 			{
