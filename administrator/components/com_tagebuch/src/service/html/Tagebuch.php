@@ -17,7 +17,7 @@ use Joomla\CMS\Language\Text;
 
 /**
  * Tagebuch HTML class.
- * Call HTML::_('Tagebuch.*function*' , $foo , $bar );
+ * Call HTML::_('Tagebuch.function' , $foo , $bar ... );
  *
  * @since  2.5
  */
