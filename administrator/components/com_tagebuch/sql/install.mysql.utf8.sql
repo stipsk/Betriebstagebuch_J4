@@ -107,3 +107,33 @@ CREATE TABLE IF NOT EXISTS `#__tagebuch_avv` (
     KEY `lfdnr` (`lfdnr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Tabellenstruktur für Tabelle `#__tagebuch_masch`
+--
+
+CREATE TABLE IF NOT EXISTS `#__tagebuch_masch` (
+    `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `wid` int(11) UNSIGNED NOT NULL COMMENT 'Verknüpfung zu Wartung ID',
+    `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `state` tinyint(3) NOT NULL DEFAULT 0,
+    `params` text DEFAULT NULL,
+    `version` int(10) UNSIGNED NOT NULL DEFAULT 1,
+    `catid` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `created_by` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `modified_by` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `checked_out` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `ordering` int(11) NOT NULL DEFAULT 0,
+    `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `metadesc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `access` int(10) UNSIGNED NOT NULL DEFAULT 0,
+    `metadata` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `wid` (`wid`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

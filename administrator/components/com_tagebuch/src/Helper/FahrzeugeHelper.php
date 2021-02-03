@@ -44,7 +44,7 @@ class FahrzeugeHelper extends ContentHelper
 					$db->quoteName('b.title', 'text'),
 				]
 			)
-			->from($db->quoteName('#__banner_clients', 'a'))
+			->from($db->quoteName('#__tagebuch_masch', 'a'))
 			->join('LEFT', $db->quoteName('#__wartung_maschine') . ' AS b ON (b.id = a.wid)' )
 			->order($db->quoteName('text'));
 

@@ -8,6 +8,8 @@
 			RENAME TABLE `#__sk_tagebuch` TO `#__tagebuch`;
 	2. Rename #__sk_tagebuch_avv 	-> 	#__tagebuch_avv
 			RENAME TABLE `#__sk_tagebuch_avv` TO `#__tagebuch_avv`;
+	3. Rename #__sk_tagebuch_masch 	-> 	#__tagebuch_masch
+    			RENAME TABLE `#__sk_tagebuch_masch` TO `#__tagebuch_masch`;
 
 	--
 	--	Tabelle #__tagbuch Strukturänderung:

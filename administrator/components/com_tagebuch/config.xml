@@ -4,7 +4,7 @@
         name="component"
 		label="COM_TAGEBUCH_COMPONENT_LABEL"
 		description="COM_TAGEBUCH_COMPONENT_DESC"
-        addfieldpath="/administrator/components/com_tagebuch/src/Field"
+        addfieldprefix="SK\Component\Tagebuch\Administrator\Field"
     >
 
 
