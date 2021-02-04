@@ -28,10 +28,6 @@
 		<folder>language</folder>
 	</files>
 
-	<languages folder="site">
-		<language tag="en-GB">language/en-GB/com_tagebuch.ini</language>
-		<language tag="de-DE">language/de-DE/com_tagebuch.ini</language>
-	</languages>
 
 	<media destination="com_tagebuch" folder="media">
 		<folder>images</folder>
@@ -61,12 +57,6 @@
 			<folder>src</folder>
 			<folder>tmpl</folder>
 		</files>
-		<languages folder="admin">
-			<language tag="en-GB">language/en-GB/com_tagebuch.ini</language>
-			<language tag="en-GB">language/en-GB/com_tagebuch.sys.ini</language>
-			<language tag="de-DE">language/de-DE/com_tagebuch.ini</language>
-			<language tag="de-DE">language/de-DE/com_tagebuch.sys.ini</language>
-		</languages>
 	</administration>
 </extension>
 

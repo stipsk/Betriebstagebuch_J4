@@ -2,27 +2,19 @@
 <config>
 	<fieldset
         name="component"
-		label="COM_TAGEBUCH_COMPONENT_LABEL"
-		description="COM_TAGEBUCH_COMPONENT_DESC"
+		label="COM_TAGEBUCH_COMPONENT_CONFIG_LABEL"
+		description="COM_TAGEBUCH_COMPONENT_CONFIG_DESC"
         addfieldprefix="SK\Component\Tagebuch\Administrator\Field"
     >
 
-
-        <field
-            name="fahrzeuge"
-            type="fahrzeuge"
-            default="0"
-            label="Fahrzeugauswahl"
-            description="DESC Fahrzeugauswahl"
-        />
 
         <field
             name="debug"
             type="radio"
             class="btn-group btn-group-yesno"
             default="0"
-            label="COM_TAGEBUCH_DEBUG_LABEL"
-            description="COM_TAGEBUCH_DEBUG_DESC"
+            label="COM_TAGEBUCH_CONFIG_DEBUG_LABEL"
+            description="COM_TAGEBUCH_CONFIG_DEBUG_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -33,8 +25,8 @@
             type="radio"
             class="btn-group btn-group-yesno"
             default="1"
-            label="COM_TAGEBUCH_SHOWPRINT_LABEL"
-            description="COM_TAGEBUCH_SHOWPRINT_DESC"
+            label="COM_TAGEBUCH_CONFIG_SHOWPRINT_LABEL"
+            description="COM_TAGEBUCH_CONFIG_SHOWPRINT_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -45,8 +37,8 @@
             type="radio"
             class="btn-group btn-group-yesno"
             default="1"
-            label="COM_TAGEBUCH_SHOWPRINT_LU_LABEL"
-            description="COM_TAGEBUCH_SHOWPRINT_LU_DESC"
+            label="COM_TAGEBUCH_CONFIG_SHOWPRINT_LU_LABEL"
+            description="COM_TAGEBUCH_CONFIG_SHOWPRINT_LU_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -57,8 +49,8 @@
             type="radio"
             class="btn-group btn-group-yesno"
             default="1"
-            label="COM_TAGEBUCH_SHOWPRINT_WS_LABEL"
-            description="COM_TAGEBUCH_SHOWPRINT_WS_DESC"
+            label="COM_TAGEBUCH_CONFIG_SHOWPRINT_WS_LABEL"
+            description="COM_TAGEBUCH_CONFIG_SHOWPRINT_WS_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -69,8 +61,8 @@
             type="radio"
             class="btn-group btn-group-yesno"
             default="1"
-            label="COM_TAGEBUCH_SHOWICONS_LABEL"
-            description="COM_TAGEBUCH_SHOWICONS_DESC"
+            label="COM_TAGEBUCH_CONFIG_SHOWICONS_LABEL"
+            description="COM_TAGEBUCH_CONFIG_SHOWICONS_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -81,8 +73,8 @@
             type="radio"
             class="btn-group btn-group-yesno"
             default="1"
-            label="COM_TAGEBUCH_SHOWFIELD_ERST_AM"
-            description="COM_TAGEBUCH_SHOWFIELD_ERST_AM"
+            label="COM_TAGEBUCH_CONFIG_SHOWFIELD_ERST_AM_LABEL"
+            description="COM_TAGEBUCH_CONFIG_SHOWFIELD_ERST_AM_DESC"
         >
             <option value="1">JYES</option>
             <option value="0">JNO</option>
@@ -90,16 +82,16 @@
 
         <field
             name="verantwortlicher"
-            type="skauthor"
-            label="COM_TAGEBUCH_VERANTW_LABEL"
-            description="COM_TAGEBUCH_VERANTW_DESC"
+            type="user"
+            label="COM_TAGEBUCH_CONFIG_VERANTW_LABEL"
+            description="COM_TAGEBUCH_CONFIG_VERANTW_DESC"
         />
 
         <field
             name="verantwortlicher_abluft"
-            type="skauthor"
-            label="COM_TAGEBUCH_VERANTWABL_LABEL"
-            description="COM_TAGEBUCH_VERANTWABL_DESC"
+            type="user"
+            label="COM_TAGEBUCH_CONFIG_VERANTWABL_LABEL"
+            description="COM_TAGEBUCH_CONFIOG_VERANTWABL_DESC"
         />
 
         <field
@@ -183,7 +175,7 @@
         />
 
         <field  name="vorlage_fahrzeug1"
-            type="skfahrzeuge"
+            type="fahrzeuge"
             extension="com_tagebuch"
             label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG1_LABEL"
             description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG1_DESC"
@@ -191,7 +183,7 @@
         />
 
         <field  name="vorlage_fahrzeug2"
-            type="skfahrzeuge"
+            type="fahrzeuge"
             extension="com_tagebuch"
             label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG2_LABEL"
             description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG2_DESC"
@@ -199,7 +191,7 @@
         />
 
         <field  name="vorlage_fahrzeug3"
-            type="skfahrzeuge"
+            type="fahrzeuge"
             extension="com_tagebuch"
             label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG3_LABEL"
             description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG3_DESC"
@@ -207,7 +199,7 @@
         />
 
         <field  name="vorlage_fahrzeug4"
-            type="skfahrzeuge"
+            type="fahrzeuge"
             extension="com_tagebuch"
             label="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG4_LABEL"
             description="COM_TAGEBUCH_FIELD_CONFIG_VORLAGE_FAHRZEUG4_DESC"
