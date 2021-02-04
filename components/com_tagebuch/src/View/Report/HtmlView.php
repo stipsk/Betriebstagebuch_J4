@@ -108,12 +108,6 @@ class HtmlView extends BaseHtmlView
 		// Add router helpers.
 		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 
-		// No link for ROOT category
-		if ($item->parent_alias === 'root')
-		{
-			$item->parent_id = null;
-		}
-
 
 		// Merge article params. If this is single-article view, menu params override article params
 		// Otherwise, article params override menu item params
@@ -235,17 +229,17 @@ class HtmlView extends BaseHtmlView
 			|| $id != $this->item->id))
 		{
 			// If a browser page title is defined, use that, then fall back to the article title if set, then fall back to the page_title option
-			$title = $this->item->params->get('article_page_title', $this->item->title ?: $title);
+			$title = $this->item->params->get('article_page_title', $this->item->datum ?: $title);
 
-			$path     = array(array('title' => $this->item->title, 'link' => ''));
-			$category = Categories::getInstance('Content')->get($this->item->catid);
+			$path     = array(array('title' => $this->item->datum, 'link' => ''));
+			//$category = Categories::getInstance('Content')->get($this->item->catid);
 
-			while ($category && (!isset($menu->query['option']) || $menu->query['option'] !== 'com_content' || $menu->query['view'] === 'article'
+			/*while ($category && (!isset($menu->query['option']) || $menu->query['option'] !== 'com_content' || $menu->query['view'] === 'article'
 				|| $id != $category->id) && $category->id > 1)
 			{
 				$path[]   = array('title' => $category->title, 'link' => RouteHelper::getCategoryRoute($category->id, $category->language));
 				$category = $category->getParent();
-			}
+			}*/
 
 			$path = array_reverse($path);
 
@@ -290,11 +284,11 @@ class HtmlView extends BaseHtmlView
 			$this->document->setMetaData('robots', $this->params->get('robots'));
 		}
 
-		if ($app->get('MetaAuthor') == '1')
+		/*if ($app->get('MetaAuthor') == '1')
 		{
 			$author = $this->item->created_by_alias ?: $this->item->author;
 			$this->document->setMetaData('author', $author);
-		}
+		}*/
 
 		$mdata = $this->item->metadata->toArray();
 
@@ -309,7 +303,7 @@ class HtmlView extends BaseHtmlView
 		// If there is a pagebreak heading or title, add it to the page title
 		if (!empty($this->item->page_title))
 		{
-			$this->item->title = $this->item->title . ' - ' . $this->item->page_title;
+			$this->item->title = $this->item->datum . ' - ' . $this->item->page_title;
 			$this->document->setTitle(
 				$this->item->page_title . ' - ' . Text::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1)
 			);

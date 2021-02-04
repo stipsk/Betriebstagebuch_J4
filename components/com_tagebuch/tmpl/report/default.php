@@ -22,10 +22,11 @@ use SK\Component\Tagebuch\Site\Helper\RouteHelper;
 
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
-$urls    = json_decode($this->item->urls);
+//$urls    = json_decode($this->item->urls);
 $canEdit = $params->get('access-edit');
 $user    = Factory::getUser();
 $info    = $params->get('info_block_position', 0);
+$format = 'd.m.Y H:i';
 
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
@@ -43,10 +44,65 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 	}
 	?>
 
+
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', Text::_('Erster Tab')); ?>
-    <div>so</div>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <?php echo JText::_('COM_TAGEBUCH_SFFRUEH').':'; ?>
+                <strong>
+                    <?php echo $this->item->sff_name ? $this->item->sff_name : Text::_( '..' ) ; ?>
+                </strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 col-md-3 text-small">
+                <!-- Frühschicht -->
+                <?php if ($params->get('show_field_erst_am')){?>
+                    <div class="row">
+                        <div class="col-4 col-md-4 text-right">
+                            <?php echo Text::_('COM_TAGEBUCH_ERSTELLT_AM').':'; ?>
+                        </div>
+                        <div class="col-8 col-md-8">
+                            <?php echo (($this->item->fs_erstellt == '0000-00-00 00:00:00') || ($this->item->fs_erstellt == ''))
+                                ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->fs_erstellt, $format); ?>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="row">
+                    <div class="col-4 col-md-4 text-right">
+                        <?php echo Text::_('COM_TAGEBUCH_ERSTELLT_VON').':'; ?>
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <?php echo ($this->item->fs_erstellt_von_name != '') ? $this->item->fs_erstellt_von_name : Text::_( '..' ); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 col-md-4 text-right">
+                        <?php echo Text::_('COM_TAGEBUCH_AENDER_AM').':'; ?>
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <?php echo (($this->item->fs_laenderung == '0000-00-00 00:00:00') || ($this->item->fs_laenderung == ''))
+                            ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->fs_laenderung, $format); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 col-md-4 text-right">
+                        <?php echo Text::_('COM_TAGEBUCH_AENDER_VON').':'; ?>
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <?php echo ($this->item->fs_laenderung_von_name != '') ? $this->item->fs_laenderung_von_name : Text::_( '..' ) ; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9 col-md-9">
+                <?php echo strlen($this->item->text_fs) > 0 ? $this->item->text_fs : HTMLHelper::image('images/blank.png' , Text::_('Empty') , $blank_image_attribs); ?>
+            </div>
+        </div>
+    </div>
+
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
     <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general2', Text::_('Zweiter Tab')); ?>
@@ -54,7 +110,7 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
     <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general3', Text::_('Dritter Tab')); ?>
-    <div>soundso</div>
+    <div class="hidden">soundso</div>
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general4', Text::_('Vierter Tab')); ?>
@@ -64,119 +120,4 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 	<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 
 
-	<?php // Todo Not that elegant would be nice to group the params ?>
-	<?php $useDefList = ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
-	|| $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $assocParam); ?>
-
-	<?php if ($params->get('show_title')) : ?>
-	<div class="page-header">
-		<h2 itemprop="headline">
-			<?php echo $this->escape($this->item->title); ?>
-		</h2>
-		<?php if ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED) : ?>
-			<span class="badge badge-warning"><?php echo Text::_('JUNPUBLISHED'); ?></span>
-		<?php endif; ?>
-		<?php if (strtotime($this->item->publish_up) > strtotime(Factory::getDate())) : ?>
-			<span class="badge badge-warning"><?php echo Text::_('JNOTPUBLISHEDYET'); ?></span>
-		<?php endif; ?>
-		<?php if (!is_null($this->item->publish_down) && (strtotime($this->item->publish_down) < strtotime(Factory::getDate()))) : ?>
-			<span class="badge badge-warning"><?php echo Text::_('JEXPIRED'); ?></span>
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
-	<?php if ($canEdit) : ?>
-		<?php echo LayoutHelper::render('joomla.content.icons', array('params' => $params, 'item' => $this->item)); ?>
-	<?php endif; ?>
-
-	<?php // Content is generated by content plugin event "onContentAfterTitle" ?>
-	<?php echo $this->item->event->afterDisplayTitle; ?>
-
-	<?php if ($useDefList && ($info == 0 || $info == 2)) : ?>
-		<?php echo LayoutHelper::render('joomla.content.info_block', array('item' => $this->item, 'params' => $params, 'position' => 'above')); ?>
-	<?php endif; ?>
-
-	<?php if ($info == 0 && $params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
-		<?php $this->item->tagLayout = new FileLayout('joomla.content.tags'); ?>
-
-		<?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
-	<?php endif; ?>
-
-	<?php // Content is generated by content plugin event "onContentBeforeDisplay" ?>
-	<?php echo $this->item->event->beforeDisplayContent; ?>
-
-	<?php if (isset($urls) && ((!empty($urls->urls_position) && ($urls->urls_position == '0')) || ($params->get('urls_position') == '0' && empty($urls->urls_position)))
-		|| (empty($urls->urls_position) && (!$params->get('urls_position')))) : ?>
-	<?php echo $this->loadTemplate('links'); ?>
-	<?php endif; ?>
-	<?php if ($params->get('access-view')) : ?>
-	<?php echo LayoutHelper::render('joomla.content.full_image', $this->item); ?>
-	<?php
-	if (!empty($this->item->pagination) && $this->item->pagination && !$this->item->paginationposition && !$this->item->paginationrelative) :
-		echo $this->item->pagination;
-	endif;
-	?>
-	<?php if (isset ($this->item->toc)) :
-		echo $this->item->toc;
-	endif; ?>
-	<div itemprop="articleBody" class="com-content-article__body">
-		<?php echo $this->item->text; ?>
-	</div>
-
-	<?php if ($info == 1 || $info == 2) : ?>
-		<?php if ($useDefList) : ?>
-			<?php echo LayoutHelper::render('joomla.content.info_block', array('item' => $this->item, 'params' => $params, 'position' => 'below')); ?>
-		<?php endif; ?>
-		<?php if ($params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
-			<?php $this->item->tagLayout = new FileLayout('joomla.content.tags'); ?>
-			<?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
-		<?php endif; ?>
-	<?php endif; ?>
-
-	<?php
-	if (!empty($this->item->pagination) && $this->item->pagination && $this->item->paginationposition && !$this->item->paginationrelative) :
-		echo $this->item->pagination;
-	?>
-	<?php endif; ?>
-	<?php if (isset($urls) && ((!empty($urls->urls_position) && ($urls->urls_position == '1')) || ($params->get('urls_position') == '1'))) : ?>
-	<?php echo $this->loadTemplate('links'); ?>
-	<?php endif; ?>
-	<?php // Optional teaser intro text for guests ?>
-	<?php elseif ($params->get('show_noauth') == true && $user->get('guest')) : ?>
-	<?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
-	<?php echo HTMLHelper::_('content.prepare', $this->item->introtext); ?>
-	<?php // Optional link to let them register to see the whole article. ?>
-	<?php if ($params->get('show_readmore') && $this->item->fulltext != null) : ?>
-	<?php $menu = Factory::getApplication()->getMenu(); ?>
-	<?php $active = $menu->getActive(); ?>
-	<?php $itemId = $active->id; ?>
-	<?php $link = new Uri(Route::_('index.php?option=com_users&view=login&Itemid=' . $itemId, false)); ?>
-	<?php $link->setVar('return', base64_encode(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language))); ?>
-	<p class="com-content-article__readmore readmore">
-		<a href="<?php echo $link; ?>" class="register">
-		<?php $attribs = json_decode($this->item->attribs); ?>
-		<?php
-		if ($attribs->alternative_readmore == null) :
-			echo Text::_('COM_CONTENT_REGISTER_TO_READ_MORE');
-		elseif ($readmore = $attribs->alternative_readmore) :
-			echo $readmore;
-			if ($params->get('show_readmore_title', 0) != 0) :
-				echo HTMLHelper::_('string.truncate', $this->item->title, $params->get('readmore_limit'));
-			endif;
-		elseif ($params->get('show_readmore_title', 0) == 0) :
-			echo Text::sprintf('COM_CONTENT_READ_MORE_TITLE');
-		else :
-			echo Text::_('COM_CONTENT_READ_MORE');
-			echo HTMLHelper::_('string.truncate', $this->item->title, $params->get('readmore_limit'));
-		endif; ?>
-		</a>
-	</p>
-	<?php endif; ?>
-	<?php endif; ?>
-	<?php
-	if (!empty($this->item->pagination) && $this->item->pagination && $this->item->paginationposition && $this->item->paginationrelative) :
-		echo $this->item->pagination;
-	?>
-	<?php endif; ?>
-	<?php // Content is generated by content plugin event "onContentAfterDisplay" ?>
-	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
