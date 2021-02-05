@@ -1,0 +1,225 @@
+/**
+ * @version		$Id: sk_tagebuch.php 
+ * @package		Joomla
+ * @subpackage	sk_Tagebuch
+ * @copyright	Copyright (C) 2009 Stephan Knauer. All rights reserved.
+ * @license		No Commercial Use - See at http://joomla.sv-portal.de
+ * @author 		Stephan Knauer (stephan@sv-portal.de)
+ * @name 		\views\css\tagebuch.css
+ */
+ 
+ 
+ /* (de) Aufteilung für Subcolumns
+ 	* basierend auf dem YAML-Framework (http://www.yaml.de
+*/
+ .subcolumns, .subcolumns0, .subcolumns1, .subcolumns_highlight, .subcolumns_nav, .subcolumns_printtop {
+    width: 99%;
+    overflow:hidden;
+  }
+  
+  .c50l, .c25l, .c33l, .c38l, .c66l, .c75l, .c62l {float: left; }
+  .c50r, .c25r, .c33r, .c38r, .c66r, .c75r, .c62r, c70r {float: right; margin-left: -5px; }
+
+  .c25l, .c25r { width: 25% }
+  .c33l, .c33r { width: 33.333% }
+  .c50l, .c50r { width: 50% }
+  .c66l, .c66r { width: 66.666% }
+  .c75l, .c75r { width: 75% }
+  .c38l, .c38r { width: 38.2% }
+  .c62l, .c62r { width: 61.8% }
+  
+  .textright{ padding-right: 1em; float: right; font-weight: bold; }
+  .subcolumns0 { background-color: #F9F9F9; padding-top: 0.3em; padding-bottom: 0.3em;}
+  .subcolumns1 { background-color: #FEFEFE; padding-top: 0.3em; padding-bottom: 0.3em;}
+  .subcolumnsR { font-size: 70%; }
+  .subcolumns_highlight { background-color: #FAFAD2; border: solid thin #222; padding: 1em 0; }
+  .subcolumns_nav { background-color: #F9F9F9; border: solid thin #222; padding: 0.5em 0; margin-bottom: 0.5em; }
+  .subcolumns_printtop { background-color: #FAFAD2; border: solid thin #222; padding: 0.5em 0.5em 0.5em 1em; width: 90%; margin-bottom: 0.5em; margin-left: 0.5em; }
+  
+  .subc  { padding: 0 0.5em }
+  .subcl { padding: 0 1em 0 0 }
+  .subcr { padding: 0 0 0 1em }
+  
+  .debugText{ padding:1em; background-color: #FAFAD2; border: dashed 1px #B0C4DE; overflow:hidden;}
+  
+  
+  /* pane-sliders  */
+.pane-sliders .title {
+	margin: 0;
+	padding: 2px;
+	color: #666;
+	cursor: pointer;
+}
+
+.pane-sliders .panel   { border: 1px solid #ccc; margin-bottom: 3px;}
+
+.pane-sliders .panel h3 { background: #f6f6f6; color: #666}
+
+.pane-sliders .content { background: #f6f6f6; }
+
+.pane-sliders .adminlist     { border: 0 none; }
+.pane-sliders .adminlist td  { border: 0 none; }
+
+.jpane-toggler  span     { background: transparent url(../images/j_arrow.png) 5px 50% no-repeat; padding-left: 20px;}
+.jpane-toggler-down span { background: transparent url(../images/j_arrow_down.png) 5px 50% no-repeat; padding-left: 20px;}
+
+.jpane-toggler-down {  border-bottom: 1px solid #ccc; }
+
+#inhalt{
+	background: #FAFAD2;
+	}
+
+/* tabs */
+
+dl.tabs {
+	float: left;
+	margin: 10px 0 -1px 0;
+	z-index: 50;
+}
+
+dl.tabs dt {
+	float: left;
+	padding: 4px 10px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-left: 3px;
+	background: #f0f0f0;
+	color: #666;
+}
+
+dl.tabs dt.open {
+	background: #F9F9F9;
+	border-bottom: 2px solid #F9F9F9;
+	z-index: 100;
+	color: #000;
+}
+
+div.current {
+	clear: both;
+	border: 1px solid #ccc;
+	padding: 10px 10px;
+	background-color: #F9F9F9;
+}
+
+div.current dd {
+	padding: 0;
+	margin: 0;
+}
+
+/* Formulare */
+.invalid {
+	border: 2px solid #FF0000;
+	background-color: #00FF00;
+}
+
+.invalid label{
+	background-color: #0000FF;
+}
+
+.smaller{
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 70%;
+}
+.sk_bk_orange{
+    background-color: #EC6607 !important;
+}
+
+
+.form-horizontal .sk-small .control-group {
+    margin-bottom: 0px;
+}
+.sk-small .control-group {
+    margin-bottom: 0px;
+}
+
+/** Formatierungen für das Tagebuch **/
+
+    .s5_awl {
+        border: 2px dashed #B0C4DE;
+        background: #FAFAD2 url(../../../images/default/s5_awl.gif) no-repeat scroll;
+        height: inherit;
+        line-height: inherit;
+        margin: 0.5em 20em 0.5em 0.5em;
+        padding: 0 0 0 25px;
+        font-size: 0.8em;
+    }
+
+    .codesys_io {
+        background: #FAFAD2 url(../../../images/default/codesys_io.gif) no-repeat scroll;
+        height: inherit;
+        line-height: inherit;
+        margin: 0.5em;
+        padding: 0 0 0 5px;
+        font-size: 0.8em;
+    }
+
+   .telefon {
+        background: #FAFAD2 url(../../../images/default/M_images/con_tel.png) no-repeat scroll;
+        height: inherit;
+        line-height: inherit;
+        margin: 0.5em;
+        padding: 0 0 0 20px;
+        font-size: 1em;
+    }
+
+    .tipsk {
+        border: 1px solid #B0C4DE;
+        font-size: 0.8em;
+        margin: 0.5em 5em 0.5em 0.5em;
+        padding: 0.5em;
+        background: #FAFAD2;
+        display: block;	
+    }
+
+    .fussnote{
+        border: 1px dashed #99CCCC;
+        font-size: 0.7em;
+        margin: 0.5em 5em 0.5em 0.5em;
+        padding: 0.5em;
+        background: #FFE6CC;
+        display: block;
+    }
+
+    .tagebuch_h1 {
+        border: 1px solid #B0C4DE;
+        font-size: 1.2em;
+        margin: 0.5em 5em 0.5em 0.5em;
+        padding: 0.5em;
+        background: #FAFAD2;	
+        display: block;
+        font-weight: bold;
+    }
+    
+    .tagebuch_h2 {
+        font-size: 1.2em;
+        background: #EAEAEA;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Formulare */
+.invalid {
+	border: 2px solid #FF0000;
+	background-color: #00FF00;
+}
+
+.invalid label{
+	background-color: #0000FF;
+}
+
+.form-inline .input-append {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+
+.form-inline .controls, .form-inline .control-label{
+    display: inline-block;
+}
+
+/* Für Selectlisten muss diese Angabe eingefügt werden, damit alles List-Elemente angezeigt werden */
+.chzn-container-single{
+    width: 260px !important;
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_tagebuch",
+  "version": "4.0.0",
+  "description": "Tagebuchkomponente",
+  "license": "GPL-2.0+",
+  "assets": [
+    {
+      "name": "tagebuch.standard",
+      "type": "style",
+      "uri": "com_tagebuch/tagebuch.css"
+    },
+    {
+      "name": "tagebuch.print",
+      "type": "style",
+      "uri": "com_tagebuch/print.css"
+    }
+  ]
+}
