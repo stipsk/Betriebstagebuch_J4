@@ -28,6 +28,10 @@ $user    = Factory::getUser();
 $info    = $params->get('info_block_position', 0);
 $format = 'd.m.Y H:i';
 
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+$wa = $this->document->getWebAssetManager();
+$wa->useStyle('tagebuch.standard');
+
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 ?>
@@ -49,16 +53,18 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 
 	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', Text::_('Erster Tab')); ?>
     <div class="container-fluid">
-        <div class="row no-gutters">
+        <div class="row">
             <div class="col-12">
+                <p>
                 <?php echo JText::_('COM_TAGEBUCH_SFFRUEH').':'; ?>
                 <strong>
                     <?php echo $this->item->sff_name ? $this->item->sff_name : Text::_( '..' ) ; ?>
                 </strong>
+                </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-3 col-md-3 text-small">
+            <div class="col-2 col-md-2 smaller">
                 <!-- Frühschicht -->
                 <?php if ($params->get('show_field_erst_am')){?>
                     <div class="row">
@@ -97,7 +103,7 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
                     </div>
                 </div>
             </div>
-            <div class="col-9 col-md-9">
+            <div class="col-10 col-md-10">
                 <?php echo strlen($this->item->text_fs) > 0 ? $this->item->text_fs : HTMLHelper::image('images/blank.png' , Text::_('Empty') , $blank_image_attribs); ?>
             </div>
         </div>
