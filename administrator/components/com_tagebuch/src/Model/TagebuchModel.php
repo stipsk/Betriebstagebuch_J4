@@ -23,7 +23,7 @@ use Joomla\Utilities\ArrayHelper;
 use Joomla\Database\ParameterType;
 
 /**
- * Methods supporting a list of mywalks records.
+ * Methods supporting a list of tagebuch records.
  *
  * @since  1.6
  */

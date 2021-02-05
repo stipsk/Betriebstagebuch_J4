@@ -80,8 +80,8 @@ class ReportModel extends ItemModel
 		$user = Factory::getUser();
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
-
-		$pk = TagebuchHelper::getLastId($pk);
+		$skhelper = new TagebuchHelper;
+		$pk = $skhelper->getLastId($pk);
 
 		if ($this->_item === null)
 		{

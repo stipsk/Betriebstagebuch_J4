@@ -11,15 +11,31 @@ namespace SK\Component\Tagebuch\Administrator\Helper;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 /**
  * Tagebuch component helper.
  *
  * @since  4.0
  */
-class TagebuchHelper
+class TagebuchHelper extends ComponentHelper
 {
+	/**
+	 * The URL option for the component.
+	 *
+	 * @var    string
+	 * @since  1.6
+	 */
+	protected $lastDate;
+
+	public function __construct()
+	{
+		$this->lastDate = null;
+
+	}
+
 	public static function getTagebuchTitle($id)
 	{
 		if (empty($id))
@@ -29,7 +45,7 @@ class TagebuchHelper
 		}
 		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('title');
+		$query->select('datum');
 		$query->from('#__tagebuch');
 		$query->where('id = ' . $id);
 		$db->setQuery($query);
@@ -46,10 +62,123 @@ class TagebuchHelper
 	 * @since   1.5
 	 */
 
-	public static function getLastId($id = null) : int
+	public function getLastId($id = null)
 	{
+		$user = Factory::getUser();
+		$db    = Factory::getDbo();
+		$config	= ComponentHelper::getParams( 'com_tagebuch' );
+		$query = $db->getQuery(true);
 
-		if (!$id) {$id = 2675;}
-		return ($id);
+		$publish_erlaubt = $user->authorise('core.edit.state', 'com_tagebuch');
+		$where = $publish_erlaubt ? $db-quoteName('1') : $db->quoteName('state') . '=' . '1' ;
+		$limit = 10;
+		$limitstart = 0;
+
+		$query->select(	$db->quoteName('id') )
+			->select(	$db->quoteName('datum') )
+			->from($db->quoteName('#__tagebuch'))
+			->where($where)
+			->order($db->quoteName('datum') . ' ' . 'DESC')
+			->setLimit($limit, $limitstart);
+
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+		$this->lastDate = $rows[0]->datum;
+		return ($rows[0]->id);
 	}
+
+	/**
+	 * Datum des letzten Eintrages holen
+	 *
+	 * @return DATETIME
+	 */
+	public function getLastDate()
+	{
+		if (!$this->_lastDate)
+		{
+			$this->getLastEntry();
+		}
+		return ($this->_lastDate);
+	}
+
+
+	/**
+	 * Nächster und Zurückliegender Eintrag einholen
+	 *
+	 * @param Int $id
+	 *
+	 * @return Array
+	 */
+/*	public function getNextPreview($id)
+	{
+		$user = JFactory::getUser();
+		$db = JFactory::getDBO();
+		$config	= JComponentHelper::getParams( SKCOMPONENT );
+
+		$publish_erlaubt = $user->authorise('core.edit.state', 'com_content') || (count($user->getAuthorisedCategories('com_content', 'core.edit.state')));
+
+		$query = "SELECT * FROM #__sk_tagebuch WHERE ";
+		$query .= $publish_erlaubt ? '1 ' : "state = '1' ";
+		$query .= "ORDER BY datum ASC";
+		$db->setQuery($query);
+
+		$this->_rows = $db->loadObjectList();
+		$this->showDebug('Query','',$db->getQuery(), $config->get('debug'));
+		$this->showDebug('Datensatzarrays' , '' , $this->_rows , $config->get('debug'));
+		$next = null;
+		$back = null;
+		$first = null;
+		$last = null;
+
+		for ($i = 0 ; $i < count($this->_rows) ; $i++)
+		{
+			if ($this->_rows[$i]->id == $id) {
+				//Datensatz gefunden
+				$back = $i == 0 ? -1 : $i-1;
+				$next = ($i < (count($this->_rows))-1) ? $i+1 : null;
+			}
+		}
+		$first = 0;
+		$last = count($this->_rows)-1;
+
+		$result_array = new stdClass();
+		$result_array->first_id		= $this->_rows[$first]->id;
+		$result_array->last_id		= $this->_rows[$last]->id;
+		$result_array->next_id		= $next ? $this->_rows[$next]->id : null;
+		if ( $back != -1 ){
+			$result_array->back_id	= $back >= 0 ? $this->_rows[$back]->id : null;
+		}else{
+			$result_array->back_id 	= null;
+		}
+		//$result_array->back_id		= $back >= 0 ? $this->_rows[$back]->id : null;
+		$result_array->first_date 	= $this->_rows[$first]->datum;
+		if ($result_array->first_date)
+		{
+			$date = JFactory::getDate($result_array->first_date);
+			$result_array->first_date = $date->format('l, d.m.Y');
+		}
+		$result_array->last_date	= $this->_rows[$last]->datum;
+		if ($result_array->last_date)
+		{
+			$date = JFactory::getDate($result_array->last_date);
+			$result_array->last_date = $date->format('l, d.m.Y');
+		}
+		$result_array->next_date	= $next ? $this->_rows[$next]->datum : null;
+		if ($result_array->next_date)
+		{
+			$date = JFactory::getDate($result_array->next_date);
+			$result_array->next_date = $date->format('l, d.m.Y');
+		}
+		$result_array->back_date	= $result_array->back_id ? $this->_rows[$back]->datum : null;
+		if ($result_array->back_date)
+		{
+			$date = JFactory::getDate($result_array->back_date);
+			$result_array->back_date = $date->format('l, d.m.Y');
+		}
+
+		$this->showDebug('resultarray:' , '' , $result_array, false);
+
+		return ($result_array);
+	}
+*/
 }
