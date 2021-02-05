@@ -134,6 +134,12 @@ div.current dd {
     margin-bottom: 0px;
 }
 
+.sk-tip {
+    margin-bottom: 0px;
+    text-decoration-color: royalblue;
+    text-decoration-line: underline;
+}
+
 /** Formatierungen für das Tagebuch **/
 
     .s5_awl {
@@ -198,6 +204,8 @@ div.current dd {
         display: block;
         font-weight: bold;
     }
+
+
 
     /* Formulare */
 .invalid {

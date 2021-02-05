@@ -1,10 +1,10 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_content
+ * @package     Tagebuch.Site
+ * @subpackage  com_tagebuch
  *
- * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2021 Stephan Knauer. All rights reserved.
+ * @license     GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 defined('_JEXEC') or die;
@@ -20,13 +20,18 @@ use Joomla\CMS\Uri\Uri;
 use SK\Component\Tagebuch\Administrator\Extension\TagebuchComponent;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper;
 
+HTMLHelper::_('behavior.core');
+
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
 //$urls    = json_decode($this->item->urls);
 $canEdit = $params->get('access-edit');
 $user    = Factory::getUser();
 $info    = $params->get('info_block_position', 0);
-$format = 'd.m.Y H:i';
+$formatDayTime = 'd.m.Y H:i';
+$formatDay = 'd.m.Y';
+$TabChecked = '<span class="fas fa-check" style="color: darkgreen;"></span>&nbsp;';
+$TabUnChecked = '<span class="fas fa-check" style="color: lightgrey;"></span>&nbsp;';
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
@@ -51,77 +56,38 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 
-	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', Text::_('Erster Tab')); ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <p>
-                <?php echo JText::_('COM_TAGEBUCH_SFFRUEH').':'; ?>
-                <strong>
-                    <?php echo $this->item->sff_name ? $this->item->sff_name : Text::_( '..' ) ; ?>
-                </strong>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2 col-md-2 smaller">
-                <!-- Frühschicht -->
-                <?php if ($params->get('show_field_erst_am')){?>
-                    <div class="row">
-                        <div class="col-4 col-md-4 text-right">
-                            <?php echo Text::_('COM_TAGEBUCH_ERSTELLT_AM').':'; ?>
-                        </div>
-                        <div class="col-8 col-md-8">
-                            <?php echo (($this->item->fs_erstellt == '0000-00-00 00:00:00') || ($this->item->fs_erstellt == ''))
-                                ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->fs_erstellt, $format); ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <div class="row">
-                    <div class="col-4 col-md-4 text-right">
-                        <?php echo Text::_('COM_TAGEBUCH_ERSTELLT_VON').':'; ?>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <?php echo ($this->item->fs_erstellt_von_name != '') ? $this->item->fs_erstellt_von_name : Text::_( '..' ); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 col-md-4 text-right">
-                        <?php echo Text::_('COM_TAGEBUCH_AENDER_AM').':'; ?>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <?php echo (($this->item->fs_laenderung == '0000-00-00 00:00:00') || ($this->item->fs_laenderung == ''))
-                            ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->fs_laenderung, $format); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 col-md-4 text-right">
-                        <?php echo Text::_('COM_TAGEBUCH_AENDER_VON').':'; ?>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <?php echo ($this->item->fs_laenderung_von_name != '') ? $this->item->fs_laenderung_von_name : Text::_( '..' ) ; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="col-10 col-md-10">
-                <?php echo strlen($this->item->text_fs) > 0 ? $this->item->text_fs : HTMLHelper::image('images/blank.png' , Text::_('Empty') , $blank_image_attribs); ?>
-            </div>
-        </div>
-    </div>
+    <?php $checked = ($this->item->fs_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB1')); ?>
+
+        <?php echo $this->loadTemplate('tabfs'); ?>
 
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general2', Text::_('Zweiter Tab')); ?>
-    <div>sound</div>
+	<?php $checked = ($this->item->ss_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general2', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB2')); ?>
+	    <?php echo $this->loadTemplate('tabss'); ?>
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general3', Text::_('Dritter Tab')); ?>
-    <div class="hidden">soundso</div>
+	<?php $checked = ($this->item->z1_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+    <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general3', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB3') ); ?>
+	    <?php echo $this->loadTemplate('tabz1'); ?>
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general4', Text::_('Vierter Tab')); ?>
-    <div>soundsodele</div>
+	<?php $checked = ($this->item->an_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general4', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB4')); ?>
+	    <?php echo $this->loadTemplate('taban'); ?>
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	<?php $checked = ($this->item->bl_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general5', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB5')); ?>
+	    <?php echo $this->loadTemplate('tabbl'); ?>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+	<?php $checked = ($this->item->z2_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general6', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB6')); ?>
+	    <?php echo $this->loadTemplate('tabz2'); ?>
+	<?php echo HTMLHelper::_('uitab.endTab'); ?>
+
 
 	<?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 
