@@ -14,6 +14,7 @@ namespace SK\Component\Tagebuch\Site\View\Report;
 use Joomla\CMS\Categories\Categories;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\TagsHelper;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Associations;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
@@ -229,7 +230,7 @@ class HtmlView extends BaseHtmlView
 			|| $id != $this->item->id))
 		{
 			// If a browser page title is defined, use that, then fall back to the article title if set, then fall back to the page_title option
-			$title = $this->item->params->get('article_page_title', $this->item->datum ?: $title);
+			$title = $this->item->params->get('article_page_title', HTMLHelper::_('date' , $this->item->datum ?: $title,'l,  d.m.Y'));
 
 			$path     = array(array('title' => $this->item->datum, 'link' => ''));
 			//$category = Categories::getInstance('Content')->get($this->item->catid);

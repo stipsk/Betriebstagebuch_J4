@@ -27,13 +27,11 @@ $detailIcon = '<span class="fa fa-eye mr-2" aria-hidden="true" style="color:lime
 $yesIcon = '<span class="fa fa-thumbs-up mr-2" aria-hidden="true" style="color:limegreen; font-size: larger;"></span>';
 $noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:coral; font-size: larger;"></span>';
 
+foreach ($this->items as $id => $item) :
+	$slug = preg_replace('/[^a-z\d]/i', '-', HTMLHelper::_('date' ,$item->datum, 'Y-m-d'));
+	$slug = strtolower(str_replace(' ', '-', $slug));
 ?>
-
-	<tbody>
-	<?php foreach ($this->items as $id => $item) :
-		$slug = preg_replace('/[^a-z\d]/i', '-', $item->datum);
-		$slug = strtolower(str_replace(' ', '-', $slug));
-	?>
+<tbody>
 	<tr>
         <td class="text-center">
 			<?php echo HTMLHelper::_('grid.id', $id, $item->id); ?>

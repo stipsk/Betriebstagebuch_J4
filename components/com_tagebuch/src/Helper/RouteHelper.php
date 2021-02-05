@@ -75,32 +75,5 @@ abstract class RouteHelper
 		return $link;
 	}
 
-	/**
-	 * Get the category route.
-	 *
-	 * @param   integer  $catid     The category ID.
-	 * @param   integer  $language  The language code.
-	 * @param   string   $layout    The layout value.
-	 *
-	 * @return  string  The article route.
-	 *
-	 * @since   1.5
-	 */
-	public static function getTagebuchRoute($language = 0, $layout = null)
-	{
 
-		$link = 'index.php?option=com_content&view=tagebuch';
-
-		if ($language && $language !== '*' && Multilanguage::isEnabled())
-		{
-			$link .= '&lang=' . $language;
-		}
-
-		if ($layout)
-		{
-			$link .= '&layout=' . $layout;
-		}
-
-		return $link;
-	}
 }

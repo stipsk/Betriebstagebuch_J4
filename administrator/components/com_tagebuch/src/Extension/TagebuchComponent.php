@@ -21,7 +21,7 @@ use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
 use Psr\Container\ContainerInterface;
 
 /**
- * Component class for com_mywalks
+ * Component class for com_tagebuch
  *
  * @since  4.0.0
  */
@@ -46,6 +46,6 @@ BootableExtensionInterface, RouterServiceInterface
 	 */
 	public function boot(ContainerInterface $container)
 	{
-		//$this->getRegistry()->register('mywalksadministrator', new AdministratorService);
+		//$this->getRegistry()->register('tagebuchadministrator', new AdministratorService);
 	}
 }
