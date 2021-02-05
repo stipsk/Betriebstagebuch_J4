@@ -35,4 +35,21 @@ class TagebuchHelper
 		$db->setQuery($query);
 		return $db->loadObject();
 	}
+
+	/**
+	 * Get the last Report.
+	 *
+	 * @param   integer  $id        The route of the content item.
+	 **
+	 * @return  integer  The last report id.
+	 *
+	 * @since   1.5
+	 */
+
+	public static function getLastId($id = null) : int
+	{
+
+		if (!$id) {$id = 2675;}
+		return ($id);
+	}
 }

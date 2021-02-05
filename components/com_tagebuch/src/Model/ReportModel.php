@@ -20,6 +20,7 @@ use SK\Component\Tagebuch\Administrator\Extension\TagebuchComponent;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\IpHelper;
+use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper
 
 /**
  * Tagebuch Component Report Model
@@ -79,6 +80,8 @@ class ReportModel extends ItemModel
 		$user = Factory::getUser();
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
+
+		$pk = TagebuchHelper::getLastId($pk);
 
 		if ($this->_item === null)
 		{
