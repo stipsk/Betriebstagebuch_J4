@@ -20,7 +20,7 @@ use SK\Component\Tagebuch\Administrator\Extension\TagebuchComponent;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\IpHelper;
-use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper
+use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper;
 
 /**
  * Tagebuch Component Report Model
