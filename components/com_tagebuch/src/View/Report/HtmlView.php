@@ -25,6 +25,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 //use SK\Component\Tagebuch\Site\Helper\AssociationHelper;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper;
+use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper;
 
 
 /**
@@ -79,6 +80,14 @@ class HtmlView extends BaseHtmlView
 	protected $pageclass_sfx = '';
 
 	/**
+	 * The Tagebuch-Navigation-Items
+	 *
+	 * @var \StdClass
+	 * @since 4.0.0
+	 */
+	protected $navigationItems
+
+	/**
 	 * Execute and display a template script.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -95,6 +104,7 @@ class HtmlView extends BaseHtmlView
 		$this->print = $app->input->getBool('print', false);
 		$this->state = $this->get('State');
 		$this->user  = $user;
+		$this->navigationItems = $this->get('Navigation');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

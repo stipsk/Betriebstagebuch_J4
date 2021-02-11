@@ -296,6 +296,22 @@ class ReportModel extends ItemModel
 	}
 
 	/**
+	 * Method to get the Navigation.
+	 *
+	 * @param   integer  $pk  The id of the report.
+	 *
+	 * @return  object|boolean  Menu item data object on success, boolean false
+	 */
+	public function getNavigation($pk = null)
+	{
+		$pk = (int) ($pk ?: $this->getState('report.id'));
+		$Navigation = null;
+		$skhelper = new TagebuchHelper;
+		$Navigation = $skhelper->getNextPreview($pk);
+		return $Navigation;
+	}
+
+	/**
 	 * Cleans the cache of com_tagebuch and tagebuch modules
 	 *
 	 * @param   string   $group     The cache group

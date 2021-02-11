@@ -109,22 +109,21 @@ class TagebuchHelper extends ComponentHelper
 	 *
 	 * @return Array
 	 */
-/*	public function getNextPreview($id)
+	public function getNextPreview($id)
 	{
-		$user = JFactory::getUser();
-		$db = JFactory::getDBO();
-		$config	= JComponentHelper::getParams( SKCOMPONENT );
+		$user = Factory::getUser();
+		$db = Factory::getDBO();
+		$config	= ComponentHelper::getParams( 'com_Tagebuch' );
 
 		$publish_erlaubt = $user->authorise('core.edit.state', 'com_content') || (count($user->getAuthorisedCategories('com_content', 'core.edit.state')));
 
-		$query = "SELECT * FROM #__sk_tagebuch WHERE ";
+		$query = "SELECT * FROM #__tagebuch WHERE ";
 		$query .= $publish_erlaubt ? '1 ' : "state = '1' ";
 		$query .= "ORDER BY datum ASC";
 		$db->setQuery($query);
 
 		$this->_rows = $db->loadObjectList();
-		$this->showDebug('Query','',$db->getQuery(), $config->get('debug'));
-		$this->showDebug('Datensatzarrays' , '' , $this->_rows , $config->get('debug'));
+
 		$next = null;
 		$back = null;
 		$first = null;
@@ -141,7 +140,7 @@ class TagebuchHelper extends ComponentHelper
 		$first = 0;
 		$last = count($this->_rows)-1;
 
-		$result_array = new stdClass();
+		$result_array = new \stdClass;
 		$result_array->first_id		= $this->_rows[$first]->id;
 		$result_array->last_id		= $this->_rows[$last]->id;
 		$result_array->next_id		= $next ? $this->_rows[$next]->id : null;
@@ -154,31 +153,29 @@ class TagebuchHelper extends ComponentHelper
 		$result_array->first_date 	= $this->_rows[$first]->datum;
 		if ($result_array->first_date)
 		{
-			$date = JFactory::getDate($result_array->first_date);
+			$date = Factory::getDate($result_array->first_date);
 			$result_array->first_date = $date->format('l, d.m.Y');
 		}
 		$result_array->last_date	= $this->_rows[$last]->datum;
 		if ($result_array->last_date)
 		{
-			$date = JFactory::getDate($result_array->last_date);
+			$date = Factory::getDate($result_array->last_date);
 			$result_array->last_date = $date->format('l, d.m.Y');
 		}
 		$result_array->next_date	= $next ? $this->_rows[$next]->datum : null;
 		if ($result_array->next_date)
 		{
-			$date = JFactory::getDate($result_array->next_date);
+			$date = Factory::getDate($result_array->next_date);
 			$result_array->next_date = $date->format('l, d.m.Y');
 		}
 		$result_array->back_date	= $result_array->back_id ? $this->_rows[$back]->datum : null;
 		if ($result_array->back_date)
 		{
-			$date = JFactory::getDate($result_array->back_date);
+			$date = Factory::getDate($result_array->back_date);
 			$result_array->back_date = $date->format('l, d.m.Y');
 		}
 
-		$this->showDebug('resultarray:' , '' , $result_array, false);
-
 		return ($result_array);
 	}
-*/
+
 }
