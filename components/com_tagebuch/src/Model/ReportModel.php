@@ -37,6 +37,13 @@ class ReportModel extends ItemModel
 	protected $_context = 'com_tagebuch.report';
 
 	/**
+	 * Navigation Items
+	 *
+	 * @var \stdClass
+	 */
+	protected $_navigationItems = null;
+
+	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
@@ -292,23 +299,36 @@ class ReportModel extends ItemModel
 			}
 		}
 
+		$this->getNavigationItems($this->_item[$pk]->id);
+
 		return $this->_item[$pk];
 	}
 
 	/**
-	 * Method to get the Navigation.
+	 * Method to get the Navigation Items.
 	 *
 	 * @param   integer  $pk  The id of the report.
 	 *
-	 * @return  object|boolean  Menu item data object on success, boolean false
+	 * @return  boolean  Menu item data object loaded.
 	 */
-	public function getNavigation()
+	protected function getNavigationItems($pk)
 	{
 
 		$Navigation = null;
 		$skhelper = new TagebuchHelper;
-		$Navigation = $skhelper->getNextPreview($this->_item->id);
-		return $Navigation;
+		$this->_navigationItems = $skhelper->getNextPreview($pk);
+		return true;
+	}
+
+	/**
+	 * Method to get the NavigationBar.
+	 *
+	 * @return String
+	 */
+	public function getNavigationBar()
+	{
+
+		return $this->_navigationItems;
 	}
 
 	/**

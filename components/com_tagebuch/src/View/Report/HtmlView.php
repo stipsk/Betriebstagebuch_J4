@@ -82,10 +82,10 @@ class HtmlView extends BaseHtmlView
 	/**
 	 * The Tagebuch-Navigation-Items
 	 *
-	 * @var \StdClass
+	 * @var     string
 	 * @since 4.0.0
 	 */
-	protected $navigationItems = null;
+	protected $navigationBar = null;
 
 	/**
 	 * Execute and display a template script.
@@ -104,7 +104,7 @@ class HtmlView extends BaseHtmlView
 		$this->print = $app->input->getBool('print', false);
 		$this->state = $this->get('State');
 		$this->user  = $user;
-		$this->navigationItems = $this->get('Navigation');
+		$this->navigationBar = $this->get('NavigationBar');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
