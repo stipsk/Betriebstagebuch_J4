@@ -13,7 +13,7 @@ namespace SK\Component\Tagebuch\Administrator\Helper;
 
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Helper\ContentHelper;
+//use Joomla\CMS\Helper\ContentHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Table\Table;
@@ -24,7 +24,7 @@ use Joomla\Database\ParameterType;
  *
  * @since  1.6
  */
-class FahrzeugeHelper extends ContentHelper
+class FahrzeugeHelper extends ComponentHelper
 {
 
 	/**
