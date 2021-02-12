@@ -85,7 +85,7 @@ class HtmlView extends BaseHtmlView
 	 * @var \StdClass
 	 * @since 4.0.0
 	 */
-	protected $navigationItems
+	protected $navigationItems = null;
 
 	/**
 	 * Execute and display a template script.
@@ -236,21 +236,13 @@ class HtmlView extends BaseHtmlView
 		$id = (int) @$menu->query['id'];
 
 		// If the menu item does not concern this article
-		if ($menu && (!isset($menu->query['option']) || $menu->query['option'] !== 'com_content' || $menu->query['view'] !== 'article'
+		if ($menu && (!isset($menu->query['option']) || $menu->query['option'] !== 'com_tagebuch' || $menu->query['view'] !== 'report'
 			|| $id != $this->item->id))
 		{
 			// If a browser page title is defined, use that, then fall back to the article title if set, then fall back to the page_title option
-			$title = $this->item->params->get('article_page_title', HTMLHelper::_('date' , $this->item->datum ?: $title,'l,  d.m.Y'));
+			$title = $this->item->params->get('article_page_title', HTMLHelper::_('date' , $this->item->datum,'l,  d.m.Y'));
 
 			$path     = array(array('title' => $this->item->datum, 'link' => ''));
-			//$category = Categories::getInstance('Content')->get($this->item->catid);
-
-			/*while ($category && (!isset($menu->query['option']) || $menu->query['option'] !== 'com_content' || $menu->query['view'] === 'article'
-				|| $id != $category->id) && $category->id > 1)
-			{
-				$path[]   = array('title' => $category->title, 'link' => RouteHelper::getCategoryRoute($category->id, $category->language));
-				$category = $category->getParent();
-			}*/
 
 			$path = array_reverse($path);
 

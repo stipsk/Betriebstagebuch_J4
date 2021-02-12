@@ -302,12 +302,12 @@ class ReportModel extends ItemModel
 	 *
 	 * @return  object|boolean  Menu item data object on success, boolean false
 	 */
-	public function getNavigation($pk = null)
+	public function getNavigation()
 	{
-		$pk = (int) ($pk ?: $this->getState('report.id'));
+
 		$Navigation = null;
 		$skhelper = new TagebuchHelper;
-		$Navigation = $skhelper->getNextPreview($pk);
+		$Navigation = $skhelper->getNextPreview($this->_item->id);
 		return $Navigation;
 	}
 
