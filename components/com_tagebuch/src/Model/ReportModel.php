@@ -323,9 +323,9 @@ class ReportModel extends ItemModel
 	/**
 	 * Method to get the NavigationBar.
 	 *
-	 * @return String
+	 * @return \stdClass
 	 */
-	public function getNavigationBar()
+	public function getNavigationClass()
 	{
 
 		return $this->_navigationItems;
