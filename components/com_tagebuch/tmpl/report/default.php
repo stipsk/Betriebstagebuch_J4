@@ -52,7 +52,7 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 		echo $this->item->pagination;
 	}
 	?>
-
+	<?php echo $this->loadTemplate('Navigation'); ?>
 
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 
