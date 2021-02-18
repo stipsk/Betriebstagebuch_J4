@@ -21,6 +21,7 @@ use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\IpHelper;
 use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper;
+use SK\Component\Tagebuch\Site\Helper\RouteHelper as RouteHelper;
 
 /**
  * Tagebuch Component Report Model
@@ -225,6 +226,21 @@ class ReportModel extends ItemModel
 				$data->params = clone $this->getState('params');
 				$data->params->merge($registry);
 
+				// Set default all access-edit vars to false
+				$editStandardFalse = new Registry(
+					'{
+						"access-edit":false,
+						"access-edit-fs":false,
+						"access-edit-ss":false,
+						"access-edit-an":false,
+						"access-edit-z1":false,
+						"access-edit-z2":false,
+						"access-edit-luft":false,
+						"access-edit-vefb":false
+					}'
+				);
+				$data->params->merge($editStandardFalse);
+
 				$data->metadata = new Registry($data->metadata);
 
 				// Technically guest could edit an article, but lets not check that to improve performance a little.
@@ -232,6 +248,7 @@ class ReportModel extends ItemModel
 				{
 					$userId = $user->get('id');
 					$asset = 'com_tagebuch.report.' . $data->id;
+
 
 					// Check general edit permission first.
 					if ($user->authorise('core.edit', $asset))
@@ -282,6 +299,10 @@ class ReportModel extends ItemModel
 
 				}
 
+				$data->params->set('editlink', RouteHelper::getEditRoute($data->id, $data->datum));
+
+				//$test = RouteHelper::getEditRoute(1,11);
+
 				$this->_item[$pk] = $data;
 			}
 			catch (\Exception $e)
@@ -321,7 +342,7 @@ class ReportModel extends ItemModel
 	}
 
 	/**
-	 * Method to get the NavigationBar.
+	 * Method to get the NavigationItems.
 	 *
 	 * @return \stdClass
 	 */

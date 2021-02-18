@@ -136,25 +136,25 @@ class HtmlView extends BaseHtmlView
 			{
 				$this->setLayout($active->query['layout']);
 			}
-			// Check for alternative layout of article
+			// Check for alternative layout of Report
 			elseif ($layout = $item->params->get('article_layout'))
 			{
 				$this->setLayout($layout);
 			}
 
-			// $item->params are the article params, $temp are the menu item params
+			// $item->params are the Report params, $temp are the menu item params
 			// Merge so that the menu item params take priority
 			$item->params->merge($temp);
 
 		}
 		else
 		{
-			// Merge so that article params take priority
+			// Merge so that Report params take priority
 			$temp->merge($item->params);
 			$item->params = $temp;
 
-			// Check for alternative layouts (since we are not in a single-article menu item)
-			// Single-article menu item layout takes priority over alt layout for an article
+			// Check for alternative layouts (since we are not in a single-Report menu item)
+			// Single-Report menu item layout takes priority over alt layout for an article
 			if ($layout = $item->params->get('article_layout'))
 			{
 				$this->setLayout($layout);

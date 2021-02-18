@@ -70,7 +70,7 @@ class TagebuchHelper extends ComponentHelper
 		$query = $db->getQuery(true);
 
 		$publish_erlaubt = $user->authorise('core.edit.state', 'com_tagebuch');
-		$where = $publish_erlaubt ? $db-quoteName('1') : $db->quoteName('state') . '=' . '1' ;
+		$where = $publish_erlaubt ? $db->quoteName('state') . '>= 0' : $db->quoteName('state') . '= 1' ;
 		$limit = 10;
 		$limitstart = 0;
 
