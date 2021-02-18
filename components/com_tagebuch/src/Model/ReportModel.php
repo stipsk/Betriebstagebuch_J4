@@ -89,7 +89,7 @@ class ReportModel extends ItemModel
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
 		$skhelper = new TagebuchHelper;
-		$pk = $skhelper->getLastId($pk);
+		$pk = $pk === 0 ? $skhelper->getLastId($pk) : $pk;
 
 		if ($this->_item === null)
 		{
@@ -254,6 +254,11 @@ class ReportModel extends ItemModel
 					if ($user->authorise('core.edit', $asset))
 					{
 						$data->params->set('access-edit', true);
+						$data->params->set('access-edit-fs', true);
+						$data->params->set('access-edit-ss', true);
+						$data->params->set('access-edit-an', true);
+						$data->params->set('access-edit-z1', true);
+						$data->params->set('access-edit-z2', true);
 					}
 
 					// Now check if edit.own is available.
