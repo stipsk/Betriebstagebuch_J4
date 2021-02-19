@@ -14,6 +14,18 @@
       "name": "tagebuch.print",
       "type": "style",
       "uri": "com_tagebuch/print.css"
+    },
+    {
+      "name": "tagebuch.bootstrap_min_js",
+      "type": "script",
+      "uri": "com_tagebuch/bootstrap.bundle.min.js",
+      "dependencies": [
+        "core",
+        "jquery"
+      ],
+      "attributes": {
+        "defer": true
+      }
     }
   ]
 }

@@ -36,7 +36,9 @@ $TabUnChecked = '<span class="fas fa-check" style="color: lightgrey;"></span>&nb
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useStyle('tagebuch.standard');
-$wa->useScript('bootstrap.js');
+//$wa->useScript('tagebuch.bootstrap_min_js');
+
+
 
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
@@ -59,21 +61,8 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 		echo $this->item->pagination;
 	}
 	?>
-	<?php //echo $this->loadTemplate('Navigation'); ?>
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-primary">1</button>
-        <button type="button" class="btn btn-primary">2</button>
+	<?php echo $this->loadTemplate('Navigation'); ?>
 
-        <div class="dropdown">
-            <button id="dLabel" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown trigger
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-            </ul>
-        </div>
-    </div>
 
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 
