@@ -23,7 +23,6 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
-//use SK\Component\Tagebuch\Site\Helper\AssociationHelper;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper;
 use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper;
 
@@ -93,6 +92,7 @@ class HtmlView extends BaseHtmlView
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
+	 * @since 4.0.0
 	 */
 	public function display($tpl = null)
 	{
@@ -208,6 +208,7 @@ class HtmlView extends BaseHtmlView
 	 * Prepares the document.
 	 *
 	 * @return  void
+	 * @since 4.0.0
 	 */
 	protected function _prepareDocument()
 	{
