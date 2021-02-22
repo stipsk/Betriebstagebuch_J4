@@ -35,8 +35,8 @@ $TabUnChecked = '<span class="fas fa-check" style="color: lightgrey;"></span>&nb
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
+$wa->registerAndUseScript('tagebuch.bootstrap_min_js');
 $wa->useStyle('tagebuch.standard');
-//$wa->useScript('tagebuch.bootstrap_min_js');
 
 
 

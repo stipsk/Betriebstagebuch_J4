@@ -15,6 +15,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
+use Joomla\CMS\Date\Date;
 use Joomla\CMS\Table\Table;
 use SK\Component\Tagebuch\Administrator\Extension\TagebuchComponent;
 use Joomla\Database\ParameterType;
@@ -304,9 +305,9 @@ class ReportModel extends ItemModel
 
 				}
 
-				$data->params->set('editlink', RouteHelper::getEditRoute($data->id, $data->datum));
+				$jdate = new Date($data->datum);
 
-				//$test = RouteHelper::getEditRoute(1,11);
+				$data->params->set('editlink', RouteHelper::getEditRoute($data->id,$jdate->format('Y-m-d')));
 
 				$this->_item[$pk] = $data;
 			}
