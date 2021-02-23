@@ -12,6 +12,7 @@ namespace SK\Component\Tagebuch\Site\Model;
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\UserGroupsHelper;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
@@ -86,11 +87,15 @@ class ReportModel extends ItemModel
 	 */
 	public function getItem($pk = null)
 	{
-		$user = Factory::getUser();
+		$app = Factory::getApplication();
+		$user = $app->getIdentity();
+
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
 		$skhelper = new TagebuchHelper;
 		$pk = $pk === 0 ? $skhelper->getLastId($pk) : $pk;
+
+		$tagebuchgroups = $skhelper->getTagebuchGroups();
 
 		if ($this->_item === null)
 		{
@@ -260,6 +265,11 @@ class ReportModel extends ItemModel
 						$data->params->set('access-edit-an', true);
 						$data->params->set('access-edit-z1', true);
 						$data->params->set('access-edit-z2', true);
+						$data->params->set('access-add-fs', true);
+						$data->params->set('access-add-ss', true);
+						$data->params->set('access-add-an', true);
+						$data->params->set('access-add-z1', true);
+						$data->params->set('access-add-z2', true);
 					}
 
 					// Now check if edit.own is available.

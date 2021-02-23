@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\CMS\Helper\UserGroupsHelper;
 
 /**
  * Tagebuch component helper.
@@ -23,17 +24,34 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 class TagebuchHelper extends ComponentHelper
 {
 	/**
-	 * The URL option for the component.
+	 * The Last Date of all Reports.
 	 *
-	 * @var    string
+	 * @var    datetime $lastDate
 	 * @since  1.6
 	 */
 	protected $lastDate;
 
+	/**
+	 * Die ID´s Gruppen der Tagebuchkomponente
+	 *
+	 * @var array $_TagebuchGroups
+	 * @since 1.0
+	 */
+	protected $_TagebuchGroups;
+
+	/**
+	 * Die ID´s der User die den Gruppen der Tagebuchkomponente zugeordnet sind
+	 *
+	 * @var array $_TagebuchAccess
+	 * @since 1.0
+	 */
+	Protected $_TagebuchAccess;
+
 	public function __construct()
 	{
 		$this->lastDate = null;
-
+		$this->_TagebuchGroups = new \stdClass();
+		$this->_TagebuchAccess = new \stdClass();
 	}
 
 	public static function getTagebuchTitle($id)
@@ -178,4 +196,32 @@ class TagebuchHelper extends ComponentHelper
 		return ($result_array);
 	}
 
+	/**
+	 * Rückgabe eines Arrays mit den ID´s der Benutzergruppen
+	 *
+	 * @return stdclass _TagebuchGroups
+	 * @since version 4.0
+	 */
+	public function getTagebuchGroups()
+	{
+		//$user = new User();
+
+		$usergroup  = new UserGroupsHelper();
+		$test = $usergroup->loadAll();
+		$groups = $test->getAll();
+
+		foreach ($groups as $item)
+		{
+			if ($item->title == 'Tagebuch-Luft'){
+				$this->_TagebuchGroups->GroupLUFT = $item->id;
+			}
+			if ($item->title == 'Tagebuch-BL'){
+				$this->_TagebuchGroups->GroupBL = $item->id;
+			}
+			if ($item->title == 'Tagebuch-VEF'){
+				$this->_TagebuchGroups->GroupVEF = $item->id;
+			}
+		}
+		return $this->_TagebuchGroups;
+	}
 }
