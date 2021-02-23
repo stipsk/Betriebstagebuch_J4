@@ -197,12 +197,12 @@ class TagebuchHelper extends ComponentHelper
 	}
 
 	/**
-	 * Rückgabe eines Arrays mit den ID´s der Benutzergruppen
+	 * Erzeugt eine Array mit den ID´s der Benutzergruppen
 	 *
-	 * @return stdclass _TagebuchGroups
+	 *
 	 * @since version 4.0
 	 */
-	public function getTagebuchGroups()
+	private function getTagebuchGroups()
 	{
 		//$user = new User();
 
@@ -219,9 +219,46 @@ class TagebuchHelper extends ComponentHelper
 				$this->_TagebuchGroups->GroupBL = $item->id;
 			}
 			if ($item->title == 'Tagebuch-VEF'){
-				$this->_TagebuchGroups->GroupVEF = $item->id;
+				$this->_TagebuchGroups->GroupVEFB = $item->id;
 			}
 		}
-		return $this->_TagebuchGroups;
+
+	}
+
+	/**
+	 * @param integer $userid
+	 *
+	 * @return \stdClass _TagebuchAccess
+	 * @since version 1.0
+	 */
+
+	public function getTagebuchAccess($userid = null)
+	{
+		$this->getTagebuchGroups();
+		$app = Factory::getApplication();
+		$user = $app->getIdentity();
+		$groups = $user->getAuthorisedGroups();
+
+		if (in_array($this->_TagebuchGroups->GroupLUFT,$groups)) {
+			$this->_TagebuchAccess->isLuft = true;
+		}else{
+			$this->_TagebuchAccess->isLuft = false;
+		}
+
+		if (in_array($this->_TagebuchGroups->GroupBL,$groups)) {
+			$this->_TagebuchAccess->isBL = true;
+		}else{
+			$this->_TagebuchAccess->isBL = false;
+		}
+
+		if (in_array($this->_TagebuchGroups->GroupVEFB,$groups)) {
+			$this->_TagebuchAccess->isVEfB = true;
+		}else{
+			$this->_TagebuchAccess->isVEF = false;
+		}
+
+
+	return $this->_TagebuchAccess;
+
 	}
 }

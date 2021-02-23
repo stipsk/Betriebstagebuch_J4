@@ -49,7 +49,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=FS&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_FS'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_FS'); ?>
                     </a>
 		            <?php if ($params->get('access-add-ss'))
 		            {
@@ -60,7 +60,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=SS&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_SS'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_SS'); ?>
                     </a>
 		            <?php if ($params->get('access-add-z1'))
 		            {
@@ -71,7 +71,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z1&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_Z1'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_Z1'); ?>
                     </a>
 		            <?php if ($params->get('access-add-an'))
 		            {
@@ -82,7 +82,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=AN&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_AN'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_AN'); ?>
                     </a>
 		            <?php if ($params->get('access-add-bl'))
 		            {
@@ -93,7 +93,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=BL&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_BL'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_BL'); ?>
                     </a>
 		            <?php if ($params->get('access-add-z2'))
 		            {
@@ -104,7 +104,7 @@ if ($params->get('access-edit'))
 			            $iconEntry = 'icon-lock';
 		            }?>
                     <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z2&return='.$returnPage); ?>">
-                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_Z2'); ?>
+                        <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_Z2'); ?>
                     </a>
                 </div>
             </div>

@@ -70,7 +70,7 @@ class ReportModel extends ItemModel
 		$params = $app->getParams();
 		$this->setState('params', $params);
 
-		$user = Factory::getUser();
+		$user = $app->getIdentity();
 
 		// If $pk is set then authorise on complete asset, else on component only
 		$asset = empty($pk) ? 'com_tagebuch' : 'com_tagebuch.report.' . $pk;
@@ -95,7 +95,7 @@ class ReportModel extends ItemModel
 		$skhelper = new TagebuchHelper;
 		$pk = $pk === 0 ? $skhelper->getLastId($pk) : $pk;
 
-		$tagebuchgroups = $skhelper->getTagebuchGroups();
+		$userAccess = $skhelper->getTagebuchAccess();
 
 		if ($this->_item === null)
 		{
@@ -239,6 +239,7 @@ class ReportModel extends ItemModel
 						"access-edit-fs":false,
 						"access-edit-ss":false,
 						"access-edit-an":false,
+						"access-edit-bl":false,
 						"access-edit-z1":false,
 						"access-edit-z2":false,
 						"access-edit-luft":false,
@@ -296,6 +297,31 @@ class ReportModel extends ItemModel
 						{
 							$data->params->set('access-edit-z2', true);
 						}
+					}
+
+					//Access Special when Verantwortlicher LUFT
+					if ($userAccess->isLuft){
+						$data->params->set('access-edit-z1', true);
+						$data->params->set('access-add-z1', true);
+						$data->params->set('access-edit_lu', true);
+					}
+
+					//Access Special when Verantwortlicher für EfB
+					if ($userAccess->isVEfB){
+						$data->params->set('access-edit-z1', true);
+						$data->params->set('access-add-z1', true);
+						$data->params->set('access-edit_lu', true);
+						$data->params->set('access-edit_vefb', true);
+					}
+
+					//Access Special when Betriebsleitung
+					if ($userAccess->isBL){
+						$data->params->set('access-edit-z1', true);
+						$data->params->set('access-add-z1', true);
+						$data->params->set('access-edit_lu', true);
+						$data->params->set('access-edit_vefb', true);
+						$data->params->set('access-edit-bl', true);
+						$data->params->set('access-add-bl', true);
 					}
 				}
 
