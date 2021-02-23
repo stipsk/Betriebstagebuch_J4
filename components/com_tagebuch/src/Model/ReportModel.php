@@ -36,6 +36,7 @@ class ReportModel extends ItemModel
 	 * Model context string.
 	 *
 	 * @var        string
+	 * @since 1.0
 	 */
 	protected $_context = 'com_tagebuch.report';
 
@@ -43,6 +44,7 @@ class ReportModel extends ItemModel
 	 * Navigation Items
 	 *
 	 * @var \stdClass
+	 * @since 1.0
 	 */
 	protected $_navigationItems = null;
 
@@ -84,6 +86,7 @@ class ReportModel extends ItemModel
 	 * @param   integer  $pk  The id of the report.
 	 *
 	 * @return  object|boolean  Menu item data object on success, boolean false
+	 * @since 1.0
 	 */
 	public function getItem($pk = null)
 	{
@@ -261,31 +264,25 @@ class ReportModel extends ItemModel
 					if ($user->authorise('core.edit', $asset))
 					{
 						$data->params->set('access-edit', true);
-						$data->params->set('access-edit-fs', true);
-						$data->params->set('access-edit-ss', true);
-						$data->params->set('access-edit-an', true);
-						$data->params->set('access-edit-z1', true);
-						$data->params->set('access-edit-z2', true);
 						$data->params->set('access-add-fs', true);
 						$data->params->set('access-add-ss', true);
 						$data->params->set('access-add-an', true);
-						$data->params->set('access-add-z1', true);
 						$data->params->set('access-add-z2', true);
 					}
 
 					// Now check if edit.own is available.
-					elseif (!empty($userId) && $user->authorise('core.edit.own', $asset))
+					if (!empty($userId) && $user->authorise('core.edit.own', $asset))
 					{
 						// Check for a valid user and that they are the owner.
-						if (($userId == $data->sff) || ($userId == $data->fs_erstellt_von) || ($userId == $data->fs_laenderung_von) )
+						if (($userId == $data->sff) || ($userId == $data->fs_erstellt_von) || ($userId == $data->fs_laenderung_von) || ($data->fs_erstellt_von == null) )
 						{
 							$data->params->set('access-edit-fs', true);
 						}
-						if (($userId == $data->sfs) || ($userId == $data->ss_erstellt_von) || ($userId == $data->ss_laenderung_von) )
+						if (($userId == $data->sfs) || ($userId == $data->ss_erstellt_von) || ($userId == $data->ss_laenderung_von) || ($data->ss_erstellt_von == null) )
 						{
 							$data->params->set('access-edit-ss', true);
 						}
-						if (($userId == $data->sfan) || ($userId == $data->an_erstellt_von) || ($userId == $data->an_laenderung_von) )
+						if (($userId == $data->sfan) || ($userId == $data->an_erstellt_von) || ($userId == $data->an_laenderung_von) || ($data->an_erstellt_von == null) )
 						{
 							$data->params->set('access-edit-an', true);
 						}
@@ -293,7 +290,7 @@ class ReportModel extends ItemModel
 						{
 							$data->params->set('access-edit-z1', true);
 						}
-						if ( ($userId == $data->z2_erstellt_von) || ($userId == $data->z2_laenderung_von) )
+						if ( ($userId == $data->z2_erstellt_von) || ($userId == $data->z2_laenderung_von)  || ($data->z2_erstellt_von == null) )
 						{
 							$data->params->set('access-edit-z2', true);
 						}
@@ -334,7 +331,6 @@ class ReportModel extends ItemModel
 				else
 				{
 					// If no access filter is set, the layout takes some responsibility for display of limited information.
-					$user = Factory::getUser();
 					$groups = $user->getAuthorisedViewLevels();
 
 					$data->params->set('access-view', in_array($data->access, $groups));
@@ -373,6 +369,7 @@ class ReportModel extends ItemModel
 	 * @param   integer  $pk  The id of the report.
 	 *
 	 * @return  boolean  Menu item data object loaded.
+	 * @since 1.0
 	 */
 	protected function getNavigationItems($pk)
 	{
@@ -387,6 +384,7 @@ class ReportModel extends ItemModel
 	 * Method to get the NavigationItems.
 	 *
 	 * @return \stdClass
+	 * @since 1.0
 	 */
 	public function getNavigationClass()
 	{

@@ -254,7 +254,7 @@ class TagebuchHelper extends ComponentHelper
 		if (in_array($this->_TagebuchGroups->GroupVEFB,$groups)) {
 			$this->_TagebuchAccess->isVEfB = true;
 		}else{
-			$this->_TagebuchAccess->isVEF = false;
+			$this->_TagebuchAccess->isVEfB = false;
 		}
 
 
