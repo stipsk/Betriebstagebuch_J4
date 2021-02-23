@@ -16,6 +16,7 @@ use Joomla\CMS\Language\Text;
 $params  = $this->item->params;
 $formatDayTime = 'd.m.Y H:i';
 $formatDay = 'd.m.Y';
+$blank_image_attribs = array();
 ?>
 <div class="container-fluid">
 
@@ -31,8 +32,8 @@ $formatDay = 'd.m.Y';
                             </span>
                         </div>
                         <div class="col-7 col-md-7">
-                            <?php echo (($this->item->z2_erstellt == '0000-00-00 00:00:00') || ($this->item->z2_erstellt == '-'))
-                                ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->z2_erstellt, $formatDay); ?>
+                            <?php echo (($this->item->z2_erstellt == '0000-00-00 00:00:00') || ($this->item->z2_erstellt == '-') || ($this->item->z2_erstellt == null))
+                                ? Text::_( 'n.V.' ) : HTMLHelper::_('date', $this->item->z2_erstellt, $formatDay); ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -55,8 +56,8 @@ $formatDay = 'd.m.Y';
                         </span>
                     </div>
                     <div class="col-7 col-md-7">
-                        <?php echo (($this->item->z2_laenderung == '0000-00-00 00:00:00') || ($this->item->z2_laenderung == '-'))
-                            ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->z2_laenderung, $formatDay); ?>
+                        <?php echo (($this->item->z2_laenderung == '0000-00-00 00:00:00') || ($this->item->z2_laenderung == '-') || ($this->item->z2_laenderung == null))
+                            ? Text::_( 'n.V.' ) : HTMLHelper::_('date', $this->item->z2_laenderung, $formatDay); ?>
                     </div>
                 </div>
                 <div class="row">
@@ -72,7 +73,7 @@ $formatDay = 'd.m.Y';
                 </div>
             </div>
             <div class="col-10 col-md-10">
-                <?php echo strlen($this->item->text_z2) > 0 ? $this->item->text_z2 : HTMLHelper::image('images/blank.png' , Text::_('Empty') , $blank_image_attribs); ?>
+                <?php echo strlen($this->item->text_z2) > 0 ? $this->item->text_z2 : HTMLHelper::image('media/com_tagebuch/images/blank.gif' , Text::_('Empty') , $blank_image_attribs,true,-1) ?>
             </div>
         </div>
     </div>

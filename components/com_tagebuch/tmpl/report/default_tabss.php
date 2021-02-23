@@ -16,6 +16,7 @@ use Joomla\CMS\Language\Text;
 $params  = $this->item->params;
 $formatDayTime = 'd.m.Y H:i';
 $formatDay = 'd.m.Y';
+$blank_image_attribs = array();
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -40,8 +41,8 @@ $formatDay = 'd.m.Y';
                             </span>
                         </div>
                         <div class="col-7 col-md-7">
-                            <?php echo (($this->item->ss_erstellt == '0000-00-00 00:00:00') || ($this->item->ss_erstellt == '-'))
-                                ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->ss_erstellt, $formatDay); ?>
+                            <?php echo (($this->item->ss_erstellt == '0000-00-00 00:00:00') || ($this->item->ss_erstellt == '-') || ($this->item->ss_erstellt == null))
+                                ? Text::_( 'n.V.' ) : HTMLHelper::_('date', $this->item->ss_erstellt, $formatDay); ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -64,8 +65,8 @@ $formatDay = 'd.m.Y';
                         </span>
                     </div>
                     <div class="col-7 col-md-7">
-                        <?php echo (($this->item->ss_laenderung == '0000-00-00 00:00:00') || ($this->item->ss_laenderung == '-'))
-                            ? Text::_( '..' ) : HTMLHelper::_('date', $this->item->ss_laenderung, $formatDay); ?>
+                        <?php echo (($this->item->ss_laenderung == '0000-00-00 00:00:00') || ($this->item->ss_laenderung == '-') || ($this->item->ss_laenderung == null))
+                            ? Text::_( 'n.V.' ) : HTMLHelper::_('date', $this->item->ss_laenderung, $formatDay); ?>
                     </div>
                 </div>
                 <div class="row">
@@ -81,7 +82,7 @@ $formatDay = 'd.m.Y';
                 </div>
             </div>
             <div class="col-10 col-md-10">
-                <?php echo strlen($this->item->text_ss) > 0 ? $this->item->text_ss : HTMLHelper::image('images/blank.png' , Text::_('Empty') , $blank_image_attribs); ?>
+                <?php echo strlen($this->item->text_ss) > 0 ? $this->item->text_ss : HTMLHelper::image('media/com_tagebuch/images/blank.gif' , Text::_('Empty') , $blank_image_attribs,true,-1) ?>
             </div>
         </div>
     </div>
