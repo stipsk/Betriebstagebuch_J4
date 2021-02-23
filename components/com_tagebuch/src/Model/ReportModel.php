@@ -377,6 +377,7 @@ class ReportModel extends ItemModel
 		$Navigation = null;
 		$skhelper = new TagebuchHelper;
 		$this->_navigationItems = $skhelper->getNextPreview($pk);
+
 		return true;
 	}
 

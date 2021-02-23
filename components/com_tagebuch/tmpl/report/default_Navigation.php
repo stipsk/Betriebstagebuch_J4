@@ -13,6 +13,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Route;
+use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
 
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
@@ -188,10 +189,18 @@ if ($params->get('access-edit'))
     <!--    Navigation Vor un Zurück-->
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
         <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-primary">1</button>
-            <button type="button" class="btn btn-primary">2</button>
-            <button type="button" class="btn btn-primary">3</button>
-            <button type="button" class="btn btn-primary">4</button>
+            <button type="button" class="btn btn-primary"  onclick="location.href = '<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->first_id, $this->navigationClass->first_slug)); ?>'">
+                <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_FIRST'); ?>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="location.href = '<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->back_id, $this->navigationClass->back_slug)); ?>'">
+		        <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_BACK'); ?>
+            </button>
+            <button type="button" class="btn btn-primary"  onclick="location.href = '<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->next_id, $this->navigationClass->next_slug)); ?>'">
+		        <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_NEXT'); ?>
+            </button>
+            <button type="button" class="btn btn-primary"  onclick="location.href = '<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->last_id, $this->navigationClass->last_slug)); ?>'">
+		        <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_LAST'); ?>
+            </button>
         </div>
     </div>
 </div>

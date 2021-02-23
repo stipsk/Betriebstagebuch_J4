@@ -15,6 +15,7 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Helper\UserGroupsHelper;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Tagebuch component helper.
@@ -173,27 +174,48 @@ class TagebuchHelper extends ComponentHelper
 		{
 			$date = Factory::getDate($result_array->first_date);
 			$result_array->first_date = $date->format('l, d.m.Y');
+			$result_array->first_slug = $this->getSlugFromDate($date);
+
 		}
 		$result_array->last_date	= $this->_rows[$last]->datum;
 		if ($result_array->last_date)
 		{
 			$date = Factory::getDate($result_array->last_date);
 			$result_array->last_date = $date->format('l, d.m.Y');
+			$result_array->last_slug = $this->getSlugFromDate($date);
 		}
 		$result_array->next_date	= $next ? $this->_rows[$next]->datum : null;
 		if ($result_array->next_date)
 		{
 			$date = Factory::getDate($result_array->next_date);
 			$result_array->next_date = $date->format('l, d.m.Y');
+			$result_array->next_slug = $this->getSlugFromDate($date);
 		}
 		$result_array->back_date	= $result_array->back_id ? $this->_rows[$back]->datum : null;
 		if ($result_array->back_date)
 		{
 			$date = Factory::getDate($result_array->back_date);
 			$result_array->back_date = $date->format('l, d.m.Y');
+			$result_array->back_slug = $this->getSlugFromDate($date);
 		}
 
 		return ($result_array);
+	}
+
+	/**
+	 * Slug mittels des Datums erzeugen
+	 *
+	 * @param date $datum
+	 *
+	 * @return string $slug
+	 *
+	 * @since 1.0
+	 */
+	private function getSlugFromDate($datum){
+
+		$slug = preg_replace('/[^a-z\d]/i', '-', HTMLHelper::_('date' ,$datum, 'Y-m-d'));
+		$slug = strtolower(str_replace(' ', '-', $slug));
+		return $slug;
 	}
 
 	/**

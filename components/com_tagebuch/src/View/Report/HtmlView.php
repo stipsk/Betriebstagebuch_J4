@@ -38,6 +38,7 @@ class HtmlView extends BaseHtmlView
 	 * The report object
 	 *
 	 * @var  \stdClass
+	 * @since 1.0
 	 */
 	protected $item;
 
@@ -45,7 +46,7 @@ class HtmlView extends BaseHtmlView
 	 * The page parameters
 	 *
 	 * @var    \Joomla\Registry\Registry|null
-	 * @since  4.0.0
+	 * @since  1.0.0
 	 */
 	protected $params = null;
 
@@ -53,6 +54,7 @@ class HtmlView extends BaseHtmlView
 	 * Should the print button be displayed or not?
 	 *
 	 * @var  boolean
+	 * @since 1.0
 	 */
 	protected $print = false;
 
@@ -60,6 +62,7 @@ class HtmlView extends BaseHtmlView
 	 * The model state
 	 *
 	 * @var  \JObject
+	 * @since 1.0
 	 */
 	protected $state;
 
@@ -67,6 +70,7 @@ class HtmlView extends BaseHtmlView
 	 * The user object
 	 *
 	 * @var  \JUser|null
+	 * @since 1.0
 	 */
 	protected $user = null;
 
@@ -92,13 +96,14 @@ class HtmlView extends BaseHtmlView
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
-	 * @since 4.0.0
+	 * @throws \Exception
+	 * @since 1.0
 	 */
 	public function display($tpl = null)
 	{
 
 		$app        = Factory::getApplication();
-		$user       = Factory::getUser();
+		$user       = $app->getIdentity();
 
 		$this->item  = $this->get('Item');
 		$this->print = $app->input->getBool('print', false);
@@ -208,7 +213,8 @@ class HtmlView extends BaseHtmlView
 	 * Prepares the document.
 	 *
 	 * @return  void
-	 * @since 4.0.0
+	 * @throws \Exception
+	 * @since 1.0
 	 */
 	protected function _prepareDocument()
 	{
