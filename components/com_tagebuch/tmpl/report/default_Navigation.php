@@ -14,6 +14,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Route;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
+use SK\Component\Tagebuch\Administrator\Helper\FahrzeugeHelper as FahrzeugeHelper;
 
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
@@ -30,8 +31,8 @@ if ($params->get('access-edit'))
 	$iconEdit = 'icon-lock';
 	$iconAdd = 'icon-lock';
 }
-$attribs = array(
-	'class'             => 'form-control-sm',);
+$CalendarAttribs = array(
+	'class'             => 'form-control-sm btn-sm',);
 ?>
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -210,7 +211,7 @@ $attribs = array(
         </div>
     </div>
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-        <?php echo HTMLHelper::calendar($this->item->datum,'datum','datum','%d.%m.%Y',$attribs);?>
+        <?php echo HTMLHelper::_('calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
     </div>
 </div>
 
