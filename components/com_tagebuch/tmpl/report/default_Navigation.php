@@ -214,7 +214,7 @@ $CalendarAttribs = array(
     </div>
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
         <?php //echo HTMLHelper::_('Tagebuch.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
-        <?php echo HTMLHelper::_('tagebuchicon.edit',$this->item,$params);?>
+        <?php echo HTMLHelper::_('calendarnav.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
     </div>
 </div>
 

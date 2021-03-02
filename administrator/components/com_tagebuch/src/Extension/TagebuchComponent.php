@@ -29,6 +29,7 @@ use Joomla\CMS\Tag\TagServiceInterface;
 use Joomla\CMS\Tag\TagServiceTrait;
 use SK\Component\Tagebuch\Administrator\Service\HTML\AdministratorService;
 use SK\Component\Tagebuch\Administrator\Service\HTML\Icon;
+use SK\Component\Tagebuch\Administrator\Service\HTML\Calendarnav;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -65,6 +66,13 @@ class TagebuchComponent extends MVCComponent implements
 	{
 		//$this->getRegistry()->register('tagebuchadministrator', new AdministratorService);
 		$this->getRegistry()->register('tagebuchicon', new Icon($container->get(SiteApplication::class)));
+		//$this->getRegistry()->register('tagebuchicon2', new Icon2($container->get(SiteApplication::class)));
+		$this->getRegistry()->register('tagebuchcalendarnav', new Calendarnav($container->get(SiteApplication::class)));
+
+		//$this->getRegistry()->register('tagebuch.icon2', new Icon2($container->get(SiteApplication::class)));
+
+		$this->getRegistry()->register('calendarnav', $this->getRegistry()->getService('tagebuchcalendarnav'));
+		//$this->getRegistry()->register('icon2', $this->getRegistry()->getService('tagebuch.icon2'));
 	}
 
 	/**
