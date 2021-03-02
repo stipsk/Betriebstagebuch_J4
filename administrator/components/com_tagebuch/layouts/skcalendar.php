@@ -1,10 +1,10 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  Layout
+ * @package     Tagebuch.Administrator
+ * @subpackage  com_tagebuch
  *
- * @copyright   (C) 2016 Open Source Matters, Inc. <https://www.joomla.org>
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2021 Stephan Knauer. All rights reserved.
+ * @license     GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 defined('_JEXEC') or die;

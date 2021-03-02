@@ -34,7 +34,10 @@ if ($params->get('access-edit'))
 	$iconAdd = 'icon-lock';
 }
 $CalendarAttribs = array(
-	'class'             => 'form-control-sm btn-sm',);
+	'class'             => 'form-control-sm btn-sm',
+    'onChange'          =>  'location.href = \' \'',
+    'onClick'           =>  '',
+    );
 ?>
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
