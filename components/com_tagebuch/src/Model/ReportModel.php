@@ -53,9 +53,10 @@ class ReportModel extends ItemModel
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
+	 * @return void
+	 * @throws \Exception
 	 * @since   1.6
 	 *
-	 * @return void
 	 */
 	protected function populateState()
 	{
@@ -96,6 +97,11 @@ class ReportModel extends ItemModel
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
 		$skhelper = new TagebuchHelper;
+
+		/**
+		 * @todo Wenn keine ID ($pk) aber datum übergeben wurde dann nach Datum suchen!
+		 *       Erst dann den letzten Eintrag anzeigen.
+		 */
 		$pk = $pk === 0 ? $skhelper->getLastId($pk) : $pk;
 
 		$userAccess = $skhelper->getTagebuchAccess();
