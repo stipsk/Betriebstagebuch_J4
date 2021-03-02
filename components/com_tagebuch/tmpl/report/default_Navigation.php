@@ -10,11 +10,13 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Route;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
 use SK\Component\Tagebuch\Administrator\Helper\FahrzeugeHelper as FahrzeugeHelper;
+
 
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
@@ -211,7 +213,8 @@ $CalendarAttribs = array(
         </div>
     </div>
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-        <?php echo HTMLHelper::_('calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
+        <?php //echo HTMLHelper::_('Tagebuch.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
+        <?php echo HTMLHelper::_('tagebuchicon.edit',$this->item,$params);?>
     </div>
 </div>
 
