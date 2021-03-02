@@ -35,10 +35,27 @@ if ($params->get('access-edit'))
 }
 $CalendarAttribs = array(
 	'class'             => 'form-control-sm btn-sm',
-    'onChange'          =>  'location.href = \' \'',
+    'onChange'          =>  'calendarValueChange(this)',
     'onClick'           =>  '',
     );
+
+$url = Route::_(TagebuchHelper::getReportRoute($this->item->id, $this->item->slug));
 ?>
+
+
+<script>
+    function calendarValueChange(el) {
+        // with jQuery
+        if (!jQuery(el).val().length) {
+            alert("Calendar value is empty!");
+        }else{
+            var url_datum = jQuery(el).val(),
+                url = '<?php echo $url.'&amp;datum='?>' + url_datum;
+            $(location).attr('href',url);
+        }
+
+    }
+</script>
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <!--    Neu und Edit-Buttons (Dropdowns) -->
