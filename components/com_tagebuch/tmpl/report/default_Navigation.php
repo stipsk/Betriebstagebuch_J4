@@ -39,7 +39,7 @@ $CalendarAttribs = array(
     'onClick'           =>  '',
     );
 
-$url = Route::_(TagebuchHelper::getReportRoute($this->item->id, $this->item->slug));
+$url = Route::_(TagebuchHelper::getReportRoute(null, null));
 ?>
 
 

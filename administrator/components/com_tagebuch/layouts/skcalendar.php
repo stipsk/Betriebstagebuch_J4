@@ -17,7 +17,6 @@ extract($displayData);
 
 // Get some system objects.
 $document = Factory::getApplication()->getDocument();
-
 /**
  * Layout variables
  * -----------------
@@ -74,7 +73,7 @@ empty($maxlength) ? null : $attributes['maxlength'] = $maxLength;
 empty($class)     ? $attributes['class'] = 'form-control' : $attributes['class'] = 'form-control ' . $class;
 !$readonly        ? null : $attributes['readonly'] = 'readonly';
 !$disabled        ? null : $attributes['disabled'] = 'disabled';
-empty($onchange)  ? null : $attributes['onchange'] = $onchange;
+empty($onchange)  ? $attributes['onchange'] = 'calendarValueChange(this)' : $attributes['onchange'] = $onchange;
 
 if ($required)
 {
