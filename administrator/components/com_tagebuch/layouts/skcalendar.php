@@ -35,6 +35,7 @@ $document = Factory::getApplication()->getDocument();
  * @var   string   $name            Name of the input field.
  * @var   string   $onchange        Onchange attribute for the field.
  * @var   string   $onclick         Onclick attribute for the field.
+ * @var   string   $onbtnclick      Onclick attribute for the button.
  * @var   string   $pattern         Pattern (Reg Ex) of value of the form field.
  * @var   boolean  $readonly        Is this field read only?
  * @var   boolean  $repeat          Allows extensions to duplicate elements.
@@ -74,6 +75,9 @@ empty($class)     ? $attributes['class'] = 'form-control' : $attributes['class']
 !$readonly        ? null : $attributes['readonly'] = 'readonly';
 !$disabled        ? null : $attributes['disabled'] = 'disabled';
 empty($onchange)  ? $attributes['onchange'] = 'calendarValueChange(this)' : $attributes['onchange'] = $onchange;
+
+if (empty($onbtnclick)){
+    $onbtnclick = 'calendarBtnClick(this)';}
 
 if ($required)
 {
@@ -136,6 +140,12 @@ $document->getWebAssetManager()
 			><span class="icon-calendar" aria-hidden="true"></span>
 			<span class="sr-only"><?php echo Text::_('JLIB_HTML_BEHAVIOR_OPEN_CALENDAR'); ?></span>
 			</button>
+            <button type="button" class="<?php echo ($readonly || $disabled) ? 'hidden ' : ''; ?>btn btn-info btn-sm"
+                    id="<?php echo $id; ?>_btnsearch"
+                    onclick="<?php echo $onbtnclick; ?>"
+            >
+                <span class="icon-search">&nbsp;<?php echo Text::_('COM_TAGEBUCH_CALENDARBUTTON_GOTO'); ?></span>
+            </button>
 		</span>
 		<?php if (!$readonly && !$disabled) : ?>
 	</div>

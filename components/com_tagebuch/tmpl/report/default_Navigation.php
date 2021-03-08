@@ -37,6 +37,7 @@ $CalendarAttribs = array(
 	'class'             => 'form-control-sm btn-sm',
     'onChange'          =>  'calendarValueChange(this)',
     'onClick'           =>  '',
+    'onBtnClick'        =>  'calendarBtnClick(this)',
     );
 
 $url = Route::_(TagebuchHelper::getReportRoute(null, null));
@@ -44,16 +45,21 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 
 
 <script>
+    var url;
     function calendarValueChange(el) {
         // with jQuery
+
         if (!jQuery(el).val().length) {
             alert("Calendar value is empty!");
-        }else{
-            var url_datum = jQuery(el).val(),
-                url = '<?php echo $url.'&amp;datum='?>' + url_datum;
-            $(location).attr('href',url);
+        } else {
+            var url_datum = jQuery(el).val();
+            url = '<?php echo $url . '&amp;datum='?>' + url_datum;
+            // $(location).attr('href',url);
         }
 
+    }
+    function calendarBtnClick(eb) {
+        $(location).attr('href',url);
     }
 </script>
 <!-- Buttonbar -->
@@ -233,7 +239,6 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
         </div>
     </div>
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-        <?php //echo HTMLHelper::_('Tagebuch.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
         <?php echo HTMLHelper::_('calendarnav.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
     </div>
 </div>
