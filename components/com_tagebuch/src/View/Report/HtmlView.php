@@ -231,7 +231,7 @@ class HtmlView extends BaseHtmlView
 
 		if ($menu)
 		{
-			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+			$this->params->def('page_heading', Text::_('COM_TAGEBUCH_REPORT_PAGETITLE_DATE').HTMLHelper::_('date' , $this->item->datum,'l,  d.m.Y'));
 		}
 		else
 		{

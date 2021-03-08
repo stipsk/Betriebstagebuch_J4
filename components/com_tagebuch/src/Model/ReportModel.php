@@ -97,11 +97,17 @@ class ReportModel extends ItemModel
 
 		$pk = (int) ($pk ?: $this->getState('report.id'));
 		$skhelper = new TagebuchHelper;
+		$this->state->set('DatumNotFound', false);
 
-		/**
-		 * @todo Wenn keine ID ($pk) aber datum übergeben wurde dann nach Datum suchen!
-		 *       Erst dann den letzten Eintrag anzeigen.
-		 */
+		$datumssuche = $app->input->getString('datum');
+		if (($pk === 0) && ( $datumssuche != null) ){
+			$pk = (int) $skhelper->getIdFromDateString($datumssuche);
+			if ($pk === 0)
+			{
+				$this->state->set('DatumNotFound', $datumssuche);
+			}
+		}
+
 		$pk = $pk === 0 ? $skhelper->getLastId($pk) : $pk;
 
 		$userAccess = $skhelper->getTagebuchAccess();

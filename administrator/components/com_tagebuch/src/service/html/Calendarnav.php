@@ -115,6 +115,7 @@ class Calendarnav
 		$hint         = $attribs['placeholder'] ?? '';
 		$class        = $attribs['class'] ?? '';
 		$onchange     = $attribs['onChange'] ?? '';
+		$onbtnclick   = $attribs['onBtnClick'] ?? '';
 		$minYear      = $attribs['minYear'] ?? null;
 		$maxYear      = $attribs['maxYear'] ?? null;
 
@@ -161,6 +162,7 @@ class Calendarnav
 			'localesPath'    => $localesPath,
 			'direction'      => $direction,
 			'onchange'       => $onchange,
+			'onbtnclick'     => $onbtnclick,
 			'minYear'        => $minYear,
 			'maxYear'        => $maxYear,
 			'dataAttribute'  => '',

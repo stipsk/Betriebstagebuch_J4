@@ -43,26 +43,16 @@ $wa->useStyle('tagebuch.standard');
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 ?>
-<script>
-    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
-    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-        return new bootstrap.Dropdown(dropdownToggleEl)
-    })
-</script>
-<div class="com-content-article item-page<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="https://schema.org/Article">
-	<meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">
-	<?php if ($this->params->get('show_page_heading')) : ?>
-	<div class="page-header">
-		<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
-	</div>
-	<?php endif;
-	if (!empty($this->item->pagination) && $this->item->pagination && !$this->item->paginationposition && $this->item->paginationrelative)
-	{
-		echo $this->item->pagination;
-	}
-	?>
 	<?php echo $this->loadTemplate('Navigation'); ?>
 
+    <div class="page-header">
+        <h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
+    </div>
+    <?php if ($this->state->DatumNotFound):?>
+    <div class="alert alert-primary">
+        <span class="icon-info-circle">&nbsp;<?php echo Text::sprintf('COM_TAGEBUCH_CELENDARNAV_NOT_FOUND', $this->state->DatumNotFound );?></span>
+    </div>
+    <?php endif; ?>
 
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 

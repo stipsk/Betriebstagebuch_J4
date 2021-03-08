@@ -11,6 +11,7 @@ namespace SK\Component\Tagebuch\Administrator\Helper;
 
 defined('_JEXEC') or die;
 
+use FOF30\Date\Date;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
@@ -74,7 +75,7 @@ class TagebuchHelper extends ComponentHelper
 	/**
 	 * Get the last Report.
 	 *
-	 * @param   integer  $id        The route of the content item.
+	 * @param   integer  $id
 	 **
 	 * @return  integer  The last report id.
 	 *
@@ -83,7 +84,8 @@ class TagebuchHelper extends ComponentHelper
 
 	public function getLastId($id = null)
 	{
-		$user = Factory::getUser();
+		$app = Factory::getApplication();
+		$user = $app->getIdentity();
 		$db    = Factory::getDbo();
 		$config	= ComponentHelper::getParams( 'com_tagebuch' );
 		$query = $db->getQuery(true);
@@ -107,9 +109,52 @@ class TagebuchHelper extends ComponentHelper
 	}
 
 	/**
+	 * Suche Eintrag nach Datumsstring
+	 *
+	 * @param   string  Suchstring für Datum
+	 *
+	 * @return  int     Rückgabe der Eintragsid - null wenn nicht vorhanden
+	 *
+	 * @since 1.0
+	 */
+	public function getIdFromDateString($datestring)
+	{
+		$app = Factory::getApplication();
+		$user = $app->getIdentity();
+		$db    = Factory::getDbo();
+		$config	= ComponentHelper::getParams( 'com_tagebuch' );
+		$query = $db->getQuery(true);
+
+		$date = Date::getInstance($datestring);
+		$suchdatum = $date->format('Y-m-d');
+		$where[] = $db->quoteName('datum') . ' = :suchdatum';
+		$query->bind(':suchdatum', $suchdatum);
+
+		$publish_erlaubt = $user->authorise('core.edit.state', 'com_tagebuch');
+		$where[] = $publish_erlaubt ? $db->quoteName('state') . '>= 0' : $db->quoteName('state') . '= 1' ;
+		$limit = 10;
+		$limitstart = 0;
+
+		$query->select(	$db->quoteName('id') )
+			->select(	$db->quoteName('datum') )
+			->from($db->quoteName('#__tagebuch'))
+			->where(implode(' AND ', $where))
+			->order($db->quoteName('datum') . ' ' . 'DESC')
+			->setLimit($limit, $limitstart);
+
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+
+		$return = count($rows) > 0 ? $rows[0]->id : null;
+		return ($return);
+	}
+
+	/**
 	 * Datum des letzten Eintrages holen
 	 *
 	 * @return DATETIME
+	 *
+	 * @since 1.0
 	 */
 	public function getLastDate()
 	{
@@ -175,7 +220,6 @@ class TagebuchHelper extends ComponentHelper
 			$date = Factory::getDate($result_array->first_date);
 			$result_array->first_date = $date->format('l, d.m.Y');
 			$result_array->first_slug = $this->getSlugFromDate($date);
-
 		}
 		$result_array->last_date	= $this->_rows[$last]->datum;
 		if ($result_array->last_date)
@@ -197,6 +241,27 @@ class TagebuchHelper extends ComponentHelper
 			$date = Factory::getDate($result_array->back_date);
 			$result_array->back_date = $date->format('l, d.m.Y');
 			$result_array->back_slug = $this->getSlugFromDate($date);
+		}
+
+		if (($result_array->first_id == null) || ($result_array->first_id == $id)){
+			$result_array->first_disabled = ' disabled';
+		}else{
+			$result_array->first_disabled = '';
+		}
+		if (($result_array->back_id == null) || ($result_array->back_id == $id)){
+			$result_array->back_disabled = ' disabled';
+		}else{
+			$result_array->back_disabled = '';
+		}
+		if (($result_array->next_id == null) || ($result_array->next_id == $id)){
+			$result_array->next_disabled = ' disabled';
+		}else{
+			$result_array->next_disabled = '';
+		}
+		if (($result_array->last_id == null) || ($result_array->last_id == $id)){
+			$result_array->last_disabled = ' disabled';
+		}else{
+			$result_array->last_disabled = '';
 		}
 
 		return ($result_array);

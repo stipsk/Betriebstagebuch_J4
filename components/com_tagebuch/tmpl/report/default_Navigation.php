@@ -62,6 +62,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
         $(location).attr('href',url);
     }
 </script>
+
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <!--    Neu und Edit-Buttons (Dropdowns) -->
@@ -217,22 +218,22 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
             </div>
         </div>
     </div>
-    <!--    Navigation Vor un Zurück-->
+    <!--    Navigation Vor und Zurück-->
     <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
         <div class="btn-group btn-group-sm" role="group">
-            <a role="button" class="btn btn-primary"  href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->first_id, $this->navigationClass->first_slug)); ?>">
+            <a role="button" class="btn btn-primary <?php echo $this->navigationClass->first_disabled;?>"  href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->first_id, $this->navigationClass->first_slug)); ?>">
                 <span class="icon-angle-double-left"></span>&#160;
                 <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_FIRST'); ?>
             </a>
-            <a type="button" class="btn btn-primary" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->back_id, $this->navigationClass->back_slug)); ?>">
+            <a type="button" class="btn btn-primary <?php echo $this->navigationClass->back_disabled;?>" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->back_id, $this->navigationClass->back_slug)); ?>">
                 <span class="icon-angle-left"></span>&#160;
                 <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_BACK'); ?>
             </a>
-            <a type="button" class="btn btn-primary" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->next_id, $this->navigationClass->next_slug)); ?>">
+            <a type="button" class="btn btn-primary <?php echo $this->navigationClass->next_disabled;?>" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->next_id, $this->navigationClass->next_slug)); ?>">
                 <span class="icon-angle-right"></span>&#160;
                 <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_NEXT'); ?>
             </a>
-            <a type="button" class="btn btn-primary" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->last_id, $this->navigationClass->last_slug)); ?>">
+            <a type="button" class="btn btn-primary <?php echo $this->navigationClass->last_disabled;?>" href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->last_id, $this->navigationClass->last_slug)); ?>">
                 <span class="icon-angle-double-right"></span>&#160;
                 <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_LAST'); ?>
             </a>
