@@ -57,6 +57,7 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 	<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', array('active' => 'general')); ?>
 
     <?php $checked = ($this->item->fs_erstellt_von_name != '') ? $TabChecked : $TabUnChecked; ?>
+
 	<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'general', $checked . Text::_('COM_TAGEBUCH_REPORT_TAB1')); ?>
 
         <?php echo $this->loadTemplate('tabfs'); ?>
