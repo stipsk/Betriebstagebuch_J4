@@ -13,7 +13,10 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\Utilities\ArrayHelper;
 
-extract($displayData);
+if (isset($displayData))
+{
+	extract($displayData);
+}
 
 // Get some system objects.
 $document = Factory::getApplication()->getDocument();
