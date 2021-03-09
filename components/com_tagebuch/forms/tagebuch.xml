@@ -394,6 +394,7 @@
 			name="version"
 			type="version"
 			label="JGLOBAL_FIELD_VERSION_LABEL"
+		/>
 
 		<field
 			name="version_note"
