@@ -38,12 +38,7 @@ $returnPage = base64_encode(Uri::getInstance());
 			?>
         </div>
         <div class="col-10">
-            <p>
-				<?php echo JText::_('COM_TAGEBUCH_REPORT_SFS').': '; ?>
-                <strong>
-					<?php echo $this->item->sfs_name ? $this->item->sfs_name : Text::_( '..' ) ; ?>
-                </strong>
-            </p>
+            &#160;
         </div>
     </div>
     <div class="row">
