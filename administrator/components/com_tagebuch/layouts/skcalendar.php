@@ -144,7 +144,7 @@ $document->getWebAssetManager()
                     id="<?php echo $id; ?>_btnsearch"
                     onclick="<?php echo $onbtnclick; ?>"
             >
-                <span class="icon-search">&nbsp;<?php echo Text::_('COM_TAGEBUCH_CALENDARBUTTON_GOTO'); ?></span>
+                <span class="icon-search"></span>&nbsp;<?php echo Text::_('COM_TAGEBUCH_CALENDARBUTTON_GOTO'); ?>
             </button>
 		</span>
 		<?php if (!$readonly && !$disabled) : ?>
