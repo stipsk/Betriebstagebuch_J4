@@ -38,7 +38,7 @@ $returnPage = base64_encode(Uri::getInstance());
             ?>
         </div>
         <div class="col-10">
-            &#160;
+            <p><stron>&#160;</stron></p>
         </div>
     </div>
     <div class="row">
