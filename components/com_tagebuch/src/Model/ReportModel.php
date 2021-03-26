@@ -265,7 +265,7 @@ class ReportModel extends ItemModel
 
 				$data->metadata = new Registry($data->metadata);
 
-				// Technically guest could edit an article, but lets not check that to improve performance a little.
+				// Nur angemeldete User dürfen Ändern/Neu Anlegen
 				if (!$user->get('guest'))
 				{
 					$userId = $user->get('id');
@@ -325,6 +325,10 @@ class ReportModel extends ItemModel
 
 					//Access Special when Betriebsleitung
 					if ($userAccess->isBL){
+						$data->params->set('access-edit-fs', true);
+						$data->params->set('access-edit-ss', true);
+						$data->params->set('access-edit-an', true);
+						$data->params->set('access-edit-z2', true);
 						$data->params->set('access-edit-z1', true);
 						$data->params->set('access-add-z1', true);
 						$data->params->set('access-edit_lu', true);
