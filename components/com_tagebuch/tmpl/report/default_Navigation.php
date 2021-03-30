@@ -81,7 +81,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=FS&return='.$returnPage); ?>">
+                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::getReportRoute($params->get('editlink').$this->item->id.'&layout=FS&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_FS'); ?>
                     </a>
 		            <?php if ($params->get('access-add-ss'))

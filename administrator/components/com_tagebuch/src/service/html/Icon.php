@@ -123,21 +123,21 @@ class Icon
 			&& !is_null($tagebuch->checked_out)
 			&& $tagebuch->checked_out !== $user->get('id'))
 		{
-			$checkoutUser = Factory::getUser($contact->checked_out);
-			$date         = HTMLHelper::_('date', $contact->checked_out_time);
+			$checkoutUser = Factory::getUser($tagebuch->checked_out);
+			$date         = HTMLHelper::_('date', $tagebuch->checked_out_time);
 			$tooltip      = Text::sprintf('COM_TAGEBUCH_CHECKED_OUT_BY', $checkoutUser->name)
 				. ' <br> ' . $date;
 
 			$text = LayoutHelper::render('joomla.content.icons.edit_lock', array('tagebuch' => $tagebuch, 'tooltip' => $tooltip, 'legacy' => $legacy));
 
-			$attribs['aria-describedby'] = 'edittagebuch-' . (int) $contact->id;
+			$attribs['aria-describedby'] = 'edittagebuch-' . (int) $tagebuch->id;
 			$output = HTMLHelper::_('link', '#', $text, $attribs);
 
 			return $output;
 		}
 
 		$tagebuchUrl = RouteHelper::getReportRoute($tagebuch->slug, null, null);
-		$url        = $tagebuchUrl . '&task=tagebuch.edit&id=' . $tagebuch->id . '&return=' . base64_encode($uri);
+		$url        = $tagebuchUrl . '&task=report.edit&id=' . $tagebuch->id . '&return=' . base64_encode($uri);
 
 		if ((int) $tagebuch->state === 0)
 		{
