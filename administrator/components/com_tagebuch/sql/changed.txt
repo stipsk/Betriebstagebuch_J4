@@ -22,3 +22,9 @@
 
 #### 2020-02-01 End	#########################
 
+#### 2021-03-30	#########################
+	1. #__tagebuch.checked_out als NULL definieren:
+		ALTER TABLE `#__tagebuch` CHANGE `checked_out` `checked_out` INT(11) UNSIGNED NULL DEFAULT NULL;
+	2. Alle vorhandenen mit "0" nach NULL konvertieren:
+		UPDATE `#__tagebuch` SET `checked_out` = NULL WHERE `uw3ro_tagebuch`.`checked_out` = 0
+#### 2021-03-30 End	#########################
