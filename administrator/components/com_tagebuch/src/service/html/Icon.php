@@ -123,7 +123,7 @@ class Icon
 			&& !is_null($tagebuch->checked_out)
 			&& $tagebuch->checked_out !== $user->get('id'))
 		{
-			$checkoutUser = Factory::getUser($tagebuch->checked_out);
+			$checkoutUser = $this->application->getIdentity($tagebuch->checked_out);
 			$date         = HTMLHelper::_('date', $tagebuch->checked_out_time);
 			$tooltip      = Text::sprintf('COM_TAGEBUCH_CHECKED_OUT_BY', $checkoutUser->name)
 				. ' <br> ' . $date;
