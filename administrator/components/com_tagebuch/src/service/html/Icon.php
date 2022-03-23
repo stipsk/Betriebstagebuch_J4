@@ -36,7 +36,7 @@ class Icon
 	 *
 	 * @since  4.0.0
 	 */
-	private $application;
+	//private $application;
 
 	/**
 	 * Service constructor
@@ -47,7 +47,7 @@ class Icon
 	 */
 	public function __construct(CMSApplication $application)
 	{
-		$this->application = $application;
+		//$this->application = $application;
 	}
 
 	/**
