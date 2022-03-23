@@ -18,6 +18,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+use Joomla\Console\Application;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper;
 use Joomla\Registry\Registry;
 
@@ -102,7 +103,8 @@ class Icon
 	 */
 	public static function edit($tagebuch, $params, $attribs = array(), $legacy = false)
 	{
-		$user = Factory::getUser();
+		$app = Factory::getApplication();
+		//$user = $app->getIdentity();//Factory::getUser();
 		$uri  = Uri::getInstance();
 
 		// Ignore if in a popup window.
@@ -121,9 +123,9 @@ class Icon
 		if (property_exists($tagebuch, 'checked_out')
 			&& property_exists($tagebuch, 'checked_out_time')
 			&& !is_null($tagebuch->checked_out)
-			&& $tagebuch->checked_out !== $user->get('id'))
+			&& $tagebuch->checked_out !== $app->getIdentity())
 		{
-			$checkoutUser = $this->application->getIdentity($tagebuch->checked_out);
+			$checkoutUser = $app->getIdentity($tagebuch->checked_out);
 			$date         = HTMLHelper::_('date', $tagebuch->checked_out_time);
 			$tooltip      = Text::sprintf('COM_TAGEBUCH_CHECKED_OUT_BY', $checkoutUser->name)
 				. ' <br> ' . $date;
