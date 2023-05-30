@@ -11,6 +11,8 @@ namespace J4xdemos\Component\Mywalks\Site\Model;
 
 defined('_JEXEC') or die;
 
+use JDatabaseDriver;
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
 
@@ -98,6 +100,27 @@ class MywalksModel extends ListModel
 	 */
 	protected function getListQuery()
 	{
+		$option['driver']   = 'mysqli';
+		$option['host']   = '192.168.2.6';
+		$option['user']   = 'wago';
+		$option['password']   = 'a88c67';
+		$option['database']   = 'wago';
+		$option['prefix']   = '';
+
+
+		$dbext = JDatabaseDriver::getInstance($option);;
+		$queryext = $dbext->getQuery(true);
+
+		//Überprüfen ob die Eingaben der Logger-Datenbank korrekt ist
+		try {
+			$test =  $dbext->getTableColumns('S415_FeuchteLogKopie') ;
+		} catch (Exception $e) {
+			// Fehler aufgetreten!!!
+			JError::raiseWarning(403, JText::sprintf('COM_ENERGIES_KEINE_VERBINDUNG_ZUR_DB', $e->getCode(), $e->getMessage()).'<br /> - $db->getTableColumns()');
+			$this->app->redirect('index.php');
+			return;
+		}
+		var_dump($test);
 
 		// Create a new query object.
 		$db    = $this->getDatabase();
