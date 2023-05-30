@@ -29,6 +29,8 @@
 !./components/com_wartungen
 !./administrator/components/com_wind
 !./components/com_wind
+!./administrator/components/com_mywalks
+!./components/com_mywalks
 !./administrator/language/de-DE
 !./administrator/language/en-GB
 !./language/de-DE
