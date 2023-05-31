@@ -39,6 +39,14 @@ class HtmlView extends BaseHtmlView
 	protected $items;
 
 	/**
+	 * The Charge details
+	 *
+	 * @var    \JObject
+	 * @since  1.6.0
+	 */
+	protected $charge;
+
+	/**
 	 * The pagination object
 	 *
 	 * @var    \JPagination
@@ -73,6 +81,7 @@ class HtmlView extends BaseHtmlView
 		$this->pagination = $this->get('Pagination');
 		// Flag indicates to not add limitstart=0 to URL
 		$this->pagination->hideEmptyLimitstart = true;
+		$this->charge = $this->get('chargenItems');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

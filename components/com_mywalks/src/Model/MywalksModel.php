@@ -100,27 +100,6 @@ class MywalksModel extends ListModel
 	 */
 	protected function getListQuery()
 	{
-		$option['driver']   = 'mysqli';
-		$option['host']   = '192.168.2.6';
-		$option['user']   = 'wago';
-		$option['password']   = 'a88c67';
-		$option['database']   = 'wago';
-		$option['prefix']   = '';
-
-
-		$dbext = JDatabaseDriver::getInstance($option);;
-		$queryext = $dbext->getQuery(true);
-
-		//Überprüfen ob die Eingaben der Logger-Datenbank korrekt ist
-		try {
-			$test =  $dbext->getTableColumns('S415_FeuchteLogKopie') ;
-		} catch (Exception $e) {
-			// Fehler aufgetreten!!!
-			JError::raiseWarning(403, JText::sprintf('COM_ENERGIES_KEINE_VERBINDUNG_ZUR_DB', $e->getCode(), $e->getMessage()).'<br /> - $db->getTableColumns()');
-			$this->app->redirect('index.php');
-			return;
-		}
-		var_dump($test);
 
 		// Create a new query object.
 		$db    = $this->getDatabase();
@@ -131,12 +110,12 @@ class MywalksModel extends ListModel
 			$this->getState(
 				'list.select',
 				'a.*,
-				(SELECT MAX(' . $db->quoteName('date') 
-				. ') FROM ' . $db->quoteName('#__mywalk_dates') 
+				(SELECT MAX(' . $db->quoteName('date')
+				. ') FROM ' . $db->quoteName('#__mywalk_dates')
 				. ' WHERE ' . $db->quoteName('walk_id') . ' = ' . $db->quoteName('a.id') . ') AS last_visit,
-				(SELECT count(' . $db->quote('date') . ') FROM ' . $db->quoteName('#__mywalk_dates') 
+				(SELECT count(' . $db->quote('date') . ') FROM ' . $db->quoteName('#__mywalk_dates')
 				. ' WHERE ' . $db->quoteName('walk_id') . ' = ' . $db->quoteName('a.id') . ') AS nvisits'
-				)
+			)
 		);
 		$query->from($db->quoteName('#__mywalks') . ' AS a');
 
@@ -147,7 +126,7 @@ class MywalksModel extends ListModel
 		{
 			$search = '%' . trim($search) . '%';
 			$query->where($db->quoteName('a.title') . ' LIKE :search')
-			->bind(':search', $search, ParameterType::STRING);
+				->bind(':search', $search, ParameterType::STRING);
 		}
 
 		// Add the list ordering clause.
@@ -155,15 +134,125 @@ class MywalksModel extends ListModel
 		$orderDirn = $this->state->get('list.direction', 'ASC');
 
 		if ($orderCol === 'title') {
-            $ordering = [
-                $db->quoteName('a.title') . ' ' . $db->escape($orderDirn),
-            ];
-        } else {
-            $ordering = $db->escape($orderCol) . ' ' . $db->escape($orderDirn);
-        }
+			$ordering = [
+				$db->quoteName('a.title') . ' ' . $db->escape($orderDirn),
+			];
+		} else {
+			$ordering = $db->escape($orderCol) . ' ' . $db->escape($orderDirn);
+		}
 
-        $query->order($ordering);
+		$query->order($ordering);
 
 		return $query;
+
+	}
+
+	/**
+	 * Get the master query for retrieving a list of walks subject to the model state.
+	 *
+	 * @return  \JDatabaseQuery
+	 *
+	 * @since   1.6
+	 */
+	protected function _getChargenQuery()
+	{
+		$option['driver']   = 'mysqli';
+		$option['host']     = '192.168.2.6';
+		$option['user']     = 'wago';
+		$option['password'] = 'a88c67';
+		$option['database'] = 'wago';
+		$option['prefix']   = '';
+		$dbname             = 'S415_FeuchteLogKopie';
+
+		// Datenbank verbinden und neues Queryobject anlegen
+		$dbext = JDatabaseDriver::getInstance($option);;
+		$queryext = $dbext->getQuery(true);
+
+		//Überprüfen ob die Logger-Datenbank vorhanden ist
+		try
+		{
+			$test = $dbext->getTableColumns($dbname);
+		}
+		catch (Exception $e)
+		{
+			// Fehler aufgetreten!!!
+			JError::raiseWarning(403, JText::sprintf('COM_ENERGIES_KEINE_VERBINDUNG_ZUR_DB', $e->getCode(), $e->getMessage()) . '<br /> - $db->getTableColumns()');
+			$this->app->redirect('index.php');
+
+			return;
+		}
+		//var_dump($test);
+
+		// Select the required fields from the table.
+		$queryext->select(
+			$this->getState(
+				'list.select',
+				'a.*'
+			)
+		);
+		$queryext->from($dbname . ' AS a');
+
+		// Filter by search in title.
+		$search = $this->getState('filter.search');
+
+		if (!empty($search))
+		{
+			$search = '%' . trim($search) . '%';
+			$queryext->where($dbext->quoteName('a.CHlabel') . ' LIKE :search')
+				->bind(':search', $search, ParameterType::STRING);
+		}
+
+		// Add the list ordering clause.
+		$orderCol  = $this->state->get('list.ordering', 'a.id');
+		$orderDirn = $this->state->get('list.direction', 'ASC');
+
+		if ($orderCol === 'title')
+		{
+			$ordering = [
+				$dbext->quoteName('a.posAbs') . ' ' . $dbext->escape($orderDirn),
+			];
+		}
+		else
+		{
+			$ordering = $dbext->escape($orderCol) . ' ' . $dbext->escape($orderDirn);
+		}
+
+		$queryext->order($ordering);
+
+		return $queryext;
+	}
+
+	/**
+	 * Method to get an array of data items.
+	 *
+	 * @return  mixed  An array of data items on success, false on failure.
+	 *
+	 * @since   1.6
+	 */
+	public function getChargenItems()
+	{
+		$option['driver']   = 'mysqli';
+		$option['host']     = '192.168.2.6';
+		$option['user']     = 'wago';
+		$option['password'] = 'a88c67';
+		$option['database'] = 'wago';
+		$option['prefix']   = '';
+		$dbname             = 'S415_FeuchteLogKopie';
+
+		// Datenbank verbinden und neues Queryobject anlegen
+		$db = JDatabaseDriver::getInstance($option);;
+
+		$query = $this->_getChargenQuery();
+		//$query->setLimit($limit, $limitstart);
+		$db->setQuery($query);
+
+		$return = $db->loadObjectList();
+		//var_dump($return);
+		foreach ($return)
+		$json = json_decode($return[0]->reals);
+		echo $json[1]."<br />";
+
+		var_dump($json);
+		return $return;
 	}
 }
