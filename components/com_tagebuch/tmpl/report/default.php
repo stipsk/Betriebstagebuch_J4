@@ -38,7 +38,7 @@ $wa = $this->document->getWebAssetManager();
 $wa->registerAndUseScript('tagebuch.bootstrap_min_js');
 $wa->useStyle('tagebuch.standard');
 
-echo HTMLHelper::_('tagebuchicon.edit', $this->item, $params);
+echo //HTMLHelper::_('tagebuchicon.edit', $this->item, $params);
 
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));

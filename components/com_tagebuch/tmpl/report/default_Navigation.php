@@ -33,10 +33,11 @@ if ($params->get('access-edit'))
 	$iconEdit = 'icon-lock';
 	$iconAdd = 'icon-lock';
 }
+
 $CalendarAttribs = array(
-	'class'             => 'form-control-sm btn-sm',
+	'class'             => 'form-control',
     'onChange'          =>  'calendarValueChange(this)',
-    'onClick'           =>  '',
+    'onClick'           =>  'calendarBtnClick(this)',
     'onBtnClick'        =>  'calendarBtnClick(this)',
     );
 
@@ -54,7 +55,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
         } else {
             var url_datum = jQuery(el).val();
             url = '<?php echo $url . '&amp;datum='?>' + url_datum;
-            // $(location).attr('href',url);
+            $(location).attr('href',url);
         }
 
     }
@@ -66,10 +67,10 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <!--    Neu und Edit-Buttons (Dropdowns) -->
-    <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Bearbeiten und Neu">
-        <div class="btn-group btn-group-sm bg-dark" role="group">
+    <div class="btn-group " role="group" aria-label="Bearbeiten und Neu">
+        <div class="btn-group bg-dark" role="group">
             <div class="dropdown">
-                <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuAdd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php echo $disabledEdit; ?> >
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuAdd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php echo $disabledEdit; ?> >
                     <span class="<?php echo $iconAdd;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW')?>
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuAdd">
@@ -142,9 +143,9 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
                 </div>
             </div>
         </div>
-        <div class="btn-group btn-group-sm" role="group">
+        <div class="btn-group" role="group">
             <div class="dropdown">
-                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php echo $disabledEdit; ?> >
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuEdit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php echo $disabledEdit; ?> >
                     <span class="<?php echo $iconEdit;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT')?>
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuEdit">
@@ -219,8 +220,8 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
         </div>
     </div>
     <!--    Navigation Vor und Zurück-->
-    <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-        <div class="btn-group btn-group-sm" role="group">
+    <div class="btn-group " role="group" aria-label="Second group">
+        <div class="btn-group " role="group">
             <a role="button" class="btn btn-primary <?php echo $this->navigationClass->first_disabled;?>"  href="<?php echo Route::_(TagebuchHelper::getReportRoute($this->navigationClass->first_id, $this->navigationClass->first_slug)); ?>">
                 <span class="icon-angle-double-left"></span>&#160;
                 <?php echo JText::_('COM_TAGEBUCH_REPORT_NAVIGATION_FIRST'); ?>
@@ -239,8 +240,12 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
             </a>
         </div>
     </div>
-    <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-        <?php echo HTMLHelper::_('calendarnav.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
+    <div class="btn-group " role="group" aria-label="Kalendarsearch">
+
+
+            <?php echo HTMLHelper::_('calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
+            <?php // echo HTMLHelper::_('calendarnav.calendar',$this->item->datum,'datum','datum','%d.%m.%Y',$CalendarAttribs);?>
+
     </div>
 </div>
 

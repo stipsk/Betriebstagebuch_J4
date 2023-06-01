@@ -70,7 +70,7 @@ class Calendarnav
 	 * @since   1.5
 	 *
 	 */
-	public static function calendar($value, $name, $id, $format = '%Y-%m-%d', $attribs = array())
+	public static function calendar($value, $name, $id, $format = '%d-%m-%Y', $attribs = array())
 	{
 		$tag       = Factory::getLanguage()->getTag();
 		$calendar  = Factory::getLanguage()->getCalendar();
