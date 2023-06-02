@@ -70,10 +70,10 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
     <div class="btn-group " role="group" aria-label="Bearbeiten und Neu">
         <div class="btn-group bg-dark" role="group">
             <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuAdd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php echo $disabledEdit; ?> >
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" <?php echo $disabledEdit; ?> >
                     <span class="<?php echo $iconAdd;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW')?>
                 </button>
-                <div class="dropdown-menu " aria-labelledby="dropdownMenuAdd">
+                <ul class="dropdown-menu">
 		            <?php if ($params->get('access-add-fs'))
 		            {
 			            $disabledEntry = '';
@@ -82,9 +82,11 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo TagebuchHelper::getReportRoute($params->get('editlink').$this->item->id,'slug',0,'&layout=FS&return='.$returnPage); ?>">
+                    <li>
+                        <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo TagebuchHelper::getReportRoute($params->get('editlink').$this->item->id,'slug',0,'&layout=FS&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_FS'); ?>
-                    </a>
+                        </a>
+                    </li>
 		            <?php if ($params->get('access-add-ss'))
 		            {
 			            $disabledEntry = '';
@@ -93,9 +95,11 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=SS&return='.$returnPage); ?>">
+                    <li>
+                        <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=SS&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_SS'); ?>
-                    </a>
+                        </a>
+                    </li>
 		            <?php if ($params->get('access-add-z1'))
 		            {
 			            $disabledEntry = '';
@@ -104,9 +108,11 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z1&return='.$returnPage); ?>">
+                    <li>
+                        <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z1&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_Z1'); ?>
-                    </a>
+                        </a>
+                    </li>
 		            <?php if ($params->get('access-add-an'))
 		            {
 			            $disabledEntry = '';
@@ -115,9 +121,9 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=AN&return='.$returnPage); ?>">
+                    <li><a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=AN&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_AN'); ?>
-                    </a>
+                        </a></li>
 		            <?php if ($params->get('access-add-bl'))
 		            {
 			            $disabledEntry = '';
@@ -126,9 +132,9 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=BL&return='.$returnPage); ?>">
+                    <li><a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=BL&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_BL'); ?>
-                    </a>
+                        </a></li>
 		            <?php if ($params->get('access-add-z2'))
 		            {
 			            $disabledEntry = '';
@@ -137,10 +143,10 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 			            $disabledEntry = 'disabled';
 			            $iconEntry = 'icon-lock';
 		            }?>
-                    <a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z2&return='.$returnPage); ?>">
+                    <li><a class="dropdown-item bg-success text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z2&return='.$returnPage); ?>">
                         <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_NEW_Z2'); ?>
-                    </a>
-                </div>
+                        </a></li>
+                </ul>
             </div>
         </div>
         <div class="btn-group" role="group">

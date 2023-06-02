@@ -37,6 +37,7 @@ $TabUnChecked = '<span class="fas fa-check" style="color: lightgrey;"></span>&nb
 $wa = $this->document->getWebAssetManager();
 $wa->registerAndUseScript('tagebuch.bootstrap_min_js');
 $wa->useStyle('tagebuch.standard');
+$wa->useStyle('tagebuch.bootstrap');
 
 echo //HTMLHelper::_('tagebuchicon.edit', $this->item, $params);
 

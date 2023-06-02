@@ -11,6 +11,7 @@ namespace SK\Component\Tagebuch\Administrator\Helper;
 
 defined('_JEXEC') or die;
 
+use AllowDynamicProperties;
 use Joomla\CMS\Date\Date;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -23,7 +24,7 @@ use Joomla\CMS\HTML\HTMLHelper;
  *
  * @since  4.0
  */
-class TagebuchHelper extends ComponentHelper
+#[AllowDynamicProperties] class TagebuchHelper extends ComponentHelper
 {
 	/**
 	 * The Last Date of all Reports.
