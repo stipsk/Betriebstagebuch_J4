@@ -63,7 +63,15 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
         $(location).attr('href',url);
     }
 </script>
-
+<button data-bs-toggle="dropdown" class="dropdown-toggle btn btn-sm btn-secondary">
+    <span class="caret"></span>
+    <span >TEXT</span>
+</button>
+<ul class="dropdown-menu">
+    <li><a 'class' => 'js-grid-item-action'>001</a> </li>
+    <li>002</li>
+    <li>003</li>
+</ul>
 <!-- Buttonbar -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <!--    Neu und Edit-Buttons (Dropdowns) -->

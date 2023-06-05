@@ -6,29 +6,29 @@
   "license": "GPL-2.0+",
   "assets": [
     {
-      "name": "tagebuch.standard",
+      "name": "com_tagebuch.standard",
       "type": "style",
       "uri": "com_tagebuch/tagebuch.css"
     },
     {
-      "name": "tagebuch.print",
+      "name": "com_tagebuch.print",
       "type": "style",
       "uri": "com_tagebuch/print.css"
     },
     {
-      "name": "tagebuch.bootstrap",
+      "name": "com_tagebuch.bootstrap",
       "type": "style",
-      "uri": "com_tagebuch/bootstrap.min.css"
+      "uri": "com_tagebuch/bootstrap.css"
     },
     {
-      "name": "tagebuch.bootstrap_min_js",
+      "name": "com_tagebuch.bootstrap_js",
       "type": "script",
-      "uri": "com_tagebuch/bootstrap.bundle.min.js",
+      "uri": "com_tagebuch/bootstrap.js",
       "dependencies": [
-        "core",
-        "jquery"
+        "core"
       ],
       "attributes": {
+        "nomodule": true,
         "defer": true
       }
     }
