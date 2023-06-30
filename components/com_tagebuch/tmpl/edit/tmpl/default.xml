@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="TAGEBUCH_LAYOT_NEW">
+		<message>
+			<![CDATA[DESC_TAGEBUCH_LAYOUT_NEW]]>
+		</message>
+	</layout>
+	<state>
+		<name>TAGEBUCH_NAME_NEW</name>
+		<description>DESC_TAGEBUCH_NAME_NEW</description>
+		<params>
+			<param name="show_betriebsleitung" type="radio" default="0" label="PARAM_ZEIGE_BETRIEBSLEITUNG" description="DESC_PARAM_ZEIGE_BETRIEBSLEITUNG">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+			<param name="show_abluft" type="radio" default="0" label="PARAM_ZEIGE_ABLUFT" description="DESC_PARAM_ZEIGE_ABLUFT">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+		</params>
+	</state>
+</metadata>
