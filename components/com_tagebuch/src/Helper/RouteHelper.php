@@ -60,7 +60,7 @@ abstract class RouteHelper
 	public static function getEditRoute($id, $slug, $language = 0, $layout = null)
 	{
 		// Create the link
-		$link = 'index.php?option=com_tagebuch&view=edit&id=' . $id . '&slug=' . $slug;
+		$link = 'index.php?option=com_tagebuch&task=report.edit&id=' . $id . '&slug=' . $slug;
 
 		if ($language && $language !== '*' && Multilanguage::isEnabled())
 		{

@@ -29,7 +29,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  4.0.0
  */
-class EditModel extends \SK\Component\Tagebuch\Administrator\Model\TagebuchModel
+class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
 {
     /**
      * Model typeAlias string. Used for version history.
@@ -47,7 +47,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\TagebuchModel
      *
      * @since  4.0.0
      */
-    protected $formName = 'form';
+    protected $formName = 'tagebuch';
 
     /**
      * Method to get the row form.

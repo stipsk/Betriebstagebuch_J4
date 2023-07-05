@@ -95,7 +95,7 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 			'Itemid' => 'INT');
 
 		// Check for edit form.
-		if ($vName === 'form' && !$this->checkEditId('com_tagebuch.edit.report', $id))
+		if ($vName === 'edit' && !$this->checkEditId('com_tagebuch.edit.report', $id))
 		{
 			// Somehow the person just went to the form - we don't allow that.
 			throw new \Exception(Text::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id), 403);

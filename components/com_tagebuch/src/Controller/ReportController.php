@@ -266,7 +266,7 @@ class ReportController extends FormController
 	 *
 	 * @since   1.5
 	 */
-	public function getModel($name = 'Form', $prefix = 'Site', $config = array('ignore_request' => true))
+	public function getModel($name = 'Edit', $prefix = 'Site', $config = array('ignore_request' => true))
 	{
 		return parent::getModel($name, $prefix, $config);
 	}
@@ -448,5 +448,22 @@ class ReportController extends FormController
 				$this->setRedirect($url, Text::_('COM_CONTENT_ARTICLE_VOTE_FAILURE'));
 			}
 		}
+	}
+	/**
+	 * Method to get a table object, load it if necessary.
+	 *
+	 * @param   string  $name     The table name. Optional.
+	 * @param   string  $prefix   The class prefix. Optional.
+	 * @param   array   $options  Configuration array for model. Optional.
+	 *
+	 * @return  bool|Table  A Table object
+	 *
+	 * @since   4.0.0
+
+	 * @throws  Exception
+	 */
+	public function getTable($name = 'Tagebuch', $prefix = 'Administrator', $options = [])
+	{
+		return parent::getTable($name, $prefix, $options);
 	}
 }

@@ -71,7 +71,7 @@ class Router extends RouterView
 		$tagebuch->setKey('id');
 		$this->registerView($tagebuch);
 
-		$edit = new RouterViewConfiguration('edit');
+		$edit = new RouterViewConfiguration('report.edit');
 		$edit->setKey('id');
 		$this->registerView($edit);
 
