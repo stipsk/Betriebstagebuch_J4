@@ -24,6 +24,14 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 {
 	/**
+	 * The URL edit variable.
+	 *
+	 * @var    string
+	 * @since  3.2
+	 */
+	protected $editpart = 'leer';
+
+	/**
 	 * Constructor.
 	 *
 	 * @param   array                $config   An optional associative array of configuration settings.
@@ -92,7 +100,8 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 			'filter-search' => 'STRING',
 			'print' => 'BOOLEAN',
 			'lang' => 'CMD',
-			'Itemid' => 'INT');
+			'Itemid' => 'INT',
+			'editpart' => 'STRING');
 
 		// Check for edit form.
 		if ($vName === 'edit' && !$this->checkEditId('com_tagebuch.edit.report', $id))

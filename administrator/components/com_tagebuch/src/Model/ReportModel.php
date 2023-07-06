@@ -370,84 +370,84 @@ class ReportModel extends AdminModel implements WorkflowModelInterface
 //
 //		return parent::publish($pks, $value);
 //	}
-//
-//	/**
-//	 * Method to get a single record.
-//	 *
-//	 * @param   integer  $pk  The id of the primary key.
-//	 *
-//	 * @return  mixed  Object on success, false on failure.
-//	 */
-//	public function getItem($pk = null)
-//	{
-//		if ($item = parent::getItem($pk)) {
-//			// Convert the params field to an array.
-//			$registry      = new Registry($item->attribs);
-//			$item->attribs = $registry->toArray();
-//
-//			// Convert the metadata field to an array.
-//			$registry       = new Registry($item->metadata);
-//			$item->metadata = $registry->toArray();
-//
-//			// Convert the images field to an array.
-//			$registry     = new Registry($item->images);
-//			$item->images = $registry->toArray();
-//
-//			// Convert the urls field to an array.
-//			$registry   = new Registry($item->urls);
-//			$item->urls = $registry->toArray();
-//
-//			$item->articletext = ($item->fulltext !== null && trim($item->fulltext) != '') ? $item->introtext . '<hr id="system-readmore">' . $item->fulltext : $item->introtext;
-//
-//			if (!empty($item->id)) {
-//				$item->tags = new TagsHelper();
-//				$item->tags->getTagIds($item->id, 'com_content.article');
-//
-//				$item->featured_up   = null;
-//				$item->featured_down = null;
-//
-//				if ($item->featured) {
-//					// Get featured dates.
-//					$db    = $this->getDatabase();
-//					$query = $db->getQuery(true)
-//						->select(
-//							[
-//								$db->quoteName('featured_up'),
-//								$db->quoteName('featured_down'),
-//							]
-//						)
-//						->from($db->quoteName('#__content_frontpage'))
-//						->where($db->quoteName('content_id') . ' = :id')
-//						->bind(':id', $item->id, ParameterType::INTEGER);
-//
-//					$featured = $db->setQuery($query)->loadObject();
-//
-//					if ($featured) {
-//						$item->featured_up   = $featured->featured_up;
-//						$item->featured_down = $featured->featured_down;
-//					}
-//				}
-//			}
-//		}
-//
-//		// Load associated content items
-//		$assoc = Associations::isEnabled();
-//
-//		if ($assoc) {
-//			$item->associations = [];
-//
-//			if ($item->id != null) {
-//				$associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $item->id);
-//
-//				foreach ($associations as $tag => $association) {
-//					$item->associations[$tag] = $association->id;
-//				}
-//			}
-//		}
-//
-//		return $item;
-//	}
-//
+
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed  Object on success, false on failure.
+	 */
+	public function getItem($pk = null)
+	{
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry      = new Registry($item->attribs);
+			$item->attribs = $registry->toArray();
+
+			// Convert the metadata field to an array.
+			$registry       = new Registry($item->metadata);
+			$item->metadata = $registry->toArray();
+
+			// Convert the images field to an array.
+			$registry     = new Registry($item->images);
+			$item->images = $registry->toArray();
+
+			// Convert the urls field to an array.
+			$registry   = new Registry($item->urls);
+			$item->urls = $registry->toArray();
+
+			$item->articletext = ($item->fulltext !== null && trim($item->fulltext) != '') ? $item->introtext . '<hr id="system-readmore">' . $item->fulltext : $item->introtext;
+
+			if (!empty($item->id)) {
+				$item->tags = new TagsHelper();
+				$item->tags->getTagIds($item->id, 'com_content.article');
+
+				$item->featured_up   = null;
+				$item->featured_down = null;
+
+				if ($item->featured) {
+					// Get featured dates.
+					$db    = $this->getDatabase();
+					$query = $db->getQuery(true)
+						->select(
+							[
+								$db->quoteName('featured_up'),
+								$db->quoteName('featured_down'),
+							]
+						)
+						->from($db->quoteName('#__content_frontpage'))
+						->where($db->quoteName('content_id') . ' = :id')
+						->bind(':id', $item->id, ParameterType::INTEGER);
+
+					$featured = $db->setQuery($query)->loadObject();
+
+					if ($featured) {
+						$item->featured_up   = $featured->featured_up;
+						$item->featured_down = $featured->featured_down;
+					}
+				}
+			}
+		}
+
+		// Load associated content items
+		$assoc = Associations::isEnabled();
+
+		if ($assoc) {
+			$item->associations = [];
+
+			if ($item->id != null) {
+				$associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $item->id);
+
+				foreach ($associations as $tag => $association) {
+					$item->associations[$tag] = $association->id;
+				}
+			}
+		}
+
+		return $item;
+	}
+
 	/**
 	 * Method to get the record form.
 	 *

@@ -54,6 +54,7 @@ class ReportController extends FormController
 	 */
 	protected $urlVar = 'a.id';
 
+
 	/**
 	 * Method to add a new record.
 	 *

@@ -112,24 +112,24 @@ class HtmlView extends BaseHtmlView
 		$this->navigationClass = $this->get('NavigationClass');
 
 		// Check for errors.
-	//	if (count($errors = $this->get('Errors')))
-	//	{
-	//		throw new GenericDataException(implode("\n", $errors), 500);
-	//	}
+		if (count($errors = $this->get('Errors')))
+		{
+			throw new GenericDataException(implode("\n", $errors), 500);
+		}
 
 		// Create a shortcut for $item.
 		$item            = $this->item;
-	//	$item->tagLayout = new FileLayout('joomla.tagebuch.tags');
+		$item->tagLayout = new FileLayout('joomla.tagebuch.tags');
 
 		// Add router helpers.
-	//	$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
+		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 
 
 		// Merge article params. If this is single-article view, menu params override article params
 		// Otherwise, article params override menu item params
-	//	$this->params = $this->state->get('params');
+		$this->params = $this->state->get('params');
 		$active       = $app->getMenu()->getActive();
-	//	$temp         = clone $this->params;
+		$temp         = clone $this->params;
 
 		// Check to see which parameters should take priority
 		if ($active)
@@ -140,11 +140,6 @@ class HtmlView extends BaseHtmlView
 			if (isset($active->query['layout']))
 			{
 				$this->setLayout($active->query['layout']);
-			}
-			// Check for alternative layout of Report
-			elseif ($layout = $item->params->get('tagebuch_layout'))
-			{
-				$this->setLayout($layout);
 			}
 
 			// $item->params are the Report params, $temp are the menu item params
@@ -169,7 +164,7 @@ class HtmlView extends BaseHtmlView
 		$offset = $this->state->get('list.offset');
 
 		// Check the view access to the article (the model has already computed the values).
-		if ($item->params->get('access-view') == false && ($item->params->get('show_noauth', '0') == '0'))
+		if ($item->params->get('access-edit') == false && ($item->params->get('show_noauth', '0') == '0'))
 		{
 			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			$app->setHeader('status', 403, true);
@@ -294,19 +289,22 @@ class HtmlView extends BaseHtmlView
 			$this->document->setMetaData('robots', $this->params->get('robots'));
 		}
 
-		/*if ($app->get('MetaAuthor') == '1')
+		if (($app->get('MetaAuthor') == '1') && (!empty($this->item->author)))
 		{
-			$author = $this->item->created_by_alias ?: $this->item->author;
+			$author = $this->item->author;
 			$this->document->setMetaData('author', $author);
-		}*/
+		}
 
-		$mdata = $this->item->metadata->toArray();
-
-		foreach ($mdata as $k => $v)
+		if (!empty($this->item->metadata))
 		{
-			if ($v)
+			$mdata = $this->item->metadata->toArray();
+
+			foreach ($mdata as $k => $v)
 			{
-				$this->document->setMetaData($k, $v);
+				if ($v)
+				{
+					$this->document->setMetaData($k, $v);
+				}
 			}
 		}
 

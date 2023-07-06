@@ -164,7 +164,8 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 		                $iconEntry = 'icon-lock';
 	                }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=FS&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'FS')).'&return='.$returnPage; ?>">
+
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_FS'); ?>
                         </a>
                     </li>
