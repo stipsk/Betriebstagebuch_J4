@@ -61,7 +61,9 @@ abstract class RouteHelper
 	{
 		// Create the link
 		$link = 'index.php?option=com_tagebuch&task=report.edit&id=' . $id . '&slug=' . $slug;
-
+		/**
+		 * @todo Für Neuer Tag evtl. andere Route notwendig!
+		 */
 		if ($language && $language !== '*' && Multilanguage::isEnabled())
 		{
 			$link .= '&lang=' . $language;
