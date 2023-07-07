@@ -463,7 +463,7 @@ class ReportModel extends AdminModel implements WorkflowModelInterface
 		$app  = Factory::getApplication();
 
 		// Get the form.
-		$form = $this->loadForm('com_tagebuch.report', 'article', ['control' => 'jform', 'load_data' => $loadData]);
+		$form = $this->loadForm('com_tagebuch.tagebuch', 'report', ['control' => 'jform', 'load_data' => $loadData]);
 
 		if (empty($form)) {
 			return false;
@@ -482,53 +482,53 @@ class ReportModel extends AdminModel implements WorkflowModelInterface
 
 		$record->id = $id;
 
-		// For new articles we load the potential state + associations
-		if ($id == 0 && $formField = $form->getField('catid')) {
-			$assignedCatids = $data['catid'] ?? $form->getValue('catid');
-
-			$assignedCatids = is_array($assignedCatids)
-				? (int) reset($assignedCatids)
-				: (int) $assignedCatids;
-
-			// Try to get the category from the category field
-			if (empty($assignedCatids)) {
-				$assignedCatids = $formField->getAttribute('default', null);
-
-				if (!$assignedCatids) {
-					// Choose the first category available
-					$catOptions = $formField->options;
-
-					if ($catOptions && !empty($catOptions[0]->value)) {
-						$assignedCatids = (int) $catOptions[0]->value;
-					}
-				}
-			}
-
-			// Activate the reload of the form when category is changed
-			$form->setFieldAttribute('catid', 'refresh-enabled', true);
-			$form->setFieldAttribute('catid', 'refresh-cat-id', $assignedCatids);
-			$form->setFieldAttribute('catid', 'refresh-section', 'article');
-
-			// Store ID of the category uses for edit state permission check
-			$record->catid = $assignedCatids;
-		} else {
-			// Get the category which the article is being added to
-			if (!empty($data['catid'])) {
-				$catId = (int) $data['catid'];
-			} else {
-				$catIds  = $form->getValue('catid');
-
-				$catId = is_array($catIds)
-					? (int) reset($catIds)
-					: (int) $catIds;
-
-				if (!$catId) {
-					$catId = (int) $form->getFieldAttribute('catid', 'default', 0);
-				}
-			}
-
-			$record->catid = $catId;
-		}
+//		// For new articles we load the potential state + associations
+//		if ($id == 0 && $formField = $form->getField('catid')) {
+//			$assignedCatids = $data['catid'] ?? $form->getValue('catid');
+//
+//			$assignedCatids = is_array($assignedCatids)
+//				? (int) reset($assignedCatids)
+//				: (int) $assignedCatids;
+//
+//			// Try to get the category from the category field
+//			if (empty($assignedCatids)) {
+//				$assignedCatids = $formField->getAttribute('default', null);
+//
+//				if (!$assignedCatids) {
+//					// Choose the first category available
+//					$catOptions = $formField->options;
+//
+//					if ($catOptions && !empty($catOptions[0]->value)) {
+//						$assignedCatids = (int) $catOptions[0]->value;
+//					}
+//				}
+//			}
+//
+//			// Activate the reload of the form when category is changed
+//			$form->setFieldAttribute('catid', 'refresh-enabled', true);
+//			$form->setFieldAttribute('catid', 'refresh-cat-id', $assignedCatids);
+//			$form->setFieldAttribute('catid', 'refresh-section', 'article');
+//
+//			// Store ID of the category uses for edit state permission check
+//			$record->catid = $assignedCatids;
+//		} else {
+//			// Get the category which the article is being added to
+//			if (!empty($data['catid'])) {
+//				$catId = (int) $data['catid'];
+//			} else {
+//				$catIds  = $form->getValue('catid');
+//
+//				$catId = is_array($catIds)
+//					? (int) reset($catIds)
+//					: (int) $catIds;
+//
+//				if (!$catId) {
+//					$catId = (int) $form->getFieldAttribute('catid', 'default', 0);
+//				}
+//			}
+//
+//			$record->catid = $catId;
+//		}
 
 		// Modify the form based on Edit State access controls.
 		if (!$this->canEditState($record)) {

@@ -66,6 +66,7 @@ class Router extends RouterView
 		$this->categoryFactory = $categoryFactory;
 		$this->db              = $db;
 
+		//Requestvars über die Laufzeit hinweg übernehmen!
 		$editpart = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
 
 

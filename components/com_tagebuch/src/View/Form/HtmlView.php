@@ -35,60 +35,77 @@ use SK\Component\Tagebuch\Administrator\Helper\TagebuchHelper;
 class HtmlView extends BaseHtmlView
 {
 	/**
-	 * The report object
+	 * The Form object
+	 *
+	 * @var  \Joomla\CMS\Form\Form
+	 */
+	protected $form;
+
+	/**
+	 * The item being created
 	 *
 	 * @var  \stdClass
-	 * @since 1.0
 	 */
 	protected $item;
+
+	/**
+	 * The page to return to after the article is submitted
+	 *
+	 * @var  string
+	 */
+	protected $return_page = '';
+
+	/**
+	 * The model state
+	 *
+	 * @var  \Joomla\CMS\Object\CMSObject
+	 */
+	protected $state;
 
 	/**
 	 * The page parameters
 	 *
 	 * @var    \Joomla\Registry\Registry|null
-	 * @since  1.0.0
+	 *
+	 * @since  4.0.0
 	 */
 	protected $params = null;
-
-	/**
-	 * Should the print button be displayed or not?
-	 *
-	 * @var  boolean
-	 * @since 1.0
-	 */
-	protected $print = false;
-
-	/**
-	 * The model state
-	 *
-	 * @var  \JObject
-	 * @since 1.0
-	 */
-	protected $state;
-
-	/**
-	 * The user object
-	 *
-	 * @var  \JUser|null
-	 * @since 1.0
-	 */
-	protected $user = null;
 
 	/**
 	 * The page class suffix
 	 *
 	 * @var    string
+	 *
 	 * @since  4.0.0
 	 */
 	protected $pageclass_sfx = '';
 
 	/**
-	 * The Tagebuch-Navigation-Items
+	 * The user object
 	 *
-	 * @var     \stdClass
-	 * @since 4.0.0
+	 * @var \Joomla\CMS\User\User
+	 *
+	 * @since  4.0.0
 	 */
-	protected $navigationClass = null;
+	protected $user = null;
+
+	/**
+	 * Should we show a captcha form for the submission of the article?
+	 *
+	 * @var    boolean
+	 *
+	 * @since  3.7.0
+	 */
+	protected $captchaEnabled = false;
+
+	/**
+	 * Should we show Save As Copy button?
+	 *
+	 * @var    boolean
+	 * @since  4.1.0
+	 */
+	protected $showSaveAsCopy = false;
+
 
 	/**
 	 * Execute and display a template script.
@@ -106,6 +123,7 @@ class HtmlView extends BaseHtmlView
 		$user       = $app->getIdentity();
 
 		$this->item  = $this->get('Item');
+		$this->form  = $this->get('form');
 		$this->print = $app->input->getBool('print', false);
 		$this->state = $this->get('State');
 		$this->user  = $user;

@@ -32,14 +32,109 @@ use Joomla\Utilities\ArrayHelper;
  */
 class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
 {
-    /**
-     * Model typeAlias string. Used for version history.
-     *
-     * @var        string
-     */
-    public $typeAlias = 'com_tagebuch.report';
+	/**
+	 * Model typeAlias string. Used for version history.
+	 *
+	 * @var    string
+	 *
+	 * @since  4.0.0
+	 */
+	public $typeAlias = 'com_tagebuch.form';
 
-    /**
+	/**
+	 * Name of the form
+	 *
+	 * @var    string
+	 *
+	 * @since  4.0.0
+	 */
+	protected $formName = 'tagebuch';
+
+	/**
+	 * Name of the form
+	 *
+	 * @var    string
+	 *
+	 * @since  4.0.0
+	 */
+	protected $editpart = null;
+
+	/**
+	 * Method to get the row form.
+	 *
+	 * @param   array    $data      Data for the form.
+	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return  Form|boolean  A Form object on success, false on failure
+	 *
+	 * @since   4.0.0
+	 */
+	public function getForm($data = [], $loadData = true)
+	{
+		$form = parent::getForm($data, $loadData);
+
+		// Prevent messing with article language and category when editing existing contact with associations
+		if ($id = $this->getState('tagebuch.id') && Associations::isEnabled()) {
+			$associations = Associations::getAssociations('com_tagebuch', '#__tagebuch', 'com_tagebuch.item', $id);
+
+			// Make fields read only
+			if (!empty($associations)) {
+				$form->setFieldAttribute('language', 'readonly', 'true');
+				$form->setFieldAttribute('language', 'filter', 'unset');
+			}
+		}
+
+		return $form;
+	}
+
+//	/**
+//	 * Method to get the record form.
+//	 *
+//	 * @param   array    $data      Data for the form.
+//	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+//	 *
+//	 * @return  Form|boolean  A Form object on success, false on failure
+//	 *
+//	 * @since   1.6
+//	 */
+//	public function getForm($data = [], $loadData = true)
+//	{
+//		$form = parent::getForm($data, $loadData);
+//
+//		if (empty($form)) {
+//			return false;
+//		}
+//
+//		$app  = Factory::getApplication();
+//		$user = $app->getIdentity();
+//
+//		// On edit article, we get ID of article from article.id state, but on save, we use data from input
+//		$id = (int) $this->getState('article.id', $app->getInput()->getInt('a_id'));
+//
+//		// Existing record. We can't edit the category in frontend if not edit.state.
+//		if ($id > 0 && !$user->authorise('core.edit.state', 'com_content.article.' . $id)) {
+//			$form->setFieldAttribute('catid', 'readonly', 'true');
+//			$form->setFieldAttribute('catid', 'required', 'false');
+//			$form->setFieldAttribute('catid', 'filter', 'unset');
+//		}
+//
+//		// Prevent messing with article language and category when editing existing article with associations
+//		if ($this->getState('article.id') && Associations::isEnabled()) {
+//			$associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $id);
+//
+//			// Make fields read only
+//			if (!empty($associations)) {
+//				$form->setFieldAttribute('language', 'readonly', 'true');
+//				$form->setFieldAttribute('catid', 'readonly', 'true');
+//				$form->setFieldAttribute('language', 'filter', 'unset');
+//				$form->setFieldAttribute('catid', 'filter', 'unset');
+//			}
+//		}
+//
+//		return $form;
+//	}
+
+	/**
      * Method to auto-populate the model state.
      *
      * Note. Calling getState in this method will result in recursion.
@@ -215,52 +310,7 @@ class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
         return parent::save($data);
     }
 
-    /**
-     * Method to get the record form.
-     *
-     * @param   array    $data      Data for the form.
-     * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
-     *
-     * @return  Form|boolean  A Form object on success, false on failure
-     *
-     * @since   1.6
-     */
-    public function getForm($data = [], $loadData = true)
-    {
-        $form = parent::getForm($data, $loadData);
 
-        if (empty($form)) {
-            return false;
-        }
-
-        $app  = Factory::getApplication();
-        $user = $app->getIdentity();
-
-        // On edit article, we get ID of article from article.id state, but on save, we use data from input
-        $id = (int) $this->getState('article.id', $app->getInput()->getInt('a_id'));
-
-        // Existing record. We can't edit the category in frontend if not edit.state.
-        if ($id > 0 && !$user->authorise('core.edit.state', 'com_content.article.' . $id)) {
-            $form->setFieldAttribute('catid', 'readonly', 'true');
-            $form->setFieldAttribute('catid', 'required', 'false');
-            $form->setFieldAttribute('catid', 'filter', 'unset');
-        }
-
-        // Prevent messing with article language and category when editing existing article with associations
-        if ($this->getState('article.id') && Associations::isEnabled()) {
-            $associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $id);
-
-            // Make fields read only
-            if (!empty($associations)) {
-                $form->setFieldAttribute('language', 'readonly', 'true');
-                $form->setFieldAttribute('catid', 'readonly', 'true');
-                $form->setFieldAttribute('language', 'filter', 'unset');
-                $form->setFieldAttribute('catid', 'filter', 'unset');
-            }
-        }
-
-        return $form;
-    }
 
     /**
      * Allows preprocessing of the JForm object.
