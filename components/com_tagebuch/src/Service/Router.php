@@ -22,7 +22,7 @@ use SK\Component\Tagebuch\Site\Service\TagebuchNomenuRules as NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseInterface;
-use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
+
 
 /**
  * Routing class of com_tagebuch
@@ -62,11 +62,12 @@ class Router extends RouterView
 	public function __construct(SiteApplication $app, AbstractMenu $menu,
 			CategoryFactoryInterface $categoryFactory, DatabaseInterface $db)
 	{
+		//$mainframe = Factory::getApplication();
 		$this->categoryFactory = $categoryFactory;
 		$this->db              = $db;
 
-		$input = $app->input->get('editpart',null);
-		$app->input->set('editpart',$input);
+		$editpart = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
+
 
 		$params = ComponentHelper::getParams('com_tagebuch');
 		$this->noIDs = (bool) $params->get('sef_ids');
