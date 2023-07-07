@@ -1,4 +1,4 @@
-HUHU!!!
+HUHU!!!<p>
 <?php
 
 use Joomla\CMS\Factory;
@@ -6,3 +6,4 @@ use Joomla\CMS\Factory;
 $app = Factory::getApplication();
 echo $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
 ?>
+</p>
