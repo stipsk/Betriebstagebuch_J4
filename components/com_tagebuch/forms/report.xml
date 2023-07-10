@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+
+	<fieldset name="details" label="COM_TAGEBUCH_TAGEBUCH_TAB_DETAILS">
+
+		<field
+				name="id"
+				type="number"
+				label="JGLOBAL_FIELD_ID_LABEL"
+				default="0"
+				class="readonly"
+				readonly="true"
+		/>
+
+		<field
+				name="datum"
+				type="calendar"
+				label="COM_TAGEBUCH_TAGEBUCH_DATE_LABEL_DATE"
+				translateformat="true"
+				showtime="false"
+				size="22"
+				filter="user_utc"
+
+		/>
+
+		<field
+				name="alias"
+				type="text"
+				label="JFIELD_ALIAS_LABEL"
+				description="JFIELD_ALIAS_DESC"
+				size="45"
+				hint="JFIELD_ALIAS_PLACEHOLDER"
+		/>
+
+		<field
+				name="sff"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_SFF_LABEL"
+		/>
+
+		<field
+				name="sfs"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_SFS_LABEL"
+		/>
+
+		<field
+				name="sfan"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_SFAN_LABEL"
+		/>
+
+
+		<field
+				name="text_fs"
+				type="editor"
+				label="COM_TAGEBUCH_FIELD_TEXT_FS_LABEL"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
+		/>
+
+		<field
+				name="text_ss"
+				type="textarea"
+				label="COM_TAGEBUCH_FIELD_TEXT_SS_LABEL"
+				rows="5"
+				cols="40"
+				required="true"
+		/>
+
+		<field
+				name="text_z1"
+				type="textarea"
+				label="COM_TAGEBUCH_FIELD_TEXT_Z1_LABEL"
+				rows="5"
+				cols="40"
+				required="true"
+		/>
+
+		<field
+				name="text_z2"
+				type="textarea"
+				label="COM_TAGEBUCH_FIELD_TEXT_Z2_LABEL"
+				rows="5"
+				cols="40"
+				required="true"
+		/>
+
+		<field
+				name="text_an"
+				type="textarea"
+				label="COM_TAGEBUCH_FIELD_TEXT_AN_LABEL"
+				rows="5"
+				cols="40"
+				required="true"
+		/>
+
+		<field
+				name="text_bl"
+				type="textarea"
+				label="COM_TAGEBUCH_FIELD_TEXT_BL_LABEL"
+				rows="5"
+				cols="40"
+				required="true"
+		/>
+
+		<field
+				name="fs_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_FS_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="fs_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_FS_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="fs_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_FS_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="fs_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_FS_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="ss_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_SS_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="ss_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_SS_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="ss_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_SS_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="ss_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_SS_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="z1_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_Z1_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="z1_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_Z1_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="z1_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_Z1_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="z1_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_Z1_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="z2_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_Z2_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="z2_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_Z2_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="z2_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_Z2_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="z2_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_Z2_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="an_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_AN_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="an_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_AN_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="an_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_AN_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="an_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_AN_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="bl_erstellt"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_BL_ERSTELLT_LABEL"
+				size="22"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="bl_erstellt_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_BL_ERSTELLT_VON_LABEL"
+		/>
+
+		<field
+				name="bl_laenderung"
+				type="calendar"
+				label="COM_TAGEBUCH_FIELD_BL_LAENDERUNG_LABEL"
+				class="readonly"
+				size="22"
+				readonly="true"
+				translateformat="true"
+				showtime="true"
+				filter="user_utc"
+		/>
+
+		<field
+				name="bl_laenderung_von"
+				type="user"
+				label="COM_TAGEBUCH_FIELD_BL_LAENDERUNG_VON_LABEL"
+				class="readonly"
+				readonly="true"
+				filter="unset"
+		/>
+
+		<field
+				name="bereich_fahrzeug1"
+				type="skfahrzeug"
+				label="COM_TAGEBUCH_FIELD_BEREICH_FAHRZEUG1_LABEL"
+		/>
+
+		<field
+				name="bereich_fahrzeug2"
+				type="skfahrzeug"
+				label="COM_TAGEBUCH_FIELD_BEREICH_FAHRZEUG2_LABEL"
+		/>
+
+		<field
+				name="bereich_fahrzeug3"
+				type="skfahrzeug"
+				label="COM_TAGEBUCH_FIELD_BEREICH_FAHRZEUG3_LABEL"
+		/>
+
+		<field
+				name="bereich_fahrzeug4"
+				type="skfahrzeug"
+				label="COM_TAGEBUCH_FIELD_BEREICH_FAHRZEUG4_LABEL"
+		/>
+
+		<field
+				name="gesehen"
+				type="bool"
+				label="COM_TAGEBUCH_TAGEBUCH_LABEL_GESEHEN"
+		/>
+
+		<field
+				name="abluft_ok"
+				type="bool"
+				label="COM_TAGEBUCH_TAGEBUCH_LABEL_ABLUFT_OK"
+		/>
+
+		<field
+				name="checked_out"
+				type="hidden"
+				filter="unset"
+		/>
+
+		<field
+				name="checked_out_time"
+				type="hidden"
+				filter="unset"
+		/>
+
+		<field
+				name="publish_up"
+				type="calendar"
+				label="COM_CONTACT_FIELD_PUBLISH_UP_LABEL"
+				translateformat="true"
+				showtime="true"
+				size="22"
+				filter="user_utc"
+		/>
+
+		<field
+				name="publish_down"
+				type="calendar"
+				label="COM_CONTACT_FIELD_PUBLISH_DOWN_LABEL"
+				translateformat="true"
+				showtime="true"
+				size="22"
+				filter="user_utc"
+		/>
+
+		<field
+				name="version"
+				type="version"
+				label="JGLOBAL_FIELD_VERSION_LABEL"
+		/>
+
+		<field
+				name="version_note"
+				type="text"
+				label="JGLOBAL_FIELD_VERSION_NOTE_LABEL"
+				labelclass="control-label"
+				class=""
+				size="45"
+				maxlength="255"
+		/>
+
+		<field
+				name="access"
+				type="accesslevel"
+				label="JFIELD_ACCESS_LABEL"
+				filter="UINT"
+				validate="options"
+		/>
+
+
+		<field
+				name="state"
+				type="list"
+				label="JSTATUS"
+				default="1"
+				id="published"
+				class="custom-select-color-state"
+				size="1"
+		>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASHED</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset
+			name="metadata"
+			label="COM_CONTACT_FIELDSET_METADATA"
+	>
+		<field
+				name="metadesc"
+				type="textarea"
+				label="JFIELD_META_DESCRIPTION_LABEL"
+				rows="3"
+				cols="30"
+		/>
+
+		<field
+				name="metakey"
+				type="textarea"
+				label="JFIELD_META_KEYWORDS_LABEL"
+				rows="3"
+				cols="30"
+		/>
+	</fieldset>
+
+</form>

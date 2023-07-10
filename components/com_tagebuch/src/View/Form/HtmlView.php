@@ -124,10 +124,12 @@ class HtmlView extends BaseHtmlView
 
 		$this->item  = $this->get('Item');
 		$this->form  = $this->get('form');
+		$this->form->bind($this->item);
 		$this->print = $app->input->getBool('print', false);
 		$this->state = $this->get('State');
 		$this->user  = $user;
 		$this->navigationClass = $this->get('NavigationClass');
+
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

@@ -463,7 +463,7 @@ class ReportModel extends AdminModel implements WorkflowModelInterface
 		$app  = Factory::getApplication();
 
 		// Get the form.
-		$form = $this->loadForm('com_tagebuch.tagebuch', 'report', ['control' => 'jform', 'load_data' => $loadData]);
+		$form = $this->loadForm('com_tagebuch.report', 'report', ['control' => 'jform', 'load_data' => $loadData]);
 
 		if (empty($form)) {
 			return false;
