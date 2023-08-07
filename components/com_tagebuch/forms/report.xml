@@ -63,47 +63,52 @@
 
 		<field
 				name="text_ss"
-				type="textarea"
+				type="editor"
 				label="COM_TAGEBUCH_FIELD_TEXT_SS_LABEL"
-				rows="5"
-				cols="40"
-				required="true"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
 		/>
 
 		<field
 				name="text_z1"
-				type="textarea"
+				type="editor"
 				label="COM_TAGEBUCH_FIELD_TEXT_Z1_LABEL"
-				rows="5"
-				cols="40"
-				required="true"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
 		/>
 
 		<field
 				name="text_z2"
-				type="textarea"
+				type="editor"
 				label="COM_TAGEBUCH_FIELD_TEXT_Z2_LABEL"
-				rows="5"
-				cols="40"
-				required="true"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
 		/>
 
 		<field
 				name="text_an"
-				type="textarea"
+				type="editor"
 				label="COM_TAGEBUCH_FIELD_TEXT_AN_LABEL"
-				rows="5"
-				cols="40"
-				required="true"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
 		/>
 
 		<field
 				name="text_bl"
-				type="textarea"
+				type="editor"
 				label="COM_TAGEBUCH_FIELD_TEXT_BL_LABEL"
-				rows="5"
-				cols="40"
-				required="true"
+				hiddenLabel="true"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				asset_id="com_tagebuch"
 		/>
 
 		<field

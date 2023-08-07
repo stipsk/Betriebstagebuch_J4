@@ -48,7 +48,7 @@
 
 		<field
 			name="text_fs"
-			type="checkbox"
+			type="textarea"
 			label="COM_TAGEBUCH_FIELD_TEXT_FS_LABEL"
 			rows="5"
 			cols="40"
