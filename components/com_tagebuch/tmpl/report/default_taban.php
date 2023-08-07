@@ -28,7 +28,7 @@ $returnPage = base64_encode(Uri::getInstance());
         <div class="col-2">
             <?php
             if ($params->get('access-edit-an')){
-                $url = Route::_($params->get('editlink').$this->item->id.'&layout=AN&return='.$returnPage);
+                $url = Route::_($params->get('editlink').$this->item->id.'&editpart=AN&return='.$returnPage);
                 ?>
             <span class="sk-tip tip hasTooltip" title="<?php echo HTMLHelper::_('tooltipText', 'COM_TAGEBUCH_REPORT_EDIT_AN_DESC'); ?>">
                 <a class="btn btn-sm btn-outline-info" href="<?php echo $url;?>">

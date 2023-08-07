@@ -178,7 +178,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 		                $iconEntry = 'icon-lock';
 	                }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=SS&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'SS')).'&return='.$returnPage; ?>">
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_SS'); ?>
                         </a>
                     </li>
@@ -191,7 +191,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 		                $iconEntry = 'icon-lock';
 	                }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z1&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'Z1')).'&return='.$returnPage; ?>">
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_Z1'); ?>
                         </a>
                     </li>
@@ -204,7 +204,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 		                $iconEntry = 'icon-lock';
 	                }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=AN&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'AN')).'&return='.$returnPage; ?>">
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_AN'); ?>
                         </a>
                     </li>
@@ -217,7 +217,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
 		                $iconEntry = 'icon-lock';
 	                }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=BL&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'BL')).'&return='.$returnPage; ?>">
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_BL'); ?>
                         </a>
                     </li>
@@ -230,7 +230,7 @@ $url = Route::_(TagebuchHelper::getReportRoute(null, null));
                         $iconEntry = 'icon-lock';
                     }?>
                     <li>
-                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_($params->get('editlink').$this->item->id.'&layout=Z2&return='.$returnPage); ?>">
+                        <a class="dropdown-item bg-info text-light text-nowrap <?php echo $disabledEntry;?>" href="<?php echo Route::_(TagebuchHelper::getEditRoute( (int) $this->item->id, null,0,'Z2')).'&return='.$returnPage; ?>">
                             <span class="<?php echo $iconEntry;?>"></span>&#160;<?php echo JText::_('COM_TAGEBUCH_REPORT_MENU_EDIT_Z2'); ?>
                         </a>
                     </li>

@@ -26,7 +26,7 @@ $returnPage = base64_encode(Uri::getInstance());
         <div class="col-2">
             <?php
             if ($params->get('access-edit-fs')){
-                $url = Route::_($params->get('editlink').$this->item->id.'&layout=FS&return='.$returnPage);
+                $url = Route::_($params->get('editlink').$this->item->id.'&editpart=FS&return='.$returnPage);
                 ?>
                 <span class="sk-tip tip hasTooltip" title="<?php echo HTMLHelper::_('tooltipText', 'COM_TAGEBUCH_REPORT_EDIT_FS_DESC'); ?>">
                 <a class="btn btn-sm btn-outline-info" href="<?php echo $url;?>">

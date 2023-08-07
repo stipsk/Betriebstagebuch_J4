@@ -60,7 +60,7 @@ abstract class RouteHelper
 	public static function getEditRoute($id, $slug, $language = 0, $layout = null)
 	{
 		// Create the link
-		$link = 'index.php?option=com_tagebuch&task=report.edit&a_id=' . $id . '&editpart=' . $layout . '&slug=' . $slug;
+		$link = 'index.php?option=com_tagebuch&task=report.edit&a_id=' . $id . '&layout=' . $layout . '&slug=' . $slug;
 		/**
 		 * @todo Für Neuer Tag evtl. andere Route notwendig!
 		 */
