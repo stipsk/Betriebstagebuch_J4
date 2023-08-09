@@ -88,16 +88,16 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
      *
      * @since   4.0.0
      */
-    public function getItem($itemId = null)
+    public function getItem($pk = null)
     {
-        $itemId = (int) (!empty($itemId)) ? $itemId : $this->getState('tagebuch.id');
+        $pk = (int) (!empty($pk)) ? $pk : $this->getState('tagebuch.id');
 
         // Get a row instance.
         $table = $this->getTable();
 
         // Attempt to load the row.
         try {
-            if (!$table->load($itemId)) {
+            if (!$table->load($pk)) {
                 return false;
             }
         } catch (Exception $e) {
@@ -116,7 +116,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
         $registry        = new Registry($value->metadata);
         $value->metadata = $registry->toArray();
 
-        if ($itemId) {
+        if (pk) {
             $value->tags = new TagsHelper();
             $value->tags->getTagIds($value->id, 'com_tagebuch.tagebuch');
             $value->metadata['tags'] = $value->tags;
