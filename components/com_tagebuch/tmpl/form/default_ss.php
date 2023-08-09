@@ -34,15 +34,14 @@ JHtml::_('behavior.keepalive');
             <?php echo $this->escape($this->params->get('page_heading')); ?>
     </h1>
     <?php endif; ?>
-    <form action="<?php echo JRoute::_('index.php?option=com_tagebuch&view=new&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
         <div class="btn-toolbar">
                 <div class="btn-group">
-                        <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('new.save')">
+                        <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('report.save')">
                                 <span class="icon-ok"></span> <?php echo JText::_('JSAVE') ?>
                         </button>
                 </div>
                 <div class="btn-group">
-                        <button type="button" class="btn" onclick="Joomla.submitbutton('new.cancel')">
+                        <button type="button" class="btn" onclick="Joomla.submitbutton('report.cancel')">
                                 <span class="icon-cancel"></span> <?php echo JText::_('JCANCEL') ?>
                         </button>
                 </div>
@@ -91,7 +90,6 @@ JHtml::_('behavior.keepalive');
         <input type="hidden" name="layout" value="edit" />
         <input type="hidden" name="editpart" value="" />
         <input type="hidden" name="referer" value="<?php echo @$_SERVER['HTTP_REFERER']; ?>" />
-        <input type="hidden" name="task" value="" />
+        <input type="hidden" name="task" value="report" />
         <?php echo JHTML::_( 'form.token' ); ?>
-    </form>
     </div>

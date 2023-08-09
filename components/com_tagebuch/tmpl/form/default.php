@@ -43,7 +43,7 @@ $subform = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
 echo "Editpart = ".$app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
 ?>
 <div class="edit item-page">
-<form action="<?php echo Route::_('index.php?option=com_content&a_id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
+<form action="<?php echo Route::_('index.php?option=com_tagebuch&a_id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
     <fieldset>
         <?php
             echo $this->loadTemplate($subform);

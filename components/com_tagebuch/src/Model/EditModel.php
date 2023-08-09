@@ -2,7 +2,7 @@
 
 /**
  * @package     Joomla.Site
- * @subpackage  com_contact
+ * @subpackage  com_tagebuch
  *
  * @copyright   (C) 2020 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -25,7 +25,7 @@ use Joomla\Utilities\ArrayHelper;
 // phpcs:enable PSR1.Files.SideEffects
 
 /**
- * Contact Component Contact Model
+ * Tagebuch Component Edit Model
  *
  * @since  4.0.0
  */
@@ -63,7 +63,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
     {
         $form = parent::getForm($data, $loadData);
 
-        // Prevent messing with article language and category when editing existing contact with associations
+        // Prevent messing with article language and category when editing existing report with associations
         if ($id = $this->getState('tagebuch.id') && Associations::isEnabled()) {
             $associations = Associations::getAssociations('com_tagebuch', '#__tagebuch', 'com_tagebuch.item', $id);
 
@@ -208,7 +208,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
      *
      * @since   4.0.0
      */
-    protected function preprocessForm(Form $form, $data, $group = 'contact')
+    protected function preprocessForm(Form $form, $data, $group = 'tagebuch')
     {
         if (!Multilanguage::isEnabled()) {
             $form->setFieldAttribute('language', 'type', 'hidden');
