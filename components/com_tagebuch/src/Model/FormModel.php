@@ -59,33 +59,6 @@ class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
 	 */
 	protected $editpart = null;
 
-	/**
-	 * Method to get the row form.
-	 *
-	 * @param   array    $data      Data for the form.
-	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
-	 *
-	 * @return  Form|boolean  A Form object on success, false on failure
-	 *
-	 * @since   4.0.0
-	 */
-//	public function getForm($data = [], $loadData = true)
-//	{
-//		$form = parent::getForm($data, $loadData);
-//
-//		// Prevent messing with article language and category when editing existing contact with associations
-//		if ($id = $this->getState('tagebuch.id') && Associations::isEnabled()) {
-//			$associations = Associations::getAssociations('com_tagebuch', '#__tagebuch', 'com_tagebuch.item', $id);
-//
-//			// Make fields read only
-//			if (!empty($associations)) {
-//				$form->setFieldAttribute('language', 'readonly', 'true');
-//				$form->setFieldAttribute('language', 'filter', 'unset');
-//			}
-//		}
-//
-//		return $form;
-//	}
 
 	/**
 	 * Method to get the record form.

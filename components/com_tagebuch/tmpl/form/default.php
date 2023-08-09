@@ -24,7 +24,7 @@ $wa->useScript('keepalive')
 	->useScript('form.validate');
 	//->useScript('com_content.form-edit');
 
-$this->tab_name = 'com-content-form';
+$this->tab_name = 'com-tagebuch-form';
 $this->ignore_fieldsets = ['image-intro', 'image-full', 'jmetadata', 'item_associations'];
 $this->useCoreUI = true;
 
@@ -38,9 +38,6 @@ if (!$params->exists('show_publishing_options')) {
 // Select tmpl to edit from editpart
 $app = Factory::getApplication();
 $subform = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
-
-
-
 
 
 echo "Editpart = ".$app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
