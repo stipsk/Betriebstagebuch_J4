@@ -2,7 +2,7 @@
 
 /**
  * @package     Joomla.Site
- * @subpackage  com_content
+ * @subpackage  com_tagebuch
  *
  * @copyright   (C) 2009 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -26,7 +26,7 @@ use Joomla\Utilities\ArrayHelper;
 // phpcs:enable PSR1.Files.SideEffects
 
 /**
- * Content Component Article Model
+ * Tagebuch Component Report Model
  *
  * @since  1.5
  */
@@ -81,26 +81,18 @@ class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
 		$app  = Factory::getApplication();
 		$user = $app->getIdentity();
 
-		// On edit article, we get ID of article from article.id state, but on save, we use data from input
-		$id = (int) $this->getState('article.id', $app->getInput()->getInt('a_id'));
+		// On edit Report, we get ID of Report from report.id state, but on save, we use data from input
+		$id = (int) $this->getState('report.id', $app->getInput()->getInt('a_id'));
 
-		// Existing record. We can't edit the category in frontend if not edit.state.
-		if ($id > 0 && !$user->authorise('core.edit.state', 'com_content.article.' . $id)) {
-			$form->setFieldAttribute('catid', 'readonly', 'true');
-			$form->setFieldAttribute('catid', 'required', 'false');
-			$form->setFieldAttribute('catid', 'filter', 'unset');
-		}
 
 		// Prevent messing with article language and category when editing existing article with associations
 		if ($this->getState('article.id') && Associations::isEnabled()) {
-			$associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $id);
+			$associations = Associations::getAssociations('com_tagebuch', '#__tagebuch', 'com_tagebuch.report', $id);
 
 			// Make fields read only
 			if (!empty($associations)) {
 				$form->setFieldAttribute('language', 'readonly', 'true');
-				$form->setFieldAttribute('catid', 'readonly', 'true');
 				$form->setFieldAttribute('language', 'filter', 'unset');
-				$form->setFieldAttribute('catid', 'filter', 'unset');
 			}
 		}
 
@@ -148,7 +140,7 @@ class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
      *
      * @param   integer  $itemId  The id of the report.
      *
-     * @return  mixed  Content item data object on success, false on failure.
+     * @return  mixed  Tagebuch item data object on success, false on failure.
      */
     public function getItem($itemId = null)
     {
@@ -267,7 +259,7 @@ class FormModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
         // Associations are not edited in frontend ATM so we have to inherit them
         if (
             Associations::isEnabled() && !empty($data['id'])
-            && $associations = Associations::getAssociations('com_content', '#__content', 'com_content.item', $data['id'])
+            && $associations = Associations::getAssociations('com_tagebuch', '#__tagebuch', 'com_tagebuch.report', $data['id'])
         ) {
             foreach ($associations as $tag => $associated) {
                 $associations[$tag] = (int) $associated->id;

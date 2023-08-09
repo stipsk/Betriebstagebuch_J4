@@ -78,11 +78,11 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
     }
 
     /**
-     * Method to get contact data.
+     * Method to get report data.
      *
-     * @param   integer  $itemId  The id of the contact.
+     * @param   integer  $itemId  The id of the report.
      *
-     * @return  mixed  Contact item data object on success, false on failure.
+     * @return  mixed  Report item data object on success, false on failure.
      *
      * @throws  Exception
      *
