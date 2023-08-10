@@ -471,6 +471,7 @@ class ReportController extends FormController
 	 * @param   array   $data_new   Die neuen Daten die überschreiben sollen
 	 * @param   string  $editpart   Der Teil der überschrieben werden soll
 	 *
+	 * @return  bool|array  Rückgabe des aufbereiteten Reports oder false wenn Fehler!
 	 *
 	 * @since 4.0.0
 	 */
