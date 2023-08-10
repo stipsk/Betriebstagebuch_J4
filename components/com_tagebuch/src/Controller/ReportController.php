@@ -11,12 +11,14 @@ namespace SK\Component\Tagebuch\Site\Controller;
 
 \defined('_JEXEC') or die;
 
+use Exception;
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Table\Table;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Versioning\VersionableControllerTrait;
 use Joomla\Utilities\ArrayHelper;
@@ -467,15 +469,15 @@ class ReportController extends FormController
 	/**
 	 * Methode zum zusammenführen der beiden Arrays um änderungen zu übernehmen und alte Daten beizubehalten!
 	 *
-	 * @param   array   $data_old   Die alten Daten die übernommen werden sollen
-	 * @param   array   $data_new   Die neuen Daten die überschreiben sollen
-	 * @param   string  $editpart   Der Teil der überschrieben werden soll
+	 * @param   array   $data_old  Die alten Daten die übernommen werden sollen
+	 * @param   array   $data_new  Die neuen Daten die überschreiben sollen
+	 * @param   string  $editpart  Der Teil der überschrieben werden soll
 	 *
-	 * @return  bool|array  Rückgabe des aufbereiteten Reports oder false wenn Fehler!
+	 * @return  array  Rückgabe des aufbereiteten Reports oder false wenn Fehler!
 	 *
 	 * @since 4.0.0
 	 */
-	public function matchData($data_old , $data_new, $editpart)
+	public function matchData(array $data_old , array $data_new, string $editpart): array
 	{
 		$user = Factory::getApplication()->getIdentity();
 		$date = Factory::getDate();

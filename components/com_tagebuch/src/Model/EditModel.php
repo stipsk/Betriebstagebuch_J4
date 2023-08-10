@@ -82,7 +82,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
      *
      * @param   integer  $itemId  The id of the report.
      *
-     * @return  mixed  Report item data object on success, false on failure.
+     * @return  false|object  Report item data object on success, false on failure.
      *
      * @throws  Exception
      *
