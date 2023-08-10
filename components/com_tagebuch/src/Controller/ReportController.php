@@ -170,6 +170,7 @@ class ReportController extends FormController
 	 *
 	 * @return  boolean  True if access level checks pass, false otherwise.
 	 *
+	 * @throws Exception
 	 * @since   1.6
 	 */
 	public function cancel($key = 'a_id')
