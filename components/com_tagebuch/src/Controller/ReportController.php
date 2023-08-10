@@ -20,6 +20,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Versioning\VersionableControllerTrait;
 use Joomla\Utilities\ArrayHelper;
+use phpseclib3\File\ASN1\Maps\AnotherName;
 
 /**
  * Content article class.
@@ -69,7 +70,7 @@ class ReportController extends FormController
 			// Redirect to the return page.
 			$this->setRedirect($this->getReturnPage());
 
-			return;
+			return false;
 		}
 
 		// Redirect to the edit screen.
@@ -367,39 +368,64 @@ class ReportController extends FormController
 	 */
 	public function save($key = null, $urlVar = 'a_id')
 	{
-		$result    = parent::save($key, $urlVar);
-		$app       = Factory::getApplication();
-		$articleId = $app->input->getInt('a_id');
+		// Check for request forgeries.
+		$this->checkToken();
 
-		// Load the parameters.
-		$params   = $app->getParams();
-		$menuitem = (int) $params->get('redirect_menuitem');
+		$app     = $this->app;
+		$model   = $this->getModel();
+		$table   = $model->getTable();
+		$data    = $this->input->post->get('jform', [], 'array');
+		$editpart = $this->input->post->get('editpart');
+		$checkin = $table->hasField('checked_out');
+		$context = "$this->option.edit.$this->context";
+		$task    = $this->getTask();
 
-		// Check for redirection after submission when creating a new article only
-		if ($menuitem > 0 && $articleId == 0)
-		{
-			$lang = '';
-
-			if (Multilanguage::isEnabled())
-			{
-				$item = $app->getMenu()->getItem($menuitem);
-				$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
-			}
-
-			// If ok, redirect to the return page.
-			if ($result)
-			{
-				$this->setRedirect(Route::_('index.php?Itemid=' . $menuitem . $lang, false));
-			}
+		// Determine the name of the primary key for the data.
+		if (empty($key)) {
+			$key = $table->getKeyName();
 		}
-		else
+
+		// To avoid data collisions the urlVar may be different from the primary key.
+		if (empty($urlVar)) {
+			$urlVar = $key;
+		}
+
+		$recordId = $this->input->getInt($urlVar);
+
+		// Populate the row id from the session.
+		$data[$key] = $recordId;
+
+		//Einlesen "alte" Daten:
+		if ($recordId > 0)
 		{
-			// If ok, redirect to the return page.
+			$dataOld = $model->getItem($recordId);
+		}
+
+		if ($editpart == '' || $editpart === null){
+			//Editpart wurde nicht übergeben, abbruch mit Hinweis!
+			$this->setMessage(Text::sprintf('COM_TAGEBUCH__ERROR_EDITPART_FAILED', $model->getError()), 'error');
+
+			$this->setRedirect(
+				Route::_(
+					'index.php?option=' . $this->option . '&view=' . $this->view_item
+					. $this->getRedirectToItemAppend($recordId, $urlVar),
+					false
+				)
+			);
+
+			return false;
+		}
+
+		$dataUpdated = $this->matchData(ArrayHelper::fromObject($dataOld),$data,$editpart);
+
+		$result = true;
+
+		 //Wenn ok, redirect to the return page.
 			if ($result)
 			{
 				$this->setRedirect(Route::_($this->getReturnPage(), false));
 			}
-		}
+
 
 		return $result;
 	}
@@ -419,37 +445,7 @@ class ReportController extends FormController
 		return parent::reload($key, $urlVar);
 	}
 
-	/**
-	 * Method to save a vote.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.6
-	 */
-	public function vote()
-	{
-		// Check for request forgeries.
-		$this->checkToken();
 
-		$user_rating = $this->input->getInt('user_rating', -1);
-
-		if ($user_rating > -1)
-		{
-			$url = $this->input->getString('url', '');
-			$id = $this->input->getInt('id', 0);
-			$viewName = $this->input->getString('view', $this->default_view);
-			$model = $this->getModel($viewName);
-
-			if ($model->storeVote($id, $user_rating))
-			{
-				$this->setRedirect($url, Text::_('COM_CONTENT_ARTICLE_VOTE_SUCCESS'));
-			}
-			else
-			{
-				$this->setRedirect($url, Text::_('COM_CONTENT_ARTICLE_VOTE_FAILURE'));
-			}
-		}
-	}
 	/**
 	 * Method to get a table object, load it if necessary.
 	 *
@@ -466,5 +462,100 @@ class ReportController extends FormController
 	public function getTable($name = 'Tagebuch', $prefix = 'Administrator', $options = [])
 	{
 		return parent::getTable($name, $prefix, $options);
+	}
+
+	/**
+	 * Methode zum zusammenführen der beiden Arrays um änderungen zu übernehmen und alte Daten beizubehalten!
+	 *
+	 * @param   array   $data_old   Die alten Daten die übernommen werden sollen
+	 * @param   array   $data_new   Die neuen Daten die überschreiben sollen
+	 * @param   string  $editpart   Der Teil der überschrieben werden soll
+	 *
+	 *
+	 * @since 4.0.0
+	 */
+	public function matchData($data_old , $data_new, $editpart)
+	{
+		$user = Factory::getApplication()->getIdentity();
+		$date = Factory::getDate();
+		$groups    = implode(',', $user->getAuthorisedViewLevels());
+		$db        = Factory::getDbo();
+
+		$nowDate = $db->quote($date->toSql());
+
+		$newData = $data_old;
+
+		switch ($editpart)
+		{
+			case 'FS':
+				$newData['sff'] = ($data_new['sff'] > 0) ? $data_new['sff'] : $user->id;
+				$newData['text_fs'] = $data_new['text_fs'];
+				if ($newData['fs_erstellt'] === '0000-00-00 00:00:00' || $newData['fs_erstellt'] == null) {
+					$newData['fs_erstellt'] = $nowDate;
+					$newData['fs_erstellt_von'] = $user->id;
+				} else {
+					$newData['fs_laenderung'] = $nowDate;
+					$newData['fs_laenderung_von'] = $user->id;
+				}
+				break;
+
+			case 'SS':
+				$newData['sfs'] = ($data_new['sfs'] > 0) ? $data_new['sfs'] : $user->id;
+				$newData['text_ss'] = $data_new['text_ss'];
+				if ($newData['ss_erstellt'] === '0000-00-00 00:00:00' || $newData['ss_erstellt'] == null) {
+					$newData['ss_erstellt'] = $nowDate;
+					$newData['ss_erstellt_von'] = $user->id;
+				} else {
+					$newData['ss_laenderung'] = $nowDate;
+					$newData['ss_laenderung_von'] = $user->id;
+				}
+				break;
+
+			case 'Z1':
+				$newData['text_z1'] = $data_new['text_z1'];
+				if ($newData['z1_erstellt'] === '0000-00-00 00:00:00' || $newData['z1_erstellt'] == null) {
+					$newData['z1_erstellt'] = $nowDate;
+					$newData['z1_erstellt_von'] = $user->id;
+				} else {
+					$newData['z1_laenderung'] = $nowDate;
+					$newData['z1_laenderung_von'] = $user->id;
+				}
+				break;
+
+			case 'Z2':
+				$newData['text_z2'] = $data_new['text_z2'];
+				if ($newData['z2_erstellt'] === '0000-00-00 00:00:00' || $newData['z2_erstellt'] == null) {
+					$newData['z2_erstellt'] = $nowDate;
+					$newData['z2_erstellt_von'] = $user->id;
+				} else {
+					$newData['z2_laenderung'] = $nowDate;
+					$newData['z2_laenderung_von'] = $user->id;
+				}
+				break;
+
+			case 'BL':
+				$newData['text_z1'] = $data_new['text_z1'];
+				if ($newData['bl_erstellt'] === '0000-00-00 00:00:00' || $newData['bl_erstellt'] == null) {
+					$newData['bl_erstellt'] = $nowDate;
+					$newData['bl_erstellt_von'] = $user->id;
+				} else {
+					$newData['bl_laenderung'] = $nowDate;
+					$newData['bl_laenderung_von'] = $user->id;
+				}
+				break;
+
+			case 'AN':
+				$newData['text_z1'] = $data_new['text_z1'];
+				if ($newData['an_erstellt'] === '0000-00-00 00:00:00' || $newData['an_erstellt'] == null) {
+					$newData['an_erstellt'] = $nowDate;
+					$newData['an_erstellt_von'] = $user->id;
+				} else {
+					$newData['an_laenderung'] = $nowDate;
+					$newData['an_laenderung_von'] = $user->id;
+				}
+				break;
+		}
+
+		return $newData;
 	}
 }

@@ -88,7 +88,7 @@ JHtml::_('behavior.keepalive');
         
         <input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
         <input type="hidden" name="layout" value="edit" />
-        <input type="hidden" name="editpart" value="" />
+        <input type="hidden" name="editpart" value="<?php echo $this->subform; ?>" />
         <input type="hidden" name="referer" value="<?php echo @$_SERVER['HTTP_REFERER']; ?>" />
         <input type="hidden" name="task" value="report" />
         <?php echo JHTML::_( 'form.token' ); ?>

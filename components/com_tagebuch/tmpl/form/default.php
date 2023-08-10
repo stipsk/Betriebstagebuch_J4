@@ -37,16 +37,16 @@ if (!$params->exists('show_publishing_options')) {
 }
 // Select tmpl to edit from editpart
 $app = Factory::getApplication();
-$subform = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
+$this->subform = $app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
 
 
-echo "Editpart = ".$app->getUserStateFromRequest("com_tagebuch.editpart", "editpart");
+echo "Editpart = ".$this->subform;
 ?>
 <div class="edit item-page">
 <form action="<?php echo Route::_('index.php?option=com_tagebuch&a_id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
     <fieldset>
         <?php
-            echo $this->loadTemplate($subform);
+            echo $this->loadTemplate($this->subform);
         ?>
     </fieldset>
 </form>

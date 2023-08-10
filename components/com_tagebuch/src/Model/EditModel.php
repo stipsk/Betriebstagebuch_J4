@@ -116,7 +116,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
         $registry        = new Registry($value->metadata);
         $value->metadata = $registry->toArray();
 
-        if (pk) {
+        if ($pk) {
             $value->tags = new TagsHelper();
             $value->tags->getTagIds($value->id, 'com_tagebuch.tagebuch');
             $value->metadata['tags'] = $value->tags;
@@ -134,7 +134,7 @@ class EditModel extends \SK\Component\Tagebuch\Administrator\Model\ReportModel
      */
     public function getReturnPage()
     {
-        return base64_encode($this->getState('return_page', ''));
+        return base64_encode($this->getState('return', ''));
     }
 
     /**

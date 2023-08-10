@@ -129,6 +129,7 @@ class HtmlView extends BaseHtmlView
 		$this->state = $this->get('State');
 		$this->user  = $user;
 		$this->navigationClass = $this->get('NavigationClass');
+		$this->return_page = $this->get('returnPage');
 
 
 		// Check for errors.
