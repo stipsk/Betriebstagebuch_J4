@@ -94,7 +94,7 @@ $returnPage = base64_encode(Uri::getInstance());
             </div>
         </div>
         <div class="col-10 col-md-10">
-            <?php echo strlen($this->item->text_z1) > 0 ? $this->item->text_z1 : HTMLHelper::image('media/com_tagebuch/images/blank.gif' , Text::_('Empty') , $blank_image_attribs,true,-1) ?>
+            <?php echo (!($this->item->text_z1 === null || $this->item->text_z1 == '')) ? $this->item->text_z1 : HTMLHelper::image('media/com_tagebuch/images/blank.gif' , Text::_('Empty') , $blank_image_attribs,true,-1) ?>
         </div>
     </div>
 </div>
