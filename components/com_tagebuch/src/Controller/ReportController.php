@@ -1,9 +1,8 @@
 <?php
-/**
+/** @noinspection PhpUnused
  * @package     Joomla.Site
  * @subpackage  com_content
- *
- * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Stephan Knauer Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -445,6 +444,7 @@ class ReportController extends FormController
 	 */
 	public function reload($key = null, $urlVar = 'a_id')
 	{
+		/** @noinspection PhpVoidFunctionResultUsedInspection */
 		return parent::reload($key, $urlVar);
 	}
 
@@ -468,7 +468,7 @@ class ReportController extends FormController
 	}
 
 	/**
-	 * Methode zum zusammenführen der beiden Arrays um änderungen zu übernehmen und alte Daten beizubehalten!
+	 * Methode zum Zusammenführen der beiden Arrays um änderungen zu übernehmen und alte Daten beizubehalten!
 	 *
 	 * @param   array   $data_old  Die alten Daten die übernommen werden sollen
 	 * @param   array   $data_new  Die neuen Daten die überschreiben sollen
