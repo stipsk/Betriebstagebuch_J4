@@ -41,7 +41,11 @@ foreach ($this->items as $id => $item) :
         </td>
         <th scope="row" class="has-context">
             <a class="hasTooltip" href="<?php echo Route::_(TagebuchHelper::getReportRoute($item->id, $slug)); ?>">
-				<?php echo $detailIcon; ?><?php echo $this->escape($item->datum); ?>
+				<?php
+                echo $detailIcon;
+                //echo '&nbsp;';
+                echo HTMLHelper::_('date', $item->datum, ' D - d.m.Y');
+                ?>
             </a>
         </th>
         <td class="">
