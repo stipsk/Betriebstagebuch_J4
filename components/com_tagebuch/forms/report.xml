@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 
-	<fieldset name="details" label="COM_TAGEBUCH_TAGEBUCH_TAB_DETAILS">
+	<fieldset addfieldprefix="Joomla\Component\Tagebuch\Administrator\Field" name="details" label="COM_TAGEBUCH_TAGEBUCH_TAB_DETAILS">
 
 		<field
 				name="id"
@@ -125,6 +125,7 @@
 				name="fs_erstellt_von"
 				type="user"
 				label="COM_TAGEBUCH_FIELD_FS_ERSTELLT_VON_LABEL"
+				validate="UserId"
 		/>
 
 		<field

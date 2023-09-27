@@ -73,6 +73,7 @@ JHtml::_('behavior.keepalive');
             echo $this->form->renderField('ss_erstellt');
             echo $this->form->renderField('ss_laenderung_von');
             echo $this->form->renderField('ss_laenderung');
+        echo $this->form->renderField('bereich_fahrzeug1');
 
         if ($this->params->get('author_efb',false))
         {
