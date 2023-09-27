@@ -140,6 +140,11 @@ div.current dd {
     text-decoration-line: underline;
 }
 
+.table-checked {
+    background-color: limegreen!important;
+}
+
+
 /** Formatierungen für das Tagebuch **/
 
     .s5_awl {

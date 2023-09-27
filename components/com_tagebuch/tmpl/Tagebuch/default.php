@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
@@ -16,6 +17,11 @@ use Joomla\CMS\Router\Route;
 use SK\Component\Tagebuch\Site\Helper\RouteHelper as TagebuchHelper;
 
 HTMLHelper::_('behavior.core');
+
+$wa = $this->document->getWebAssetManager();
+//$wa->useScript('com_tagebuch.bootstrap_js')
+//->useScript('core');
+$wa->useStyle('com_tagebuch.standard');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
@@ -52,9 +58,6 @@ $noIcon = '<span class="fa fa-thumbs-down mr-2" aria-hidden="true" style="color:
                             <td style="width:1%" class="text-center">
 								<?php echo HTMLHelper::_('grid.checkall'); ?>
                             </td>
-                            <th scope="col" style="width:1%; min-width:85px" class="text-center">
-								<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
-                            </th>
                             <th scope="col" style="width:20%">
 								<?php echo HTMLHelper::_('searchtools.sort', 'COM_TAGEBUCH_TAGEBUCH_LABEL_DATUM', 'a.datum', $listDirn, $listOrder); ?>
                             </th>

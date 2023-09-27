@@ -36,9 +36,6 @@ foreach ($this->items as $id => $item) :
         <td class="text-center">
 			<?php echo HTMLHelper::_('grid.id', $id, $item->id); ?>
         </td>
-        <td class="class="article-status"">
-		<?php echo $states[$item->state]; ?>
-        </td>
         <th scope="row" class="has-context">
             <a class="hasTooltip" href="<?php echo Route::_(TagebuchHelper::getReportRoute($item->id, $slug)); ?>">
 				<?php
@@ -48,7 +45,7 @@ foreach ($this->items as $id => $item) :
                 ?>
             </a>
         </th>
-        <td class="">
+        <td class="table-checked">
 			<?php echo $item->text_fs_bool>0 ? $yesIcon : $noIcon; ?>
         </td>
         <td class="">
